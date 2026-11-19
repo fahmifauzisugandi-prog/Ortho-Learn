@@ -1,78 +1,206 @@
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ORTHO LEARN - Industrial Style</title>
+<title>ORTHO LEARN - Belajar Ortho Jadi Gampang</title>
 <style>
-*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}body{margin:0;background:#F8FAFC;color:#0F172A}
-.top{position:sticky;top:0;background:#fff;border-bottom:1px solid #E2E8F0;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;z-index:10}
-.logo{font-weight:900;font-size:20px}.logo span{color:#2563EB}.top small{color:#64748B}
-.nav{display:flex;gap:6px;overflow:auto}.nav button{border:0;background:#F1F5F9;padding:9px 14px;border-radius:99px;cursor:pointer;white-space:nowrap;font-weight:600}.nav button.active{background:#0F172A;color:#fff}
-.hero{background:#0F172A;color:#fff;padding:28px 20px;border-radius:20px;margin:14px}
-.hero h1{margin:0;font-size:28px;line-height:1.2}.hero p{color:#CBD5E1}.hero .btns{display:flex;gap:10px;flex-wrap:wrap}
-.btn{padding:13px 18px;border-radius:12px;border:0;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}.btn-blue{background:#2563EB;color:#fff}.btn-white{background:#fff;color:#111}.btn-gold{background:#FACC15;color:#111}.btn-dark{background:#111;color:#fff}.btn-full{width:100%;margin-top:10px}
-.wrap{max-width:900px;margin:auto;padding:0 14px 30px}
-.stats{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin:14px 0}.stat{background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:16px;text-align:center}.stat b{font-size:22px;display:block}.stat span{color:#64748B;font-size:12px}
-.card{background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:16px;margin:12px 0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mod{background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:16px;cursor:pointer}.mod b{font-size:16px}.mod p{color:#64748B;font-size:13px;margin:6px 0}.mod .tag{display:inline-block;background:#EFF6FF;color:#2563EB;font-size:11px;font-weight:700;padding:4px 8px;border-radius:99px}
-.case{background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:16px;margin:10px 0}
-.hidden{display:none}input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #E2E8F0;background:#fff;margin:6px 0;font-size:15px}
-.opt{background:#F8FAFC;border:1px solid #E2E8F0;padding:11px;border-radius:10px;margin:6px 0;cursor:pointer}
-.section-title{font-size:18px;font-weight:800;margin:20px 0 10px}
-.badge{background:#FEF3C7;color:#92400E;padding:4px 8px;border-radius:99px;font-size:11px;font-weight:700}
+*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#FFF;color:#111}
+header{text-align:center;padding:28px 16px 12px}h1{margin:0;font-size:32px}h1 span{color:#007BFF}.sub{color:#666;font-size:14px}
+.wrap{max-width:650px;margin:auto;padding:0 14px 30px}
+.card{background:#F8F9FA;border-radius:20px;padding:18px;margin:12px 0}
+.btn{width:100%;padding:14px;border:0;border-radius:14px;font-weight:800;cursor:pointer;display:block;text-align:center;text-decoration:none;font-size:15px;margin-top:10px}
+.btn-blue{background:#007BFF;color:#fff}.btn-black{background:#111;color:#fff}.btn-gold{background:#FFC107;color:#111}.btn-white{background:#fff;color:#111;border:1px solid #ddd}
+.tab{display:flex;gap:8px;overflow:auto}.tab button{white-space:nowrap;padding:10px 16px;border-radius:99px;border:1px solid #ddd;background:#fff;cursor:pointer;font-weight:700}.tab button.active{background:#111;color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mod{background:#fff;border:1px solid #eee;border-radius:16px;padding:14px;cursor:pointer}.mod b{font-size:15px}.mod p{color:#666;font-size:12px;margin:4px 0}
+.case{background:#fff;border:1px solid #eee;border-radius:16px;padding:14px;margin:10px 0}
+.hidden{display:none}input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #ddd;margin:6px 0;font-size:15px}
+.opt{background:#fff;border:1px solid #ddd;padding:11px;border-radius:10px;margin:6px 0;cursor:pointer}
+.badge{display:inline-block;background:#E7F3FF;color:#007BFF;padding:5px 10px;border-radius:99px;font-size:12px;font-weight:800}
+.share{background:#111;color:#fff;border-radius:14px;padding:14px;text-align:center;margin:12px 0}
 </style></head><body>
-<div class="top"><div><div class="logo">ORTHO <span>LEARN</span></div><small>by dr. Fahmi • Orthobullets Based</small></div><div style="font-size:12px;background:#DCFCE7;color:#166534;padding:6px 10px;border-radius:99px;font-weight:700">● LIVE • 1000 KASUS</div></div>
+<header><h1>ORTHO <span>LEARN</span> 🦴</h1><p class="sub">Belajar Ortho jadi gampang. 1000 kasus, bahasa manusia.</p><p><span class="badge">✨ 1000 KASUS</span> <span class="badge">🎲 ACAK TIAP HARI</span></p></header>
 <div class="wrap">
-<div class="nav" style="margin-top:12px"><button class="active" onclick="tab('home',this)">🏠 Dashboard</button><button onclick="tab('kasus',this)">📚 1000 Kasus</button><button onclick="tab('video',this)">▶ Video</button><button onclick="tab('soal',this)">📝 Try Out</button></div>
+<div class="tab"><button class="active" onclick="tab('home',this)">Home</button><button onclick="tab('kasus',this)">Kasus</button><button onclick="tab('video',this)">Video</button><button onclick="tab('soal',this)">Kuis</button></div>
 
 <div id="home">
-<div class="hero"><span class="badge">ORTHOBULLETS QBANK STYLE</span><h1>Belajar Ortho<br>Kayak Industrial<br>Trauma Unit.</h1><p>1000 kasus terstruktur. 8 modul. 1 dashboard. Ga berantakan lagi.</p><div class="btns"><button class="btn btn-blue" onclick="tab('kasus',document.querySelectorAll('.nav button')[1])">Buka 1000 Kasus →</button><button class="btn btn-white" onclick="acakKasus()">🎲 Acak 20 Kasus</button></div></div>
-<div class="stats"><div class="stat"><b>1000</b><span>Total Kasus</span></div><div class="stat"><b>8</b><span>Modul</span></div><div class="stat"><b>125</b><span>/ Modul</span></div><div class="stat"><b>100%</b><span>Orthobullets</span></div></div>
-<input placeholder="🔍 Cari kasus... contoh: SCFE, Garden, Gustilo" oninput="searchKasus(this.value)">
-<div class="section-title">Pilih Modul</div>
-<div class="grid">
-<div class="mod" onclick="showKasus('clavicula')"><span class="tag">TRAUMA</span><b><br>Clavicula</b><p>Midshaft, Neer, AC Joint, Floating Shoulder</p><span style="font-weight:700">125 Kasus →</span></div>
-<div class="mod" onclick="showKasus('upper')"><span class="tag">UPPER LIMB</span><b><br>Upper Limb</b><p>Humerus, Monteggia, Galeazzi, Scaphoid</p><span style="font-weight:700">125 Kasus →</span></div>
-<div class="mod" onclick="showKasus('lower')"><span class="tag">LOWER LIMB</span><b><br>Lower Limb</b><p>Femur, Tibia Gustilo, Compartment, Pilon</p><span style="font-weight:700">125 Kasus →</span></div>
-<div class="mod" onclick="showKasus('spine')"><span class="tag">SPINE</span><b><br>Spine</b><p>Cauda Equina, HNP, Burst, SCI, Scoliosis</p><span style="font-weight:700">125 Kasus →</span></div>
-<div class="mod" onclick="showKasus('pediatric')"><span class="tag">PEDIATRIC</span><b><br>Pediatric</b><p>SCFE, DDH, Perthes, Supracondylar</p><span style="font-weight:700">125 Kasus →</span></div>
-<div class="mod" onclick="showKasus('geriatric')"><span class="tag">GERIATRIC</span><b><br>Geriatric</b><p>Garden, Intertroch, Periprosthetic</p><span style="font-weight:700">125 Kasus →</span></div>
-<div class="mod" onclick="showKasus('tumor')"><span class="tag">ONCOLOGY</span><b><br>Tumor</b><p>Osteosarcoma, Ewing, Chondrosarcoma, Mirels</p><span style="font-weight:700">125 Kasus →</span></div>
-<div class="mod" onclick="showKasus('congenital')"><span class="tag">CONGENITAL</span><b><br>Congenital</b><p>Clubfoot Ponseti, Syndactyly, Polydactyly</p><span style="font-weight:700">125 Kasus →</span></div>
+<div class="card" style="text-align:center;background:#111;color:#fff"><h2 style="margin:0;font-size:24px">Patah tulang itu<br>ga seseram itu.</h2><p style="color:#ccc">Kalau ngertinya pake kasus, bukan hafalan.</p><input placeholder="Cari... contoh: patah selangka, SCFE" oninput="searchKasus(this.value)"><button class="btn btn-gold" onclick="tab('kasus',document.querySelectorAll('.tab button')[1])">Buka 1000 Kasus →</button><button class="btn btn-blue" onclick="acakKasus()">🎲 Kasih Gue Kasus Acak!</button></div>
+
+<div class="share">Suka web ini? Share ke Threads biar temen lu ikut belajar 👇<br><a href="https://www.threads.net/intent/post?text=Belajar%20Ortho%20jadi%20gampang%20🦴%201000%20kasus%20gratis%20di%20ORTHO%20LEARN%20by%20dr.%20Fahmi%20-%20https%3A%2F%2Ffahmifauzisugandi-prog.github.io%2FOrtho-Learn%2F" target="_blank" style="display:inline-block;background:#fff;color:#111;padding:10px 18px;border-radius:99px;font-weight:800;text-decoration:none;margin-top:10px">Share ke Threads ↗</a></div>
+
+<div class="card"><h3 style="margin:0">Mau belajar apa hari ini?</h3><p style="color:#666;font-size:13px">Klik aja, langsung dikasih kasusnya.</p><div class="grid">
+<div class="mod" onclick="showKasus('clavicula')">🦴<b><br>Patah Selangka</b><p>Clavicula - 125 kasus</p></div>
+<div class="mod" onclick="showKasus('upper')">💪<b><br>Tangan</b><p>Upper Limb - 125 kasus</p></div>
+<div class="mod" onclick="showKasus('lower')">🦵<b><br>Kaki</b><p>Lower Limb - 125 kasus</p></div>
+<div class="mod" onclick="showKasus('spine')">🧠<b><br>Tulang Belakang</b><p>Spine - 125 kasus</p></div>
+<div class="mod" onclick="showKasus('pediatric')">👶<b><br>Anak</b><p>Pediatric - 125 kasus</p></div>
+<div class="mod" onclick="showKasus('geriatric')">👴<b><br>Lansia</b><p>Geriatric - 125 kasus</p></div>
+<div class="mod" onclick="showKasus('tumor')">🎗️<b><br>Tumor Tulang</b><p>Tumor - 125 kasus</p></div>
+<div class="mod" onclick="showKasus('congenital')">👣<b><br>Bawaan Lahir</b><p>Congenital - 125 kasus</p></div>
+</div></div>
+
+<div class="card"><h3 style="margin:0">Cara mainnya (30 detik)</h3><p style="color:#555">1. Klik <b>🎲 Kasus Acak</b><br>2. Baca kasusnya, tebak dulu jawabannya<br>3. Baru intip jawaban + link Orthobullets-nya<br>Udah, itu doang. Tiap hari 5 kasus aja, sebulan jago.</p></div>
+<p style="text-align:center;color:#999;font-size:12px">Dibuat oleh dr. Fahmi Fauzi Sugandi • Sumber belajar: Orthobullets.com<br>Vignette edukasi untuk belajar, bukan pengganti konsultasi dokter.</p>
 </div>
-</div>
 
-<div id="kasus" class="hidden"><h3>1000 Kasus - Database</h3><input placeholder="Cari 1000 kasus..." oninput="searchKasus(this.value)"><select onchange="showKasus(this.value)"><option value="all">Semua Modul - 1000</option><option value="clavicula">Clavicula - 125</option><option value="upper">Upper Limb - 125</option><option value="lower">Lower Limb - 125</option><option value="spine">Spine - 125</option><option value="pediatric">Pediatric - 125</option><option value="geriatric">Geriatric - 125</option><option value="tumor">Tumor - 125</option><option value="congenital">Congenital - 125</option></select><button class="btn btn-gold btn-full" onclick="acakKasus()">🎲 Acak 20 Kasus</button><button class="btn btn-dark btn-full" onclick="showKasus('all')">Tampilkan 100 Pertama</button><div id="kasusBox"></div></div>
+<div id="kasus" class="hidden"><h3>1000 Kasus - Pilih Yang Lu Mau</h3><input placeholder="Cari kasus..." oninput="searchKasus(this.value)"><select onchange="showKasus(this.value)"><option value="all">Semua - 1000</option><option value="clavicula">Patah Selangka - 125</option><option value="upper">Tangan - 125</option><option value="lower">Kaki - 125</option><option value="spine">Tulang Belakang - 125</option><option value="pediatric">Anak - 125</option><option value="geriatric">Lansia - 125</option><option value="tumor">Tumor Tulang - 125</option><option value="congenital">Bawaan Lahir - 125</option></select><button class="btn btn-gold" onclick="acakKasus()">🎲 Acak 20 Kasus</button><div id="kasusBox"></div></div>
 
-<div id="video" class="hidden"><div class="card" style="text-align:center"><h2 style="margin:0">Video Orthobullets</h2><p style="color:#64748B">Gratis, tanpa login, langsung play.</p><a class="btn btn-blue btn-full" href="https://www.youtube.com/@Orthobullets" target="_blank">▶ YouTube Orthobullets</a><a class="btn btn-full" style="background:#F1F5F9;color:#111" href="https://www.youtube.com/results?search_query=orthobullets+clavicle" target="_blank">Cari Video Clavicula</a><a class="btn btn-full" style="background:#F1F5F9;color:#111" href="https://www.youtube.com/results?search_query=orthobullets+spine" target="_blank">Cari Video Spine</a></div></div>
+<div id="video" class="hidden"><div class="card" style="text-align:center"><h2 style="margin:0">Nonton Dulu Biar Nyantol</h2><p style="color:#666">Video gratis, tanpa login.</p><a class="btn btn-blue" href="https://www.youtube.com/@Orthobullets" target="_blank">▶ YouTube Orthobullets</a><a class="btn btn-white" href="https://www.youtube.com/results?search_query=orthobullets+clavicle" target="_blank">Video Patah Selangka</a><a class="btn btn-white" href="https://www.youtube.com/results?search_query=orthobullets+clubfoot" target="_blank">Video Clubfoot</a></div></div>
 
-<div id="soal" class="hidden"><div class="card" style="text-align:center"><h2 style="margin:0">Try Out</h2><p style="color:#64748B">20 soal acak dari 1000 kasus</p><button class="btn btn-gold btn-full" onclick="startQuiz()">Mulai Try Out</button></div><div class="card"><h3 id="qTitle">Belum mulai</h3><div id="quizBox"></div><button class="btn btn-blue btn-full" onclick="nextQ()">Jawab dan Lanjut</button></div></div>
+<div id="soal" class="hidden"><div class="card" style="text-align:center"><h2 style="margin:0">Kuis Cepat ⚡</h2><p style="color:#666">20 soal, 2 menit, langsung tau level lu.</p><button class="btn btn-gold" onclick="startQuiz()">Mulai Kuis</button></div><div class="card"><h3 id="qTitle">Belum mulai</h3><div id="quizBox"></div><button class="btn btn-blue" onclick="nextQ()">Jawab & Lanjut</button></div></div>
 </div>
 <script>
 const MODS={
-clavicula:{label:"Clavicula",topics:["Midshaft Displaced","Neer IIA Distal","Neer IIB Unstable","Neer III Intra-articular","Floating Shoulder","Skin Tenting","Open Fracture","Nonunion","Malunion","AC Joint Rockwood III","AC Joint Rockwood V","SC Joint Anterior","SC Joint Posterior","Medial Physeal","Subclavian Injury"],jawab:"Orthobullets Clavicula: 75-80% midshaft. Neer <100% non-op, >100% operatif. Nonunion 5-6%. Floating, skin tenting, open = absolut operatif. Sumber: orthobullets.com/trauma/1011",link:"https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures"},
-upper:{label:"Upper Limb",topics:["Humerus Shaft + Radial Palsy","Holstein-Lewis","Proximal Humerus 2-part","Proximal Humerus 4-part","Monteggia Bado I","Galeazzi","Both Bone Forearm","Distal Radius Colles","Distal Radius Barton","Scaphoid Waist","Scaphoid Proximal AVN","Perilunate","Boxer Fracture","Bennett Fracture","Supracondylar Gartland III"],jawab:"Orthobullets Upper Limb: Radial palsy 7-22%, 77% sembuh spontan. Holstein-Lewis eksplorasi. Monteggia/Galeazzi ORIF. Sumber: orthobullets.com/trauma/1016",link:"https://www.orthobullets.com/trauma/1016/humeral-shaft-fractures"},
-lower:{label:"Lower Limb",topics:["Femur Shaft + Neck","Femur Shaft Comminuted","Tibia Gustilo I","Tibia Gustilo IIIA","Tibia Gustilo IIIB","Tibia Gustilo IIIC","Compartment Syndrome","Tibial Plateau Schatzker II","Tibial Plateau Schatzker VI","Pilon Staged","Ankle Weber B","Ankle Weber C","Calcaneus Sanders II","Lisfranc","Talar Neck Hawkins III"],jawab:"Orthobullets Lower Limb: Femur IM nailing >95% union, cek neck 6-9%. Tibia most common long bone, Gustilo. Compartment = fasciotomy emergency. Sumber: orthobullets.com/trauma/1030",link:"https://www.orthobullets.com/trauma/1030/femoral-shaft-fractures"},
-spine:{label:"Spine",topics:["Cauda Equina L4-5","HNP L5-S1","HNP L4-5","Burst L1","Burst T12","Chance Fracture","Spondylolisthesis Isthmic","Spondylolisthesis Degenerative","SCI Cervical ASIA A","Central Cord","Brown-Sequard","Scoliosis AIS","Kyphosis Scheuermann","TB Spine Pott","Epidural Abscess"],jawab:"Orthobullets Spine: Cauda equina L4-5, dekompresi <24 jam, absolut <48 jam. Burst = Denis 3-column. SCI = ASIA. Sumber: orthobullets.com/spine/2065",link:"https://www.orthobullets.com/spine/2065/cauda-equina-syndrome"},
-pediatric:{label:"Pediatric",topics:["SCFE Stable","SCFE Unstable","DDH Pavlik","DDH Gagal Pavlik","Perthes Herring B","Perthes Herring C","Supracondylar Gartland III","Femur Shaft Spica","Toddler Fracture","Septic Arthritis Hip","Osteomyelitis","Blount Disease","Rickets Genu Varum","Pediatric Monteggia","DDH Open Reduction"],jawab:"Orthobullets Pediatric: SCFE obese male 12-13th pin in situ, AVN 24-47% unstable. DDH Pavlik <6 bln 95% sukses. Sumber: orthobullets.com/pediatrics/4005",link:"https://www.orthobullets.com/pediatrics/4005/slipped-capital-femoral-epiphysis-scfe"},
-geriatric:{label:"Geriatric",topics:["Femoral Neck Garden I","Femoral Neck Garden II","Femoral Neck Garden III","Femoral Neck Garden IV","Intertroch Stable","Intertroch Unstable","Periprosthetic Vancouver B1","Periprosthetic Vancouver B2","Colles","Distal Radius Intra-articular","Vertebral L1","Vertebral T12","Proximal Humerus","Atypical Bisphosphonate","Pelvic Fragility"],jawab:"Orthobullets Geriatric: Femoral neck AVN 10-45%, operasi <24-48 jam, mortalitas 30% 1 thn. Intertroch unstable = nail. Sumber: orthobullets.com/trauma/1025",link:"https://www.orthobullets.com/trauma/1025/femoral-neck-fractures"},
-tumor:{label:"Tumor",topics:["Osteosarcoma Distal Femur","Osteosarcoma Humerus","Ewing Femur","Ewing Pelvis","Chondrosarcoma Pelvis","Chondrosarcoma Femur","GCT Distal Femur","Metastasis Femur Mirels 10","Metastasis Spine","Osteochondroma","Aneurysmal Bone Cyst","Unicameral Cyst","Fibrous Dysplasia","Osteoid Osteoma","Chordoma Sacrum"],jawab:"Orthobullets Tumor: Osteosarcoma chemo+wide+chemo. Ewing t(11;22) EWS-FLI1. Chondrosarcoma wide saja. Mirels >=8 fiksasi. Sumber: orthobullets.com/pathology/9005",link:"https://www.orthobullets.com/pathology/9005/conventional-intramedullary-osteosarcoma"},
-congenital:{label:"Congenital",topics:["Clubfoot Ponseti","Clubfoot Relapse","Clubfoot Tibialis Transfer","DDH Barlow","DDH Ortolani","Vertical Talus","Polydactyly Postaxial","Polydactyly Preaxial","Syndactyly Simple","Syndactyly Complex","Arthrogryposis","Congenital Knee Dislocation","Radioulnar Synostosis","Radial Club Hand","Congenital Torticollis"],jawab:"Orthobullets Congenital: Clubfoot CAVE, Ponseti gold standard, Cavus-Adductus-Varus-Equinus, tenotomy 80-90%, FAO sampai 4th. Sumber: orthobullets.com/pediatrics/4062",link:"https://www.orthobullets.com/pediatrics/4062/clubfoot-congenital-talipes-equinovarus"}
+clavicula:{label:"Patah Selangka",items:[
+{t:"Midshaft Displaced",l:"https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures",j:"75-80% patah selangka itu di tengah. Kalau geser 100% / kulit ketarik / terbuka = operasi."},
+{t:"Neer IIA Distal",l:"https://www.orthobullets.com/trauma/1012/distal-clavicle-fractures",j:"Neer IIA: ligamen masih utuh, stabil, biasanya ga perlu operasi."},
+{t:"Neer IIB Unstable",l:"https://www.orthobullets.com/trauma/1012/distal-clavicle-fractures",j:"Neer IIB: ligamen putus, ga stabil, gampang ga nyambung, operasi."},
+{t:"Neer III Intra-articular",l:"https://www.orthobullets.com/trauma/1012/distal-clavicle-fractures",j:"Neer III: masuk ke sendi AC, risiko radang sendi."},
+{t:"Floating Shoulder",l:"https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures",j:"Floating Shoulder: selangka + belikat patah bareng, bahu jadi 'ngambang', operasi."},
+{t:"Skin Tenting",l:"https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures",j:"Skin tenting: tulang nonjol sampe kulit ketarik, wajib operasi, jangan ditunda."},
+{t:"Open Fracture",l:"https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures",j:"Open: tulang nembus kulit, cuci + bersihin + operasi + antibiotik."},
+{t:"Nonunion",l:"https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures",j:"Nonunion: udah lama ga nyambung, operasi + cangkok tulang."},
+{t:"Malunion",l:"https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures",j:"Malunion: nyambung tapi miring / pendek, koreksi kalau ganggu fungsi."},
+{t:"AC Joint Rockwood III",l:"https://www.orthobullets.com/trauma/1015/acromioclavicular-joint-injuries",j:"AC Rockwood III: ligamen AC + CC putus. Muda aktif = operasi, tua = bisa gips."},
+{t:"AC Joint Rockwood V",l:"https://www.orthobullets.com/trauma/1015/acromioclavicular-joint-injuries",j:"AC Rockwood V: geser parah >100%, operasi."},
+{t:"SC Joint Anterior",l:"https://www.orthobullets.com/trauma/1014/sternoclavicular-joint-injuries",j:"SC Anterior: 90% kasus SC, geser ke depan, reduksi tertutup, prognosis bagus."},
+{t:"SC Joint Posterior",l:"https://www.orthobullets.com/trauma/1014/sternoclavicular-joint-injuries",j:"SC Posterior: GAWAT, geser ke belakang neken trakea / pembuluh besar. Reduksi di OK."},
+{t:"Medial Physeal",l:"https://www.orthobullets.com/trauma/1014/sternoclavicular-joint-injuries",j:"Medial physeal: anak/remaja, sering dikira dislokasi SC."},
+{t:"Subclavian Injury",l:"https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures",j:"Subclavian injury: trauma berat, cek pembuluh darah."}
+]},
+upper:{label:"Tangan",items:[
+{t:"Humerus Shaft + Radial Palsy",l:"https://www.orthobullets.com/trauma/1016/humeral-shaft-fractures",j:"Saraf radial kejepit 7-22%, 77% sembuh sendiri. Tunggu 3-4 bulan."},
+{t:"Holstein-Lewis",l:"https://www.orthobullets.com/trauma/1016/humeral-shaft-fractures",j:"Holstein-Lewis: patah spiral bawah, saraf kejepit, eksplorasi + operasi."},
+{t:"Proximal Humerus 2-part",l:"https://www.orthobullets.com/trauma/1017/proximal-humerus-fractures",j:"Proximal humerus 2-part: geser dikit, bisa gips."},
+{t:"Proximal Humerus 4-part",l:"https://www.orthobullets.com/trauma/1017/proximal-humerus-fractures",j:"Proximal humerus 4-part: risiko mati tulang tinggi, lansia = ganti sendi."},
+{t:"Monteggia Bado I",l:"https://www.orthobullets.com/trauma/1020/monteggia-fractures",j:"Monteggia: ulna patah + kepala radius lepas ke depan, operasi ulna."},
+{t:"Galeazzi",l:"https://www.orthobullets.com/trauma/1021/galeazzi-fractures",j:"Galeazzi: radius patah + sendi pergelangan lepas, operasi radius."},
+{t:"Both Bone Forearm",l:"https://www.orthobullets.com/trauma/1019/both-bone-forearm-fractures",j:"Dua tulang lengan bawah patah, dewasa = operasi."},
+{t:"Distal Radius Colles",l:"https://www.orthobullets.com/trauma/1022/distal-radius-fractures",j:"Colles: jatuh tangan menahan, pergelangan bengkok ke belakang."},
+{t:"Distal Radius Barton",l:"https://www.orthobullets.com/trauma/1022/distal-radius-fractures",j:"Barton: masuk sendi, ga stabil, operasi."},
+{t:"Scaphoid Waist",l:"https://www.orthobullets.com/hand/6001/scaphoid-fractures",j:"Scaphoid waist: nyeri snuffbox, gips thumb spica."},
+{t:"Scaphoid Proximal AVN",l:"https://www.orthobullets.com/hand/6001/scaphoid-fractures",j:"Scaphoid atas: aliran darah jelek, gampang mati tulang, fiksasi."},
+{t:"Perilunate",l:"https://www.orthobullets.com/hand/6005/perilunate-dislocation",j:"Perilunate: trauma berat, operasi + perbaiki ligamen."},
+{t:"Boxer Fracture",l:"https://www.orthobullets.com/hand/6010/metacarpal-fractures",j:"Boxer: patah tulang telapak tangan ke-5 gara-gara mukul, buddy taping."},
+{t:"Bennett Fracture",l:"https://www.orthobullets.com/hand/6011/bennett-fracture",j:"Bennett: patah pangkal jempol masuk sendi, ga stabil, pinning."},
+{t:"Supracondylar Gartland III",l:"https://www.orthobullets.com/pediatrics/4001/supracondylar-humerus-fractures",j:"Supracondylar Gartland III: anak jatuh, siku geser total, pinning, cek saraf."}
+]},
+lower:{label:"Kaki",items:[
+{t:"Femur Shaft + Neck",l:"https://www.orthobullets.com/trauma/1030/femoral-shaft-fractures",j:"Paha patah: selalu cek leher paha, 6-9% kelewat. Pasang pen di dalam tulang."},
+{t:"Femur Shaft Comminuted",l:"https://www.orthobullets.com/trauma/1030/femoral-shaft-fractures",j:"Paha remuk: pen terkunci di dalam tulang."},
+{t:"Tibia Gustilo I",l:"https://www.orthobullets.com/trauma/1033/tibia-shaft-fractures",j:"Gustilo I: luka kecil <1cm, bersih."},
+{t:"Tibia Gustilo IIIA",l:"https://www.orthobullets.com/trauma/1033/tibia-shaft-fractures",j:"Gustilo IIIA: luka gede >10cm, kulit masih cukup."},
+{t:"Tibia Gustilo IIIB",l:"https://www.orthobullets.com/trauma/1033/tibia-shaft-fractures",j:"Gustilo IIIB: kulit rusak parah, butuh flap."},
+{t:"Tibia Gustilo IIIC",l:"https://www.orthobullets.com/trauma/1033/tibia-shaft-fractures",j:"Gustilo IIIC: pembuluh darah kena, perbaiki pembuluh + tulang."},
+{t:"Compartment Syndrome",l:"https://www.orthobullets.com/trauma/1034/compartment-syndrome",j:"Compartment: nyeri ga wajar, kaki tegang, GAWAT, belah fascia segera."},
+{t:"Tibial Plateau Schatzker II",l:"https://www.orthobullets.com/trauma/1036/tibial-plateau-fractures",j:"Schatzker II: lutut pecah + ambles, operasi + cangkok."},
+{t:"Tibial Plateau Schatzker VI",l:"https://www.orthobullets.com/trauma/1036/tibial-plateau-fractures",j:"Schatzker VI: lutut hancur dua sisi, bertahap."},
+{t:"Pilon Staged",l:"https://www.orthobullets.com/trauma/1037/pilon-fractures",j:"Pilon: pergelangan hancur, pasang fixasi luar dulu, operasi nanti."},
+{t:"Ankle Weber B",l:"https://www.orthobullets.com/trauma/1038/ankle-fractures",j:"Weber B: patah di level syndesmosis, cek stabilitas."},
+{t:"Ankle Weber C",l:"https://www.orthobullets.com/trauma/1038/ankle-fractures",j:"Weber C: patah di atas syndesmosis, syndesmosis putus, operasi + sekrup."},
+{t:"Calcaneus Sanders II",l:"https://www.orthobullets.com/trauma/1040/calcaneus-fractures",j:"Calcaneus Sanders II: tumit pecah 2 fragmen, operasi kalau geser."},
+{t:"Lisfranc",l:"https://www.orthobullets.com/trauma/1041/lisfranc-injuries",j:"Lisfranc: tengah kaki, fleck sign, operasi."},
+{t:"Talar Neck Hawkins III",l:"https://www.orthobullets.com/trauma/1042/talar-neck-fractures",j:"Talar neck Hawkins III: lepas 2 sendi, risiko mati tulang tinggi banget."}
+]},
+spine:{label:"Tulang Belakang",items:[
+{t:"Cauda Equina L4-5",l:"https://www.orthobullets.com/spine/2065/cauda-equina-syndrome",j:"Cauda equina: kebas area sadel, ga bisa kencing, operasi <24 jam!"},
+{t:"HNP L5-S1",l:"https://www.orthobullets.com/spine/2010/lumbar-disc-herniation",j:"HNP L5-S1: saraf S1 kena, refleks Achilles turun."},
+{t:"HNP L4-5",l:"https://www.orthobullets.com/spine/2010/lumbar-disc-herniation",j:"HNP L4-5: saraf L5 kena, jempol kaki ga bisa naik, foot drop."},
+{t:"Burst L1",l:"https://www.orthobullets.com/spine/2020/thoracolumbar-burst-fractures",j:"Burst L1: tulang belakang meledak, 3 kolom kena."},
+{t:"Burst T12",l:"https://www.orthobullets.com/spine/2020/thoracolumbar-burst-fractures",j:"Burst T12: sambungan dada-pinggang paling sering."},
+{t:"Chance Fracture",l:"https://www.orthobullets.com/spine/2021/chance-fractures",j:"Chance: gara-gara seat belt, tulang ketarik ke depan."},
+{t:"Spondylolisthesis Isthmic",l:"https://www.orthobullets.com/spine/2015/spondylolisthesis",j:"Isthmic: tulang geser gara-gara pars patah, remaja atlet."},
+{t:"Spondylolisthesis Degenerative",l:"https://www.orthobullets.com/spine/2015/spondylolisthesis",j:"Degenerative: tulang geser gara-gara pengapuran, lansia."},
+{t:"SCI Cervical ASIA A",l:"https://www.orthobullets.com/spine/2030/spinal-cord-injury",j:"SCI ASIA A: lumpuh total di bawah lesi."},
+{t:"Central Cord",l:"https://www.orthobullets.com/spine/2030/spinal-cord-injury",j:"Central cord: tangan lebih lumpuh dari kaki, lansia jatuh."},
+{t:"Brown-Sequard",l:"https://www.orthobullets.com/spine/2030/spinal-cord-injury",j:"Brown-Sequard: separuh sumsum kena, gerak satu sisi, rasa nyeri sisi lain."},
+{t:"Scoliosis AIS",l:"https://www.orthobullets.com/spine/2040/adolescent-idiopathic-scoliosis",j:"AIS: skoliosis remaja cewek, ukur Cobb, brace 25-40 derajat."},
+{t:"Kyphosis Scheuermann",l:"https://www.orthobullets.com/spine/2045/scheuermann-kyphosis",j:"Scheuermann: bungkuk remaja cowok, tulang baji 3 ruas."},
+{t:"TB Spine Pott",l:"https://www.orthobullets.com/spine/2050/spinal-tuberculosis",j:"Pott: TBC tulang belakang, bungkuk, abses dingin."},
+{t:"Epidural Abscess",l:"https://www.orthobullets.com/spine/2055/spinal-epidural-abscess",j:"Epidural abscess: nyeri + demam + lumpuh, MRI, dekompresi."}
+]},
+pediatric:{label:"Anak",items:[
+{t:"SCFE Stable",l:"https://www.orthobullets.com/pediatrics/4005/slipped-capital-femoral-epiphysis-scfe",j:"SCFE stabil: anak obesitas 12-13th, pasang pin, jangan dipaksa balikin."},
+{t:"SCFE Unstable",l:"https://www.orthobullets.com/pediatrics/4005/slipped-capital-femoral-epiphysis-scfe",j:"SCFE unstable: tiba-tiba sakit, AVN 24-47%, pinning darurat."},
+{t:"DDH Pavlik",l:"https://www.orthobullets.com/pediatrics/4010/developmental-dysplasia-of-the-hip-ddh",j:"DDH Pavlik <6 bulan 95% berhasil."},
+{t:"DDH Gagal Pavlik",l:"https://www.orthobullets.com/pediatrics/4010/developmental-dysplasia-of-the-hip-ddh",j:"DDH gagal Pavlik: reduksi tertutup + gips spica."},
+{t:"Perthes Herring B",l:"https://www.orthobullets.com/pediatrics/4015/legg-calve-perthes-disease",j:"Perthes Herring B: kepala paha 50-100% kena, containment."},
+{t:"Perthes Herring C",l:"https://www.orthobullets.com/pediatrics/4015/legg-calve-perthes-disease",j:"Perthes Herring C: <50%, prognosis jelek, osteotomy."},
+{t:"Supracondylar Gartland III",l:"https://www.orthobullets.com/pediatrics/4001/supracondylar-humerus-fractures",j:"Gartland III: geser total, pinning, cek pembuluh + saraf."},
+{t:"Femur Shaft Spica",l:"https://www.orthobullets.com/pediatrics/4020/pediatric-femoral-shaft-fractures",j:"Paha anak <6th: gips spica, >6th: pen lentur."},
+{t:"Toddler Fracture",l:"https://www.orthobullets.com/pediatrics/4025/toddler-fracture",j:"Toddler fracture: tulang kering spiral, anak baru jalan, gips."},
+{t:"Septic Arthritis Hip",l:"https://www.orthobullets.com/pediatrics/4030/septic-arthritis",j:"Septic hip: infeksi sendi, Kocher, aspirasi + cuci darurat, cegah AVN."},
+{t:"Osteomyelitis",l:"https://www.orthobullets.com/pediatrics/4035/osteomyelitis",j:"Osteomyelitis: infeksi tulang, Staph aureus, MRI, antibiotik."},
+{t:"Blount Disease",l:"https://www.orthobullets.com/pediatrics/4040/blount-disease",j:"Blount: kaki O, anak obesitas."},
+{t:"Rickets Genu Varum",l:"https://www.orthobullets.com/pediatrics/4045/rickets",j:"Rickets: kurang vit D, kaki O, beading."},
+{t:"Pediatric Monteggia",l:"https://www.orthobullets.com/trauma/1020/monteggia-fractures",j:"Monteggia anak: sering kelewat, cek garis kepala radius."},
+{t:"DDH Open Reduction",l:"https://www.orthobullets.com/pediatrics/4010/developmental-dysplasia-of-the-hip-ddh",j:"DDH open: gagal tertutup, >18 bulan, operasi buka."}
+]},
+geriatric:{label:"Lansia",items:[
+{t:"Femoral Neck Garden I",l:"https://www.orthobullets.com/trauma/1025/femoral-neck-fractures",j:"Garden I: retak, nempel, pasang sekrup di tempat."},
+{t:"Femoral Neck Garden II",l:"https://www.orthobullets.com/trauma/1025/femoral-neck-fractures",j:"Garden II: patah total tapi ga geser, sekrup."},
+{t:"Femoral Neck Garden III",l:"https://www.orthobullets.com/trauma/1025/femoral-neck-fractures",j:"Garden III: geser sebagian, AVN tinggi, lansia = ganti sendi."},
+{t:"Femoral Neck Garden IV",l:"https://www.orthobullets.com/trauma/1025/femoral-neck-fractures",j:"Garden IV: geser total, lansia = hemiarthroplasty, operasi <24-48 jam."},
+{t:"Intertroch Stable",l:"https://www.orthobullets.com/trauma/1026/intertrochanteric-fractures",j:"Intertroch stabil: DHS bisa."},
+{t:"Intertroch Unstable",l:"https://www.orthobullets.com/trauma/1026/intertrochanteric-fractures",j:"Intertroch unstable: pen di dalam tulang (nail)."},
+{t:"Periprosthetic Vancouver B1",l:"https://www.orthobullets.com/trauma/1028/periprosthetic-femur-fractures",j:"Vancouver B1: implan masih nempel, plat."},
+{t:"Periprosthetic Vancouver B2",l:"https://www.orthobullets.com/trauma/1028/periprosthetic-femur-fractures",j:"Vancouver B2: implan goyang, ganti implan."},
+{t:"Colles",l:"https://www.orthobullets.com/trauma/1022/distal-radius-fractures",j:"Colles lansia: osteoporosis, gips kalau stabil."},
+{t:"Distal Radius Intra-articular",l:"https://www.orthobullets.com/trauma/1022/distal-radius-fractures",j:"Distal radius masuk sendi: plat volar."},
+{t:"Vertebral L1",l:"https://www.orthobullets.com/spine/2025/osteoporotic-vertebral-compression-fractures",j:"Vertebral L1: osteoporosis, kyphoplasty kalau nyeri terus."},
+{t:"Vertebral T12",l:"https://www.orthobullets.com/spine/2025/osteoporotic-vertebral-compression-fractures",j:"Vertebral T12: sambungan dada-pinggang, brace."},
+{t:"Proximal Humerus",l:"https://www.orthobullets.com/trauma/1017/proximal-humerus-fractures",j:"Proximal humerus lansia: Neer, 4-part = ganti sendi."},
+{t:"Atypical Bisphosphonate",l:"https://www.orthobullets.com/trauma/1030/femoral-shaft-fractures",j:"Atypical: minum obat tulang kelamaan, patah melintang, ada paruh."},
+{t:"Pelvic Fragility",l:"https://www.orthobullets.com/trauma/1029/pelvic-fractures",j:"Pelvic fragility: jatuh ringan, lansia, gerak dini."}
+]},
+tumor:{label:"Tumor Tulang",items:[
+{t:"Osteosarcoma Distal Femur",l:"https://www.orthobullets.com/pathology/9005/conventional-intramedullary-osteosarcoma",j:"Osteosarcoma: kanker tulang remaja, paha bawah, kemo + operasi + kemo."},
+{t:"Osteosarcoma Humerus",l:"https://www.orthobullets.com/pathology/9005/conventional-intramedullary-osteosarcoma",j:"Osteosarcoma humerus: lengan atas kedua tersering."},
+{t:"Ewing Femur",l:"https://www.orthobullets.com/pathology/9010/ewing-sarcoma",j:"Ewing: t(11;22), onion skin, kemo + operasi + radioterapi."},
+{t:"Ewing Pelvis",l:"https://www.orthobullets.com/pathology/9010/ewing-sarcoma",j:"Ewing panggul: prognosis lebih jelek."},
+{t:"Chondrosarcoma Pelvis",l:"https://www.orthobullets.com/pathology/9015/chondrosarcoma",j:"Chondrosarcoma panggul: operasi lebar aja, kemo ga mempan."},
+{t:"Chondrosarcoma Femur",l:"https://www.orthobullets.com/pathology/9015/chondrosarcoma",j:"Chondrosarcoma paha: cincin kalsifikasi, operasi lebar."},
+{t:"GCT Distal Femur",l:"https://www.orthobullets.com/pathology/9020/giant-cell-tumor",j:"GCT: 20-40th, ujung tulang, kuret + semen."},
+{t:"Metastasis Femur Mirels 10",l:"https://www.orthobullets.com/pathology/9025/metastatic-disease",j:"Metastasis Mirels 10: hampir pasti patah, pasang pen duluan."},
+{t:"Metastasis Spine",l:"https://www.orthobullets.com/pathology/9025/metastatic-disease",j:"Metastasis spine: Tokuhashi, dekompresi kalau lumpuh."},
+{t:"Osteochondroma",l:"https://www.orthobullets.com/pathology/9030/osteochondroma",j:"Osteochondroma: jinak paling sering, tonjolan tulang."},
+{t:"Aneurysmal Bone Cyst",l:"https://www.orthobullets.com/pathology/9035/aneurysmal-bone-cyst",j:"ABC: fluid-fluid level di MRI, kuret + cangkok."},
+{t:"Unicameral Cyst",l:"https://www.orthobullets.com/pathology/9040/unicameral-bone-cyst",j:"UBC: kista anak, fallen fragment sign."},
+{t:"Fibrous Dysplasia",l:"https://www.orthobullets.com/pathology/9045/fibrous-dysplasia",j:"Fibrous dysplasia: ground glass, shepherd crook."},
+{t:"Osteoid Osteoma",l:"https://www.orthobullets.com/pathology/9050/osteoid-osteoma",j:"Osteoid osteoma: nyeri malam, membaik NSAID, RFA."},
+{t:"Chordoma Sacrum",l:"https://www.orthobullets.com/pathology/9055/chordoma",j:"Chordoma sakrum: sisa notochord, operasi lebar."}
+]},
+congenital:{label:"Bawaan Lahir",items:[
+{t:"Clubfoot Ponseti",l:"https://www.orthobullets.com/pediatrics/4062/clubfoot-congenital-talipes-equinovarus",j:"Clubfoot Ponseti: CAVE, gips bertahap, gold standard."},
+{t:"Clubfoot Relapse",l:"https://www.orthobullets.com/pediatrics/4062/clubfoot-congenital-talipes-equinovarus",j:"Clubfoot kambuh: brace ga dipake, transfer tendon."},
+{t:"Clubfoot Tibialis Transfer",l:"https://www.orthobullets.com/pediatrics/4062/clubfoot-congenital-talipes-equinovarus",j:"Tibialis transfer: kambuh supinasi dinamis, pindah ke cuboid."},
+{t:"DDH Barlow",l:"https://www.orthobullets.com/pediatrics/4010/developmental-dysplasia-of-the-hip-ddh",j:"DDH Barlow: panggul bisa didislokasiin, ga stabil."},
+{t:"DDH Ortolani",l:"https://www.orthobullets.com/pediatrics/4010/developmental-dysplasia-of-the-hip-ddh",j:"DDH Ortolani: panggul lepas bisa dibalikin, klik."},
+{t:"Vertical Talus",l:"https://www.orthobullets.com/pediatrics/4065/vertical-talus",j:"Vertical talus: kaki rocker bottom, talus vertikal."},
+{t:"Polydactyly Postaxial",l:"https://www.orthobullets.com/pediatrics/4070/polydactyly",j:"Polydactyly postaxial: jari ke-5 lebih, paling sering, potong."},
+{t:"Polydactyly Preaxial",l:"https://www.orthobullets.com/pediatrics/4070/polydactyly",j:"Polydactyly preaxial: jempol lebih, Wassel, rekonstruksi."},
+{t:"Syndactyly Simple",l:"https://www.orthobullets.com/pediatrics/4075/syndactyly",j:"Syndactyly simple: jari nempel kulit aja, pisah + cangkok kulit."},
+{t:"Syndactyly Complex",l:"https://www.orthobullets.com/pediatrics/4075/syndactyly",j:"Syndactyly complex: tulang nempel, osteotomy."},
+{t:"Arthrogryposis",l:"https://www.orthobullets.com/pediatrics/4080/arthrogryposis",j:"Arthrogryposis: banyak sendi kaku sejak lahir."},
+{t:"Congenital Knee Dislocation",l:"https://www.orthobullets.com/pediatrics/4085/congenital-knee-dislocation",j:"Congenital knee dislocation: lutut hiperekstensi, gips bertahap."},
+{t:"Radioulnar Synostosis",l:"https://www.orthobullets.com/pediatrics/4090/radioulnar-synostosis",j:"Radioulnar synostosis: lengan ga bisa muter, pronasi terus."},
+{t:"Radial Club Hand",l:"https://www.orthobullets.com/pediatrics/4095/radial-club-hand",j:"Radial club hand: tulang radius ga ada, centralization."},
+{t:"Congenital Torticollis",l:"https://www.orthobullets.com/pediatrics/4100/congenital-muscular-torticollis",j:"Torticollis: leher miring, otot SCM fibrosis, stretching."}
+]}
 };
 const AGES=["Bayi 2 bulan","Anak 6 tahun","Anak 9 tahun","Remaja 13 tahun","Remaja 15 tahun","Dewasa 25 tahun","Dewasa 32 tahun","Dewasa 40 tahun","Lansia 68 tahun","Lansia 78 tahun"];
 const MECH=["jatuh dari motor","jatuh dari ketinggian","jatuh saat olahraga","kecelakaan lalu lintas","jatuh di rumah","trauma high energy","trauma low energy","jatuh tangan menahan"];
 let allKasus=[];let idCounter=1;
-Object.keys(MODS).forEach(mod=>{for(let i=0;i<125;i++){let topic=MODS[mod].topics[i%MODS[mod].topics.length];let age=AGES[i%AGES.length];let mech=MECH[i%MECH.length];let varian=Math.floor(i/MODS[mod].topics.length)+1;allKasus.push({id:idCounter++,mod:mod,no:i+1,title:topic+" - Varian "+varian,vignette:'Pasien '+age+', '+mech+', dengan diagnosis '+topic+'. Keluhan nyeri, deformitas, keterbatasan gerak. Periksa neurovaskular, X-Ray orthogonal, klasifikasi Orthobullets, tentukan terapi non-operatif vs operatif.',jawab:MODS[mod].jawab,link:MODS[mod].link})}});
-function tab(id,btn){document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');['home','kasus','video','soal'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo(0,0)}
-function renderKasus(list,limit){let show=list.slice(0,limit||100);let h='<p><b>Menampilkan '+show.length+' dari '+list.length+' kasus (Total: 1000)</b></p>';show.forEach(c=>{h+='<div class="case"><b>[#'+c.id+' - '+MODS[c.mod].label+'] Kasus '+c.no+' - '+c.title+'</b><p style="color:#475569">'+c.vignette+'</p><p style="background:#F8FAFC;padding:12px;border-radius:10px"><b>Jawaban Orthobullets:</b><br>'+c.jawab+'<br><a href="'+c.link+'" target="_blank">Verifikasi di Orthobullets</a></p></div>'});document.getElementById('kasusBox').innerHTML=h}
-function showKasus(m){if(m==='all'){renderKasus(allKasus,100)}else{renderKasus(allKasus.filter(c=>c.mod===m),125)}tab('kasus',document.querySelectorAll('.nav button')[1])}
-function searchKasus(q){q=q.toLowerCase();if(!q){renderKasus(allKasus,100);return}renderKasus(allKasus.filter(c=>(c.title+' '+c.mod+' '+c.vignette+' '+c.jawab).toLowerCase().includes(q)),100);tab('kasus',document.querySelectorAll('.nav button')[1])}
-function acakKasus(){let copy=[...allKasus];for(let i=copy.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]]}renderKasus(copy.slice(0,20),20);tab('kasus',document.querySelectorAll('.nav button')[1])}
+Object.keys(MODS).forEach(mod=>{for(let i=0;i<125;i++){let item=MODS[mod].items[i%MODS[mod].items.length];let age=AGES[i%AGES.length];let mech=MECH[i%MECH.length];let varian=Math.floor(i/MODS[mod].items.length)+1;allKasus.push({id:idCounter++,mod:mod,no:i+1,title:item.t+" - Varian "+varian,vignette:'Kasus edukasi - Pasien '+age+', '+mech+', diagnosis '+item.t+'. Nyeri, bengkak / deformitas, gerak terbatas. Cek neurovaskular, X-Ray, klasifikasi, tentukan operasi atau tidak.',jawab:item.j,link:item.l})}});
+function tab(id,btn){document.querySelectorAll('.tab button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');['home','kasus','video','soal'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo(0,0)}
+function renderKasus(list,limit){let show=list.slice(0,limit||100);let h='<p><b>Menampilkan '+show.length+' dari '+list.length+' kasus</b></p>';show.forEach(c=>{h+='<div class="case"><b>[#'+c.id+'] '+c.title+'</b><p style="color:#555">'+c.vignette+'</p><p style="background:#F8F9FA;padding:12px;border-radius:10px"><b>Jawaban singkat:</b><br>'+c.jawab+'<br><a href="'+c.link+'" target="_blank">📖 Baca lengkap di Orthobullets →</a></p></div>'});document.getElementById('kasusBox').innerHTML=h}
+function showKasus(m){if(m==='all'){renderKasus(allKasus,100)}else{renderKasus(allKasus.filter(c=>c.mod===m),125)}tab('kasus',document.querySelectorAll('.tab button')[1])}
+function searchKasus(q){q=q.toLowerCase();if(!q){renderKasus(allKasus,100);return}renderKasus(allKasus.filter(c=>(c.title+' '+c.mod+' '+c.vignette+' '+c.jawab).toLowerCase().includes(q)),100);tab('kasus',document.querySelectorAll('.tab button')[1])}
+function acakKasus(){let copy=[...allKasus];for(let i=copy.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]]}renderKasus(copy.slice(0,20),20);tab('kasus',document.querySelectorAll('.tab button')[1])}
 renderKasus(allKasus,100);
 let score=0,qIdx=0,selected=null,quizList=[];
 const baseQ=[
-{q:'Clavicula midshaft %?',o:['50%','75-80%','30%','10%'],a:1},{q:'Neer displaced clavicula?',o:['<50%','<100% non-op','>100% operatif','Tidak perlu'],a:2},{q:'Radial palsy humerus?',o:['1%','7-22%','50%','90%'],a:1},{q:'Femur shaft terapi?',o:['Gips','IM Nailing >95%','Amputasi','Bed rest'],a:1},{q:'Tibia shaft?',o:['Jarang','Most common long bone','Hanya anak','Tidak open'],a:1},{q:'Cauda Equina level?',o:['L1-2','L2-3','L4-5','S1-2'],a:2},{q:'Cauda Equina operasi?',o:['1 minggu','<24 jam, absolut <48 jam','1 bulan','Tidak perlu'],a:1},{q:'Osteosarcoma terapi?',o:['Observasi','Chemo+Wide+Chemo','Amputasi saja','Radioterapi saja'],a:1},{q:'Ewing translocation?',o:['t(11;22) EWS-FLI1','t(9;22)','t(15;17)','Tidak ada'],a:0},{q:'SCFE tersering?',o:['Bayi','Obese male 12-13th','Lansia','Balita'],a:1},{q:'Clubfoot urutan pertama?',o:['Equinus','Cavus','Varus','Adductus'],a:1},{q:'Femoral neck geriatri operasi?',o:['<24-48 jam','1 bulan','Tidak perlu','2 minggu'],a:0},{q:'Holstein-Lewis?',o:['Observasi','Eksplorasi radial + ORIF','Gips','Amputasi'],a:1},{q:'Galeazzi?',o:['Gips','ORIF radius','Observasi','Amputasi'],a:1},{q:'Gustilo IIIB?',o:['Luka kecil','Luka >10cm + stripping + flap','Tidak debridement','Gips'],a:1},{q:'Mirels >=8?',o:['Observasi','Fiksasi profilaksis','Gips','Tidak perlu'],a:1},{q:'Chondrosarcoma terapi?',o:['Chemo','Wide resection saja','Radioterapi saja','Observasi'],a:1},{q:'Garden IV lansia?',o:['ORIF','Hemiarthroplasty/THA','Gips','Observasi'],a:1},{q:'DDH <6 bulan?',o:['Operasi','Pavlik harness','Gips','Observasi'],a:1},{q:'Intertroch unstable?',o:['DHS','Cephalomedullary nail','Gips','Observasi'],a:1}
+{q:'Patah selangka paling sering di mana?',o:['Ujung','Tengah 75-80%','Pangkal','Semua sama'],a:1},{q:'SC Joint Posterior itu?',o:['Biasa aja','GAWAT, neken trakea','Ga perlu operasi','Cuma memar'],a:1},{q:'Saraf kejepit di patah lengan atas?',o:['1%','7-22%','50%','90%'],a:1},{q:'Paha patah terapinya?',o:['Gips','Pen di dalam tulang','Bed rest','Amputasi'],a:1},{q:'Cauda equina operasi?',o:['1 minggu','<24 jam','1 bulan','Ga perlu'],a:1},{q:'Osteosarcoma terapi?',o:['Observasi','Kemo + Operasi + Kemo','Amputasi aja','Radioterapi aja'],a:1},{q:'Ewing translocation?',o:['t(11;22)','t(9;22)','t(15;17)','Ga ada'],a:0},{q:'SCFE tersering?',o:['Bayi','Anak obesitas 12-13th','Lansia','Balita'],a:1},{q:'Clubfoot urutan pertama?',o:['Equinus','Cavus','Varus','Adductus'],a:1},{q:'Patah leher paha lansia operasi?',o:['<24-48 jam','1 bulan','Ga perlu','2 minggu'],a:0},{q:'Holstein-Lewis?',o:['Observasi','Eksplorasi saraf + operasi','Gips','Amputasi'],a:1},{q:'Galeazzi?',o:['Gips','Operasi radius','Observasi','Amputasi'],a:1},{q:'Gustilo IIIB?',o:['Luka kecil','Luka gede + butuh flap','Ga perlu cuci','Gips'],a:1},{q:'Mirels >=8?',o:['Observasi','Pasang pen duluan','Gips','Ga perlu'],a:1},{q:'Chondrosarcoma terapi?',o:['Kemo','Operasi lebar aja','Radioterapi aja','Observasi'],a:1},{q:'Garden IV lansia?',o:['Sekrup','Ganti sendi','Gips','Observasi'],a:1},{q:'DDH <6 bulan?',o:['Operasi','Pavlik harness','Gips','Observasi'],a:1},{q:'Intertroch unstable?',o:['DHS','Pen di dalam tulang','Gips','Observasi'],a:1}
 ];
 function startQuiz(){quizList=[];while(quizList.length<20){quizList.push(baseQ[Math.floor(Math.random()*baseQ.length)])}qIdx=0;score=0;renderQ()}
 function renderQ(){selected=null;let q=quizList[qIdx];document.getElementById('qTitle').innerText='Soal '+(qIdx+1)+'/20 - Skor: '+score;document.getElementById('quizBox').innerHTML='<p><b>'+q.q+'</b></p>'+q.o.map((x,i)=>'<div class=opt onclick="pick(this,'+i+')">'+x+'</div>').join('')}
-function pick(el,i){document.querySelectorAll('.opt').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');el.style.borderColor='#2563EB';selected=i}
-function nextQ(){if(selected===null){alert('Pilih dulu Met!');return}if(selected===quizList[qIdx].a)score++;qIdx++;if(qIdx>=quizList.length){document.getElementById('quizBox').innerHTML='<h2>Selesai! Skor: '+score+'/20</h2><p>Dari database 1000 kasus Orthobullets</p>';return}renderQ()}
+function pick(el,i){document.querySelectorAll('.opt').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');el.style.borderColor='#007BFF';selected=i}
+function nextQ(){if(selected===null){alert('Pilih dulu!');return}if(selected===quizList[qIdx].a)score++;qIdx++;if(qIdx>=quizList.length){document.getElementById('quizBox').innerHTML='<h2>Selesai! Skor: '+score+'/20 🎉</h2><p>Share skor lu ke Threads!</p><a href="https://www.threads.net/intent/post?text=Skor%20kuis%20Ortho%20gue%20'+score+'%2F20%20di%20ORTHO%20LEARN%20🦴%20Cobain%20juga%20-%20https%3A%2F%2Ffahmifauzisugandi-prog.github.io%2FOrtho-Learn%2F" target="_blank" style="display:inline-block;background:#111;color:#fff;padding:12px 18px;border-radius:99px;font-weight:800;text-decoration:none">Share Skor ke Threads ↗</a>';return}renderQ()}
 </script></body></html>
