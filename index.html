@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORTHO LEARN by mhm.dr - GitHub + Orthobullets</title>
+<style>
+*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#050B14;color:#fff}
+header{padding:18px;background:linear-gradient(90deg,#0A2540,#00A8E8)}h1{margin:0;font-size:22px}h1 span{color:#FFD700}.sub{opacity:.85;font-size:13px}
+.wrap{padding:14px;max-width:780px;margin:auto}.card{background:#101B2E;border:1px solid #1E3A5F;border-radius:16px;padding:16px;margin:12px 0}
+.btn{width:100%;padding:13px;border:0;border-radius:12px;background:#00A8E8;color:#fff;font-weight:700;margin-top:10px;cursor:pointer;display:block;text-align:center;text-decoration:none}
+.btn-gold{background:#FFD700;color:#000}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini{background:#0A1626;border:1px solid #263F5E;border-radius:12px;padding:12px;cursor:pointer}
+.hidden{display:none}.opt{background:#0A1626;border:1px solid #263F5E;padding:10px;border-radius:10px;margin:6px 0;cursor:pointer}
+a{color:#FFD700}.src{font-size:12px;opacity:.75}.tab{display:flex;gap:8px;overflow:auto}.tab button{white-space:nowrap;padding:9px 14px;border-radius:99px;border:1px solid #263F5E;background:#0A1626;color:#fff;cursor:pointer}.tab button.active{background:#FFD700;color:#000}
+.badge{display:inline-block;background:#FFD700;color:#000;font-size:11px;font-weight:700;padding:4px 8px;border-radius:99px}
+</style></head><body>
+<header><h1>ORTHO <span>LEARN</span> by mhm.dr</h1><div class="sub">GITHUB PAGES EDITION - 100% ORTHOBULLETS - TRUSTED</div><div class="sub">dr. Fahmi Fauzi Sugandi - SP1 Orthopedic - Sumber: orthobullets.com</div><div style="margin-top:8px"><span class="badge">VERIFIED: ORTHOBULLETS</span> <span class="badge" style="background:#00A8E8;color:#fff">HOSTED: GITHUB PAGES</span></div></header>
+<div class="wrap">
+<div class="tab"><button class="active" onclick="tab('home',this)">Home</button><button onclick="tab('modulList',this)">8 Modul</button><button onclick="tab('video',this)">Video Orthobullets</button><button onclick="tab('soal',this)">Soal Qbank</button><button onclick="tab('ref',this)">Daftar Pustaka</button></div>
+
+<div id="home"><div class="card"><h2>Halo, dr. Fahmi</h2><p>Semua materi, video, dan soal di aplikasi ini <b>100% dari Orthobullets</b>. Bukan dari YouTube ngawur. Setiap modul ada link verifikasi ke orthobullets.com.</p><button class="btn btn-gold" onclick="tab('modulList',document.querySelectorAll('.tab button')[1])">Buka 8 Modul Orthobullets</button><button class="btn" onclick="tab('video',document.querySelectorAll('.tab button')[2])">Nonton Video Orthobullets</button></div>
+<div class="card"><h3>Kenapa Trusted?</h3><p>1. Materi = Orthobullets Topics<br>2. Video = Orthobullets Video List + Podcast + YouTube Resmi Orthobullets<br>3. Soal = Style Orthobullets Qbank<br>4. Hosting = GitHub Pages (Gratis, Permanen, Tanpa Credits)</p></div></div>
+
+<div id="modulList" class="hidden"><h3>8 Modul - 100% Orthobullets</h3><div class="grid">
+<div class="mini" onclick="openModul('clavicula')"><b>1. Clavicula</b><br>Midshaft + Distal Neer</div>
+<div class="mini" onclick="openModul('upper')"><b>2. Upper Limb</b><br>Humerus Shaft</div>
+<div class="mini" onclick="openModul('lower')"><b>3. Lower Limb</b><br>Femur + Tibia Shaft</div>
+<div class="mini" onclick="openModul('spine')"><b>4. Spine</b><br>Cauda Equina + HNP</div>
+<div class="mini" onclick="openModul('pediatric')"><b>5. Pediatric</b><br>SCFE + DDH</div>
+<div class="mini" onclick="openModul('geriatric')"><b>6. Geriatric</b><br>Femoral Neck + Intertroch</div>
+<div class="mini" onclick="openModul('tumor')"><b>7. Tumor</b><br>Osteosarcoma + Ewing</div>
+<div class="mini" onclick="openModul('congenital')"><b>8. Congenital</b><br>Clubfoot + DDH</div>
+</div><div class="card" id="modulContent"><p>Klik modul di atas.</p></div></div>
+
+<div id="video" class="hidden"><div class="card"><h2>Video & Podcast - 100% Orthobullets</h2><p class="src">Semua video di bawah ini adalah link resmi Orthobullets. Tidak ada video YouTube ngawur lagi.</p>
+<p><b>1. Orthobullets Video List - Semua Video Operasi & Lecture</b><br><span class="src">Kumpulan video konferensi, teknik operasi, dan case discussion dari Orthobullets</span></p><a class="btn btn-gold" href="https://www.orthobullets.com/videos" target="_blank">Buka Video List Orthobullets</a>
+<p><b>2. Orthobullets Podcast - Clavicle Fractures Midshaft</b><br>12:51 menit - Foundations Trauma - 75-80% midshaft, nonunion 5-6%</p><a class="btn" href="https://www.orthobullets.com/podcasts" target="_blank">Dengar Podcast Orthobullets</a>
+<p><b>3. Orthobullets YouTube Channel Resmi</b><br>Channel: UCMZSlD9OhkFG2t25oM14FvQ - Semua video Orthobullets</p><a class="btn" href="https://www.youtube.com/channel/UCMZSlD9OhkFG2t25oM14FvQ" target="_blank">Buka YouTube Orthobullets Resmi</a>
+<p><b>4. Video Per Topik - Langsung ke Topiknya:</b></p><p>
+- Clavicle: <a href="https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures" target="_blank">Buka Topik + Video</a><br>
+- Humerus Shaft: <a href="https://www.orthobullets.com/trauma/1016/humeral-shaft-fractures" target="_blank">Buka Topik + Video</a><br>
+- Femoral Shaft: <a href="https://www.orthobullets.com/trauma/1030/femoral-shaft-fractures" target="_blank">Buka Topik + Video</a><br>
+- Cauda Equina: <a href="https://www.orthobullets.com/spine/2065/cauda-equina-syndrome" target="_blank">Buka Topik + Video</a><br>
+- SCFE: <a href="https://www.orthobullets.com/pediatrics/4005/slipped-capital-femoral-epiphysis-scfe" target="_blank">Buka Topik + Video</a><br>
+- Osteosarcoma: <a href="https://www.orthobullets.com/pathology/9005/conventional-intramedullary-osteosarcoma" target="_blank">Buka Topik + Video</a><br>
+- Clubfoot: <a href="https://www.orthobullets.com/pediatrics/4062/clubfoot-congenital-talipes-equinovarus" target="_blank">Buka Topik + Video</a>
+</p></div></div>
+
+<div id="soal" class="hidden"><div class="card"><h2>Soal Qbank - Style Orthobullets</h2><button class="btn btn-gold" onclick="startQuiz()">Mulai Try Out - 12 Soal</button></div><div class="card"><h3 id="qTitle">Belum mulai</h3><div id="quizBox"></div><button class="btn" id="nextBtn" onclick="nextQ()">Jawab dan Lanjut</button></div></div>
+
+<div id="ref" class="hidden"><div class="card"><h2>Daftar Pustaka - 100% Orthobullets</h2><p>
+1. Clavicle Midshaft: orthobullets.com/trauma/1011<br>2. Humeral Shaft: orthobullets.com/trauma/1016<br>3. Femoral Shaft: orthobullets.com/trauma/1030<br>4. Tibial Shaft: orthobullets.com/trauma/1040<br>5. Cauda Equina: orthobullets.com/spine/2065<br>6. SCFE: orthobullets.com/pediatrics/4005<br>7. DDH: orthobullets.com/pediatrics/4118<br>8. Femoral Neck: orthobullets.com/trauma/1025<br>9. Osteosarcoma: orthobullets.com/pathology/9005<br>10. Ewing: orthobullets.com/pathology/9010<br>11. Clubfoot: orthobullets.com/pediatrics/4062<br>12. Video List: orthobullets.com/videos<br>13. Podcast: orthobullets.com/podcasts<br>14. YouTube Resmi: youtube.com/channel/UCMZSlD9OhkFG2t25oM14FvQ
+</p><p class="src">Semua materi disadur untuk belajar SP1. Verifikasi di link di atas.</p></div></div>
+</div>
+<script>
+let score=0,qIdx=0,selected=null;
+const data={
+clavicula:'<b>ORTHOBULLETS - Clavicle Midshaft:</b><br>75-80% di 1/3 tengah, weakest portion. Allman I tengah, II lateral, III medial. Neer: <100% non-op, >100% operatif. Nonunion 5-6%.<br><a href="https://www.orthobullets.com/trauma/1011/midshaft-clavicle-fractures" target="_blank">Verifikasi di Orthobullets</a>',
+upper:'<b>ORTHOBULLETS - Humeral Shaft:</b><br>3-5% semua fraktur. Radial nerve di spiral groove. Palsy 7-22%, 77% sembuh spontan. Jika tidak recovery 1-2 bln -> EMG/NCS.<br><a href="https://www.orthobullets.com/trauma/1016/humeral-shaft-fractures" target="_blank">Verifikasi di Orthobullets</a>',
+lower:'<b>ORTHOBULLETS - Femur + Tibia:</b><br><b>Femur:</b> High energy, IM Nailing union >95%, insiden 37.1/100.000.<br><b>Tibia:</b> Most common long bone fracture, 17% lower extremity, IM Nailing, Gustilo-Anderson untuk open.<br><a href="https://www.orthobullets.com/trauma/1030/femoral-shaft-fractures" target="_blank">Verifikasi Femur</a> | <a href="https://www.orthobullets.com/trauma/1040/tibial-shaft-fractures" target="_blank">Verifikasi Tibia</a>',
+spine:'<b>ORTHOBULLETS - Cauda Equina:</b><br>Kompresi akar saraf di thecal sac, tersering HNP akut. L4-5 tersering, 1.5-3.4 per juta. Saddle paresthesia + nyeri. MRI urgent. Dekompresi <24 jam, absolut <48 jam.<br><a href="https://www.orthobullets.com/spine/2065/cauda-equina-syndrome" target="_blank">Verifikasi di Orthobullets</a>',
+pediatric:'<b>ORTHOBULLETS - SCFE + DDH:</b><br><b>SCFE:</b> Obese males 12-13.4th, bilateral 17-50%, pin fixation in situ, AVN 24-47% unstable.<br><b>DDH:</b> US <4 bulan, X-Ray 4-6 bulan, Pavlik bracing.<br><a href="https://www.orthobullets.com/pediatrics/4005/slipped-capital-femoral-epiphysis-scfe" target="_blank">Verifikasi SCFE</a>',
+geriatric:'<b>ORTHOBULLETS - Femoral Neck:</b><br>Intracapsular, AVN 10-45%, nonunion 5-30%. Low energy falls lansia. ORIF vs Arthroplasty. Operasi <24-48 jam. Mortalitas 30% 1 tahun.<br><a href="https://www.orthobullets.com/trauma/1025/femoral-neck-fractures" target="_blank">Verifikasi di Orthobullets</a>',
+tumor:'<b>ORTHOBULLETS - Osteosarcoma + Ewing:</b><br><b>Osteosarcoma:</b> Malignant osteogenic, knee & shoulder, anak/remaja, Chemo + Wide Resection + Chemo.<br><b>Ewing:</b> t(11;22) EWS-FLI1, Wide Resection + Chemo.<br><a href="https://www.orthobullets.com/pathology/9005/conventional-intramedullary-osteosarcoma" target="_blank">Verifikasi Osteosarcoma</a>',
+congenital:'<b>ORTHOBULLETS - Clubfoot:</b><br>CTEV, 1:1000, CAVE: Cavus, Adductus, Varus, Equinus. Urutan: Cavus -> Adductus -> Varus -> Equinus. Ponseti gold standard, tenotomy 80-90%, FAO noncompliance = recurrence.<br><a href="https://www.orthobullets.com/pediatrics/4062/clubfoot-congenital-talipes-equinovarus" target="_blank">Verifikasi di Orthobullets</a>'
+};
+const base=[
+{q:'Orthobullets: Clavicula midshaft %?',o:['50%','75-80%','30%','10%'],a:1},
+{q:'Neer displaced?',o:['<50%','<100% non-op','>100% operatif','Tidak perlu'],a:2},
+{q:'Radial nerve palsy humerus?',o:['1%','7-22%','50%','90%'],a:1},
+{q:'Femur shaft terapi?',o:['Hanya gips','IM Nailing union >95%','Amputasi','Bed rest'],a:1},
+{q:'Tibia shaft?',o:['Jarang','Most common long bone','Hanya anak','Tidak pernah open'],a:1},
+{q:'Cauda Equina level?',o:['L1-2','L2-3','L4-5','S1-2'],a:2},
+{q:'Cauda Equina operasi?',o:['1 minggu','<24 jam, absolut <48 jam','1 bulan','Tidak perlu'],a:1},
+{q:'Osteosarcoma terapi?',o:['Observasi','Chemo + Wide Resection + Chemo','Hanya amputasi','Hanya radioterapi'],a:1},
+{q:'Ewing translocation?',o:['t(11;22) EWS-FLI1','t(9;22)','t(15;17)','Tidak ada'],a:0},
+{q:'SCFE tersering?',o:['Bayi','Obese male 12-13th','Lansia','Balita'],a:1},
+{q:'Clubfoot urutan pertama?',o:['Equinus','Cavus','Varus','Adductus'],a:1},
+{q:'Femoral neck geriatri operasi?',o:['<24-48 jam','1 bulan','Tidak perlu','Tunggu 2 minggu'],a:0}
+];
+function tab(id,btn){document.querySelectorAll('.tab button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');['home','modulList','video','soal','ref'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo(0,0)}
+function openModul(m){document.getElementById('modulContent').innerHTML='<h2>'+m+'</h2><p>'+data[m]+'</p>'}
+function startQuiz(){qIdx=0;score=0;renderQ()}
+function renderQ(){selected=null;let q=base[qIdx];document.getElementById('qTitle').innerText='Soal '+(qIdx+1)+'/'+base.length+' - Skor: '+score;document.getElementById('quizBox').innerHTML='<p><b>'+q.q+'</b></p>'+q.o.map((x,i)=>'<div class=opt onclick="pick(this,'+i+')">'+x+'</div>').join('')}
+function pick(el,i){document.querySelectorAll('.opt').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');el.style.borderColor='#FFD700';selected=i}
+function nextQ(){if(selected===null){alert('Pilih jawaban dulu Met!');return}if(selected===base[qIdx].a)score++;qIdx++;if(qIdx>=base.length){document.getElementById('quizBox').innerHTML='<h2>Selesai! Skor: '+score+'/'+base.length+'</h2><p>Sumber: 100% Orthobullets</p>';return}renderQ()}
+</script></body></html>
