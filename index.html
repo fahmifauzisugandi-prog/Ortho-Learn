@@ -25,6 +25,14 @@
                             900: '#0f172a',
                             950: '#090d16',
                         },
+                        clinical: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                        },
                         teal: {
                             50: '#f0fdfa',
                             100: '#ccfbf1',
@@ -52,7 +60,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-teal-100 selection:text-teal-900 min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-sky-100 selection:text-sky-900 min-h-screen flex flex-col">
 
     <!-- Top Navigation / Header -->
     <header class="bg-navy-900 text-white sticky top-0 z-30 shadow-md border-b border-slate-800">
@@ -61,7 +69,7 @@
                 <!-- Brand & Title -->
                 <div class="flex items-center justify-between">
                     <button onclick="navigateToHome()" class="flex items-center gap-3 text-left group focus:outline-none">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-inner shrink-0 group-hover:scale-105 transition-transform">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-clinical-500 to-teal-600 flex items-center justify-center shadow-inner shrink-0 group-hover:scale-105 transition-transform">
                             <!-- Bone / Orthopedic Cross SVG Icon -->
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -70,25 +78,119 @@
                         <div>
                             <div class="flex items-center gap-2">
                                 <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-white">Ortho-Learn</h1>
-                                <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">v2.0 Verified</span>
+                                <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-clinical-500/20 text-sky-300 border border-sky-400/30">SKDI & PPDS v3.0</span>
                             </div>
-                            <p class="text-xs sm:text-sm text-slate-300 font-medium">High-Yield Orthopaedic & Traumatology Review for GP & PPDS Prep</p>
+                            <p class="text-xs sm:text-sm text-slate-300 font-medium">Kisi-Kisi Ujian Masuk PPDS Orthopaedi & Kompetensi SKDI IGD</p>
                         </div>
                     </button>
                 </div>
 
-                <!-- Attribution & Progress Pill -->
+                <!-- Attribution & Blueprint Quick Button -->
                 <div class="flex items-center justify-between sm:justify-end gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800">
-                    <span class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-slate-800 text-slate-200 border border-slate-700">
-                        <svg class="w-3.5 h-3.5 text-teal-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    <button onclick="toggleBlueprintDrawer()" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-clinical-600 hover:bg-clinical-500 text-white shadow-sm transition-colors">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
-                        Curated for Indonesian GPs | Evidence-Based
-                    </span>
+                        Blueprint & Cheat-Sheet PPDS
+                    </button>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Collapsible PPDS Blueprint & Rapid Cheat-Sheet Drawer -->
+    <section id="blueprint-drawer" class="hidden bg-navy-950 text-slate-200 border-b border-slate-800 shadow-inner">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-5">
+            <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-3">
+                <div>
+                    <span class="text-[11px] font-mono uppercase tracking-wider text-sky-400 font-semibold">PABOI / Kolegium & SKDI KKI Mapping</span>
+                    <h2 class="text-lg sm:text-xl font-bold text-white mt-0.5">Kisi-Kisi Ujian Tulis, OSCE & Wawancara Masuk PPDS Orthopaedi</h2>
+                </div>
+                <button onclick="toggleBlueprintDrawer()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-3">
+                    Tutup ✕
+                </button>
+            </div>
+
+            <!-- 6 Core Pillars Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+                <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl">
+                    <div class="font-bold text-sky-400 mb-1">1. Upper Extremity Trauma (25%)</div>
+                    <p class="text-slate-400 leading-relaxed">Clavicle (Allman/Neer), Floating Shoulder (SSSC), Anterior Shoulder Dislocation (Bankart/Hill-Sachs/Axillary n.), Humeral Shaft (Holstein-Lewis/Radial n.), Distal Radius (Colles/Smith/Barton, Galeazzi/Monteggia).</p>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl">
+                    <div class="font-bold text-indigo-400 mb-1">2. Lower Extremity & Pelvis (25%)</div>
+                    <p class="text-slate-400 leading-relaxed">Femoral Neck (Garden/Pauwels, MFCA AVN), Open Tibia (Gustilo-Anderson & Compartment Syndrome ΔP < 30), Ankle (Weber/Lauge-Hansen/Maisonneuve), Pelvic Ring (Young-Burgess & ATLS Binder).</p>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl">
+                    <div class="font-bold text-rose-400 mb-1">3. Pediatric Orthopaedics (20%)</div>
+                    <p class="text-slate-400 leading-relaxed">Supracondylar Humerus (Gartland, AIN & Pink Pulseless Hand), Salter-Harris I–V, Septic Arthritis vs Transient Synovitis (Kocher Criteria), DDH (Ortolani/Barlow) & CTEV (Ponseti CAVE).</p>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl">
+                    <div class="font-bold text-amber-400 mb-1">4. Spine & Neuro-Emergency (10%)</div>
+                    <p class="text-slate-400 leading-relaxed">Cauda Equina Syndrome (Saddle anesthesia, PVR > 200 mL, dekompresi < 24–48 jam), Spinal Cord Injury (ASIA Scale, Neurogenic Shock vs Spinal Shock).</p>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl">
+                    <div class="font-bold text-purple-400 mb-1">5. Bone Tumor & Sports/Knee (10%)</div>
+                    <p class="text-slate-400 leading-relaxed">Osteosarcoma (Codman triangle/Sunburst), Giant Cell Tumor (Soap-bubble epiphyseal), Osteochondroma, Enneking Staging, ACL/PCL/Meniscus & Unhappy Triad O'Donoghue.</p>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl">
+                    <div class="font-bold text-emerald-400 mb-1">6. Basic Science & Infection (10%)</div>
+                    <p class="text-slate-400 leading-relaxed">Primary vs Secondary Bone Healing, Wolff's Law, RANKL-OPG, Nonunion (Hypertrophic vs Atrophic), serta Cierny-Mader Osteomyelitis.</p>
+                </div>
+            </div>
+
+            <!-- Rapid High-Yield Nerve & Eponym Table -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+                <div class="px-4 py-2.5 bg-slate-800/80 text-xs font-bold text-white flex items-center justify-between">
+                    <span>⚡ Tabel Hafalan Wajib Ujian Tulis & OSCE: Cedera Tulang & Saraf Berisiko</span>
+                    <span class="text-[11px] font-mono text-sky-400">High-Yield Board Pearls</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-950/60 text-slate-400 border-b border-slate-800">
+                            <tr>
+                                <th class="py-2 px-3">Cedera / Fraktur</th>
+                                <th class="py-2 px-3">Saraf / Struktur Berisiko</th>
+                                <th class="py-2 px-3">Temuan Khas (Exam Pearl)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/80 text-slate-300">
+                            <tr>
+                                <td class="py-2 px-3 font-medium text-white">Anterior Shoulder Dislocation</td>
+                                <td class="py-2 px-3 text-sky-300">N. Axillaris</td>
+                                <td class="py-2 px-3">Baal <em>regimental badge area</em>, kelemahan abduksi deltoid</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3 font-medium text-white">Humeral Shaft (Holstein-Lewis)</td>
+                                <td class="py-2 px-3 text-sky-300">N. Radialis</td>
+                                <td class="py-2 px-3">Wrist drop, hilangnya ekstensi MCP & ibu jari, baal dorsal web space 1</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3 font-medium text-white">Pediatric Supracondylar (Extension)</td>
+                                <td class="py-2 px-3 text-sky-300">Anterior Interosseous N. (AIN)</td>
+                                <td class="py-2 px-3">Gagal membuat tanda "OK" bulat (kelemahan FPL & FDP telunjuk)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3 font-medium text-white">Monteggia Fracture-Dislocation</td>
+                                <td class="py-2 px-3 text-sky-300">Posterior Interosseous N. (PIN)</td>
+                                <td class="py-2 px-3">Fraktur 1/3 proksimal ulna + dislokasi caput radii; finger drop tanpa wrist drop</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3 font-medium text-white">Posterior Hip Dislocation / Acetabulum</td>
+                                <td class="py-2 px-3 text-sky-300">N. Ischiadicus (Peroneal division)</td>
+                                <td class="py-2 px-3">Tungkai fleksi-adduksi-endorotasi; kelemahan dorsofleksi ankle/ibu jari</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3 font-medium text-white">Knee Dislocation / Proximal Fibula</td>
+                                <td class="py-2 px-3 text-sky-300">N. Peroneus Communis & A. Poplitea</td>
+                                <td class="py-2 px-3">Foot drop & baal dorsum pedis; wajib cek ABI (<0,9 → CTA)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Main Container -->
     <main class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
@@ -99,23 +201,23 @@
             <!-- Intro Banner & Progress Tracker -->
             <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div class="space-y-1.5 max-w-2xl">
-                    <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-md">
-                        <span>📚</span> Curated by dr. Fahmi Fauzi Sugandi (@mhm.dr) • Open Access Medical Education
+                    <div class="inline-flex flex-wrap items-center gap-1.5 text-xs font-semibold text-clinical-700 bg-clinical-50 px-2.5 py-1 rounded-md border border-clinical-100">
+                        <span>📚</span> Curated by dr. Fahmi Fauzi Sugandi (@mhm.dr) • SKDI KKI & Blueprint PPDS Orthopaedi
                     </div>
-                    <h2 class="text-lg sm:text-xl font-bold text-slate-900">12 Kasus Esensial Ortopedi & Traumatologi</h2>
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900">16 Kasus High-Yield & Basic Science Seleksi PPDS Orthopaedi</h2>
                     <p class="text-sm text-slate-600 leading-relaxed">
-                        Ringkasan klinis padat, terstruktur, dan 100% berbasis referensi buku teks standar (<em>Rockwood & Green, Miller's, AO Reference, ATLS</em>) untuk persiapan jaga IGD maupun ujian masuk PPDS Orthopaedi.
+                        Disusun sistematis mencakup kompetensi kegawatdaruratan <strong>SKDI (3B/3A/2)</strong> di IGD hingga konsep ujian tulis/OSCE seleksi masuk PPDS (<em>Rockwood & Green, Miller's, Tachdjian's, AO Reference, ATLS</em>).
                     </p>
                 </div>
 
                 <!-- Progress Card -->
-                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80 shrink-0 min-w-[210px]">
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80 shrink-0 min-w-[220px]">
                     <div class="flex items-center justify-between text-xs font-semibold text-slate-600 mb-1.5">
                         <span>Progress Belajar</span>
-                        <span id="progress-text" class="font-mono text-teal-700">0 / 12 Selesai</span>
+                        <span id="progress-text" class="font-mono text-clinical-700">0 / 16 Selesai</span>
                     </div>
                     <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden mb-2">
-                        <div id="progress-bar" class="bg-teal-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        <div id="progress-bar" class="bg-clinical-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
                     </div>
                     <div class="flex items-center justify-between text-[11px] text-slate-500">
                         <span id="quiz-passed-text">0 Kuis Lulus</span>
@@ -133,8 +235,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <input type="text" id="search-input" placeholder="Cari diagnosis, klasifikasi, saraf, atau tanda klinis (misal: Floating shoulder, Gartland, Radial nerve, Gustilo)..." 
-                        class="block w-full pl-10 pr-10 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent shadow-sm transition-all">
+                    <input type="text" id="search-input" placeholder="Cari diagnosis, SKDI, klasifikasi, saraf, atau eponim (misal: Galeazzi, Salter-Harris, Ponseti, Osteosarcoma, RANKL)..." 
+                        class="block w-full pl-10 pr-10 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-transparent shadow-sm transition-all">
                     <button id="clear-search" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -142,22 +244,28 @@
                     </button>
                 </div>
 
-                <!-- Filter Tabs -->
+                <!-- Filter Tabs (6 Pillars) -->
                 <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="category-tabs">
-                    <button data-category="All" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-navy-900 text-white shadow-sm">
-                        Semua Kasus (12)
+                    <button data-category="All" class="filter-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-navy-900 text-white shadow-sm">
+                        Semua (16)
                     </button>
-                    <button data-category="Upper Extremity" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
-                        Upper Extremity (6)
+                    <button data-category="Upper Extremity" class="filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                        Upper Extremity (5)
                     </button>
-                    <button data-category="Lower Extremity" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
-                        Lower Extremity (3)
+                    <button data-category="Lower Extremity & Pelvis" class="filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                        Lower Extremity & Pelvis (4)
                     </button>
-                    <button data-category="Spine & Pelvis" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
-                        Spine & Pelvis (2)
+                    <button data-category="Pediatric Orthopaedics" class="filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                        Pediatric Ortho (3)
                     </button>
-                    <button data-category="Pediatric & Infection" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
-                        Pediatric & Infection (1)
+                    <button data-category="Spine & Neuro" class="filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                        Spine & Neuro (1)
+                    </button>
+                    <button data-category="Tumor & Sports" class="filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                        Tumor & Sports (2)
+                    </button>
+                    <button data-category="Basic Science & Infection" class="filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                        Basic Science & Infection (1)
                     </button>
                 </div>
             </div>
@@ -176,7 +284,7 @@
                 </div>
                 <h3 class="text-base font-bold text-slate-800">Kasus tidak ditemukan</h3>
                 <p class="text-sm text-slate-500 mt-1">Coba gunakan kata kunci lain atau reset filter kategori.</p>
-                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-teal-600 text-white text-xs font-semibold rounded-xl hover:bg-teal-700 transition-colors">
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-clinical-600 text-white text-xs font-semibold rounded-xl hover:bg-clinical-700 transition-colors">
                     Tampilkan Semua Kasus
                 </button>
             </div>
@@ -187,7 +295,7 @@
             
             <!-- Top Navigation Bar inside Case -->
             <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-3.5 sm:px-5 rounded-2xl border border-slate-200 shadow-sm">
-                <button onclick="navigateToHome()" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-teal-700 py-1.5 px-3 rounded-xl hover:bg-slate-100 transition-colors">
+                <button onclick="navigateToHome()" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-clinical-700 py-1.5 px-3 rounded-xl hover:bg-slate-100 transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
@@ -208,8 +316,8 @@
 
             <!-- Bottom Prev / Next Case Navigation -->
             <div class="grid grid-cols-2 gap-3 sm:gap-4 pt-2">
-                <button id="prev-case-btn" class="flex items-center justify-start gap-3 p-4 bg-white rounded-2xl border border-slate-200 hover:border-teal-500 hover:shadow-sm transition-all text-left group disabled:opacity-40 disabled:pointer-events-none">
-                    <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-teal-50 text-slate-600 group-hover:text-teal-700 flex items-center justify-center shrink-0">
+                <button id="prev-case-btn" class="flex items-center justify-start gap-3 p-4 bg-white rounded-2xl border border-slate-200 hover:border-clinical-500 hover:shadow-sm transition-all text-left group disabled:opacity-40 disabled:pointer-events-none">
+                    <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-clinical-50 text-slate-600 group-hover:text-clinical-700 flex items-center justify-center shrink-0">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                         </svg>
@@ -220,12 +328,12 @@
                     </div>
                 </button>
 
-                <button id="next-case-btn" class="flex items-center justify-end gap-3 p-4 bg-white rounded-2xl border border-slate-200 hover:border-teal-500 hover:shadow-sm transition-all text-right group disabled:opacity-40 disabled:pointer-events-none">
+                <button id="next-case-btn" class="flex items-center justify-end gap-3 p-4 bg-white rounded-2xl border border-slate-200 hover:border-clinical-500 hover:shadow-sm transition-all text-right group disabled:opacity-40 disabled:pointer-events-none">
                     <div class="min-w-0">
                         <span class="block text-[11px] font-mono uppercase text-slate-400">Kasus Berikutnya</span>
                         <span id="next-case-title" class="block text-xs sm:text-sm font-bold text-slate-800 truncate">-</span>
                     </div>
-                    <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-teal-50 text-slate-600 group-hover:text-teal-700 flex items-center justify-center shrink-0">
+                    <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-clinical-50 text-slate-600 group-hover:text-clinical-700 flex items-center justify-center shrink-0">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                         </svg>
@@ -244,7 +352,7 @@
                 <p class="mt-0.5">Disusun untuk Dokter Umum (GP) & Calon Residen PPDS Orthopaedi dan Traumatologi Indonesia.</p>
             </div>
             <div class="text-center sm:text-right">
-                <p>Ref: Rockwood & Green • Miller's Review • AO Surgery Reference • ATLS 10th Ed</p>
+                <p>Ref: Rockwood & Green • Miller's Review • Tachdjian's • AO Reference • ATLS 10th Ed • SKDI KKI</p>
                 <p class="mt-0.5 text-slate-400">Untuk tujuan edukasi klinis. Selalu sesuaikan dengan protokol RS setempat.</p>
             </div>
         </div>
@@ -253,7 +361,7 @@
     <!-- Toast Notification (Replaces alert) -->
     <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
         <div class="bg-navy-900 text-white text-xs sm:text-sm font-medium px-4 py-3 rounded-xl shadow-lg border border-slate-700 flex items-center gap-2.5">
-            <span id="toast-icon" class="text-teal-400">✓</span>
+            <span id="toast-icon" class="text-sky-400">✓</span>
             <span id="toast-message">Status diperbarui</span>
         </div>
     </div>
@@ -261,36 +369,36 @@
     <!-- JavaScript Database & Application Logic -->
     <script>
         // =========================================================================
-        // 1. AUTHORITATIVE CLINICAL DATABASE (12 UNIQUE, NON-DUPLICATED CASES)
+        // 1. AUTHORITATIVE CLINICAL DATABASE (16 HIGH-YIELD SKDI & PPDS CASES)
         // =========================================================================
         const ORTHO_CASES = [
+            // --- PILLAR 2: UPPER EXTREMITY TRAUMA (CASES 01 - 05) ---
             {
                 id: "case-01",
                 number: "01",
                 title: "Clavicle Fracture (Midshaft & Distal)",
-                subtitle: "Allman & Neer Classification • Operative Thresholds & Neurovascular Proximity",
+                subtitle: "Allman & Neer Classification • Operative Thresholds & Subclavian Proximity",
                 category: "Upper Extremity",
-                highYieldBadge: "Most Common Shoulder Girdle Fracture",
-                summary: "Evaluasi pemendekan (>2 cm), skin tenting, klasifikasi Neer distal clavicle, serta indikasi absolut vs relatif ORIF.",
+                skdiBadge: "SKDI 3B • High-Yield PPDS",
+                highYieldBadge: "Shortening >2 cm & Skin Tenting",
+                kisiKisiPPDS: "Penguji sering menanyakan: (1) Otot yang menarik fragmen medial ke superior (SCM) vs lateral ke inferior (Pectoralis major & berat lengan), (2) Klasifikasi Neer tipe II distal klavikula (nonunion tinggi), (3) Indikasi absolut vs relatif ORIF (shortening >2 cm, displacement >100%, skin tenting), dan (4) Proyeksi Zanca view.",
+                summary: "Evaluasi pemendekan (>2 cm), skin tenting, klasifikasi Neer distal clavicle, serta tatalaksana awal IGD (SKDI 3B) vs indikasi ORIF.",
                 vignette: "Laki-laki 26 tahun datang ke IGD setelah terjatuh dari sepeda motor dengan bahu kanan membentur aspal. Pasien mengeluh nyeri hebat dan tidak bisa mengangkat lengan kanan. Pemeriksaan fisik: tampak deformitas dan pembengkakan di sepertiga tengah klavikula kanan dengan kulit di atasnya tampak menegang pucat (skin tenting), tanpa luka terbuka. Pulsasi a. radialis kuat, sensasi dan motorik n. medianus, ulnaris, radialis, serta aksilaris intak.",
-                pathoanatomy: [
-                    "<strong>Anatomi & Gaya Deformitas:</strong> Bagian medial klavikula tertarik ke superior oleh <em>m. sternocleidomastoideus</em>, sedangkan fragmen lateral tertarik ke inferior dan medial oleh berat lengan serta <em>m. pectoralis major</em>.",
-                    "<strong>Klasifikasi Allman:</strong> Group I = Midshaft (sekitar 80% kasus); Group II = Distal/Lateral third (15%); Group III = Medial third (5%, risiko cedera struktur mediastinum).",
-                    "<strong>Klasifikasi Neer (Distal Clavicle):</strong><br>• <em>Type I:</em> Lateral terhadap ligamen coracoclavicular (CC) — stabil.<br>• <em>Type II:</em> Medial terhadap ligamen CC (IIA: conoid & trapezoid intak pada fragmen distal; IIB: conoid robek) — sangat tidak stabil (angka nonunion tinggi).<br>• <em>Type III:</em> Ekstensi intra-artikular ke sendi acromioclavicular (AC).",
-                    "<strong>Struktur Vital Posterior:</strong> Subclavian vessels dan brachial plexus (terutama medial/posterior cord) berada tepat di posterior-inferior sepertiga tengah klavikula."
+                classificationAndMechanism: [
+                    "<strong>Anatomi & Gaya Deformitas:</strong> Fragmen medial klavikula tertarik ke superior oleh <em>m. sternocleidomastoideus (SCM)</em>, sedangkan fragmen lateral tertarik ke inferior dan medial oleh berat lengan serta <em>m. pectoralis major</em>.",
+                    "<strong>Klasifikasi Allman:</strong> Group I = Midshaft (~80% kasus); Group II = Distal/Lateral third (15%); Group III = Medial third (5%, risiko cedera mediastinum/dislokasi sternoclavicular posterior).",
+                    "<strong>Klasifikasi Neer (Distal Clavicle):</strong><br>• <em>Type I:</em> Lateral terhadap ligamen coracoclavicular (CC) — stabil.<br>• <em>Type II:</em> Medial terhadap ligamen CC (IIA: conoid & trapezoid intak pada fragmen distal; IIB: conoid robek) — sangat tidak stabil (angka nonunion tinggi hingga 25–30%).<br>• <em>Type III:</em> Ekstensi intra-artikular ke sendi acromioclavicular (AC)."
                 ],
-                workup: [
+                examAndRedFlags: [
+                    "<strong>Struktur Vital Posterior:</strong> Subclavian vessels dan brachial plexus (terutama medial/posterior cord) berada tepat di posterior-inferior sepertiga tengah klavikula.",
                     "<strong>Radiografi Standar:</strong> Foto polos klavikula AP dan <strong>Zanca View</strong> (10°–15° cephalic tilt) untuk mengevaluasi sendi AC dan distal klavikula tanpa superimposisi skapula.",
-                    "<strong>CT Scan:</strong> Diindikasikan pada fraktur sepertiga medial (Allman Group III) untuk menyingkirkan dislokasi sternoclavicular posterior atau kompresi pembuluh darah besar/trakea."
+                    "<strong>RED FLAG — Impending Skin Necrosis:</strong> Fragmen tajam yang mendesak kulit hingga pucat menegang (skin tenting) membutuhkan rujukan/fiksasi bedah segera sebelum menembus kulit menjadi fraktur terbuka."
                 ],
                 management: [
-                    "<strong>Terapi Konservatif (Non-Operatif):</strong> Arm sling atau figure-of-eight bandage selama 4–6 minggu untuk fraktur midshaft nondisplaced atau minimally displaced tanpa komplikasi.",
-                    "<strong>Indikasi Absolut Operasi (ORIF Plate & Screw / IM Nail):</strong><br>• Fraktur terbuka (open fracture)<br>• Cedera neurovaskular (brachial plexus atau subclavian vessels)<br>• <strong>Skin tenting berat</strong> dengan ancaman nekrosis kulit (impending open fracture)<br>• Floating shoulder (fraktur klavikula + leher skapula ipsilateral)",
-                    "<strong>Indikasi Relatif Operasi:</strong><br>• Pemendekan (shortening) > 2 cm atau displacement > 100% (meningkatkan risiko symptomatic malunion dan penurunan endurance bahu)<br>• Fraktur distal klavikula <strong>Neer Type II</strong> (risiko nonunion hingga 25–30% bila konservatif)."
-                ],
-                redFlags: [
-                    "<strong>Impending Skin Necrosis:</strong> Fragmen tajam yang mendesak kulit hingga pucat membutuhkan reduksi/fiksasi segera sebelum menembus kulit menjadi fraktur terbuka.",
-                    "<strong>Cedera Subclavian Vein/Artery:</strong> Selalu periksa status hemodinamik dan pulsasi distal sebelum dan sesudah pemasangan sling."
+                    "<strong>Tatalaksana Awal IGD (Kompetensi SKDI 3B):</strong> Lakukan <em>primary survey</em>, periksa dan dokumentasikan status neurovaskular distal, berikan analgetik adekuat, pasang imobilisasi <strong>Arm Sling</strong> (atau figure-of-eight bandage secara hati-hati tanpa menjepit aksila), dan rujuk ke Sp.OT bila ada indikasi operasi.",
+                    "<strong>Terapi Konservatif:</strong> Arm sling 4–6 minggu untuk fraktur midshaft nondisplaced atau minimally displaced tanpa komplikasi.",
+                    "<strong>Indikasi Absolut Operasi (ORIF Plate & Screw / IM Nail):</strong> Fraktur terbuka, cedera neurovaskular (brachial plexus / subclavian vessels), <strong>skin tenting berat</strong>, dan <em>Floating Shoulder</em>.",
+                    "<strong>Indikasi Relatif Operasi:</strong> Pemendekan (shortening) <strong>> 2 cm</strong> atau displacement > 100% pada pasien aktif (mencegah symptomatic malunion & penurunan endurance bahu), serta fraktur distal klavikula <strong>Neer Type II</strong>."
                 ],
                 mcq: {
                     question: "Seorang pria 28 tahun mengalami fraktur midshaft klavikula tertutup setelah kecelakaan olahraga. Pada foto Rontgen didapatkan displacement 100% dan pemendekan 2,4 cm, namun kulit di atasnya masih tebal dan vaskularisasi serta saraf distal intak. Pasien adalah atlet renang kompetitif. Manakah tatalaksana yang paling tepat?",
@@ -301,12 +409,12 @@
                         "Closed reduction di IGD dan pemasangan gips spica bahu"
                     ],
                     correctIndex: 1,
-                    explanation: "Pemendekan (shortening) klavikula > 2 cm dan displacement penuh pada pasien aktif merupakan indikasi relatif kuat untuk ORIF (level I evidence: Canadian Orthopaedic Trauma Society) karena terapi konservatif pada kelompok ini berisiko tinggi menimbulkan symptomatic malunion, nonunion, dan penurunan kekuatan/endurance abduksi bahu."
+                    explanation: "Pemendekan (shortening) klavikula > 2 cm dan displacement penuh pada pasien aktif merupakan indikasi relatif kuat untuk ORIF (level I evidence: Canadian Orthopaedic Trauma Society) karena terapi konservatif pada kelompok ini berisiko tinggi menimbulkan symptomatic malunion, nonunion, dan penurunan kekuatan abduksi bahu."
                 },
                 references: [
-                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Chapter: Fractures of the Clavicle.",
-                    "Miller's Review of Orthopaedics, 8th Ed. — Trauma: Upper Extremity (Clavicle Fractures).",
-                    "Canadian Orthopaedic Trauma Society (COTS). Nonoperative treatment compared with plate fixation of displaced midshaft clavicular fractures. J Bone Joint Surg Am."
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Fractures of the Clavicle.",
+                    "Miller's Review of Orthopaedics, 8th Ed. — Trauma: Upper Extremity.",
+                    "Konsil Kedokteran Indonesia (KKI) — Standar Kompetensi Dokter Indonesia (SKDI)."
                 ]
             },
             {
@@ -315,28 +423,25 @@
                 title: "Floating Shoulder (Double Disruption of SSSC)",
                 subtitle: "Ipsilateral Clavicle + Scapular Neck Fracture • SSSC & Glenopolar Angle",
                 category: "Upper Extremity",
-                highYieldBadge: "High-Energy Trauma Marker",
+                skdiBadge: "SKDI 3B • High-Yield PPDS",
+                highYieldBadge: "Goss SSSC Concept & GPA < 20°",
+                kisiKisiPPDS: "Materi favorit ujian masuk PPDS: (1) Komponen cincin Superior Shoulder Suspensory Complex (SSSC) menurut Goss, (2) Pengukuran Glenopolar Angle (GPA normal 30°–45°; indikasi operasi bila GPA < 20°), (3) Tingginya angka cedera toraks penyerta (>80%), dan (4) Konsep indirect reduction leher skapula melalui fiksasi klavikula saja.",
                 summary: "Konsep Superior Shoulder Suspensory Complex (Goss), pengukuran Glenopolar Angle (<20°), dan strategi fiksasi.",
                 vignette: "Laki-laki 34 tahun korban tabrakan motor kecepatan tinggi dibawa ke IGD dalam kondisi sadar (GCS 15). Pasien mengeluh nyeri hebat di bahu kiri dan tidak mampu menggerakkan lengan kiri. Foto Rontgen toraks dan bahu menunjukkan fraktur midshaft klavikula kiri disertai fraktur collum scapulae (scapular neck) kiri yang bergeser ke inferomedial. Tampak pula fraktur iga ke-2 dan ke-3 kiri.",
-                pathoanatomy: [
+                classificationAndMechanism: [
                     "<strong>Definisi Floating Shoulder:</strong> Fraktur ipsilateral pada klavikula dan leher skapula (<em>scapular neck</em>), yang menyebabkan hilangnya penopang aksial kompleks glenoid terhadap rangka aksial.",
-                    "<strong>Konsep SSSC (Goss):</strong> <em>Superior Shoulder Suspensory Complex</em> adalah cincin tulang dan jaringan lunak yang terdiri dari prosesus glenoid, prosesus coracoid, ligamen coracoclavicular (CC), klavikula distal, sendi AC, dan acromion. Gangguan pada satu titik biasanya stabil, namun <strong>gangguan ganda (double disruption)</strong> membuat seluruh cincin tidak stabil.",
+                    "<strong>Konsep SSSC (Goss):</strong> <em>Superior Shoulder Suspensory Complex</em> adalah cincin tulang dan jaringan lunak yang terdiri dari prosesus glenoid, prosesus coracoid, ligamen coracoclavicular (CC), klavikula distal, sendi AC, dan acromion. <strong>Gangguan ganda (double disruption)</strong> pada cincin ini menyebabkan instabilitas berat.",
                     "<strong>Associated Injuries:</strong> Karena merupakan trauma energi tinggi, >80% pasien memiliki cedera penyerta seperti fraktur iga, pneumotoraks/hemotoraks, kontusio paru, atau cedera pleksus brakhialis."
                 ],
-                workup: [
-                    "<strong>Trauma Series Bahu:</strong> True AP (Grashey view), Scapular Y-view, dan Axillary view.",
-                    "<strong>CT Scan Bahu dengan Rekonstruksi 3D:</strong> Wajib dilakukan untuk mengukur sudut pergeseran glenoid secara akurat.",
-                    "<strong>Glenopolar Angle (GPA):</strong> Sudut pada proyeksi AP antara garis yang menghubungkan tepi superior-inferior glenoid dengan garis dari tepi superior glenoid ke sudut inferior skapula. <strong>GPA normal = 30°–45°</strong>. Nilai <strong>GPA < 20°</strong> menunjukkan ketidakstabilan rotasional berat dan merupakan indikasi kuat operasi."
+                examAndRedFlags: [
+                    "<strong>Trauma Series Bahu & CT Scan 3D:</strong> True AP (Grashey view), Scapular Y-view, Axillary view, serta CT Scan 3D untuk mengukur sudut glenoid.",
+                    "<strong>Glenopolar Angle (GPA):</strong> Sudut pada proyeksi AP antara garis tepi superior-inferior glenoid dengan garis tepi superior glenoid ke sudut inferior skapula. <strong>GPA normal = 30°–45°</strong>; nilai <strong>GPA < 20°</strong> menandakan rotasi glenoid berat (indikasi operasi).",
+                    "<strong>RED FLAG — Missed Thoracic Trauma:</strong> Fraktur skapula/floating shoulder adalah penanda benturan energi besar; wajib singkirkan pneumotoraks, hemotoraks, dan cedera a. subklavia."
                 ],
                 management: [
-                    "<strong>Primary Survey (ATLS):</strong> Singkirkan terlebih dahulu trauma toraks (pneumotoraks/hemotoraks) sebelum fokus pada cedera bahu.",
+                    "<strong>Tatalaksana Awal IGD (ATLS & SKDI 3B):</strong> Primary survey ABCDE untuk menyingkirkan trauma toraks yang mengancam nyawa, pemeriksaan neurovaskular ekstremitas atas, analgetik, imobilisasi dengan <em>arm sling / collar-and-cuff</em>, dan rujuk segera ke Sp.OT.",
                     "<strong>Terapi Konservatif:</strong> Hanya untuk fraktur nondisplaced dengan <strong>GPA > 20°</strong> dan medialisasi glenoid < 10 mm.",
-                    "<strong>Terapi Operatif (ORIF):</strong> Diindikasikan bila GPA < 20°, medialisasi glenoid > 10–20 mm, atau displacement klavikula signifikan.",
-                    "<strong>Strategi Fiksasi Bedah:</strong> Fiksasi <strong>klavikula saja (clavicle plating)</strong> sering kali sudah cukup mereduksi dan menstabilkan leher skapula secara tidak langsung (indirect reduction) asalkan ligamen CC dan coracoacromial intak. Bila glenoid tetap bergeser pasca-fiksasi klavikula, lanjutkan dengan fiksasi skapula posterior (Judet approach)."
-                ],
-                redFlags: [
-                    "<strong>Missed Thoracic Trauma:</strong> Fraktur skapula/floating shoulder menandakan energi benturan besar; jangan pernah melewatkan evaluasi paru dan pembuluh darah besar toraks.",
-                    "<strong>Suprascapular Nerve Injury:</strong> Dapat terjepit di suprascapular notch atau spinoglenoid notch akibat pergeseran fragmen leher skapula."
+                    "<strong>Terapi Operatif (ORIF):</strong> Diindikasikan bila GPA < 20° atau medialisasi glenoid > 10–20 mm. Fiksasi <strong>klavikula saja (clavicle plating)</strong> sering sudah cukup mereduksi leher skapula secara tidak langsung (indirect reduction) bila ligamen CC intak; bila tetap tidak stabil, lanjutkan fiksasi skapula posterior (Judet approach)."
                 ],
                 mcq: {
                     question: "Pada pasien dengan Floating Shoulder (fraktur midshaft klavikula dan leher skapula ipsilateral), parameter radiografis manakah pada pemeriksaan CT/Grashey view yang menjadi indikasi utama dilakukannya tindakan operatif?",
@@ -347,42 +452,39 @@
                         "Adanya fraktur prosesus spinosus C7"
                     ],
                     correctIndex: 0,
-                    explanation: "Glenopolar Angle (GPA) mengukur inklinasi dan rotasi glenoid terhadap badan skapula (normal 30°–45°). GPA < 20° menandakan rotasi/kolaps glenoid yang bermakna pada double disruption of SSSC sehingga membutuhkan fiksasi bedah untuk mencegah nyeri kronis dan disfungsi rotator cuff."
+                    explanation: "Glenopolar Angle (GPA) mengukur inklinasi dan rotasi glenoid terhadap badan skapula (normal 30°–45°). GPA < 20° menandakan rotasi/kolaps glenoid yang bermakna pada double disruption of SSSC sehingga membutuhkan fiksasi bedah."
                 },
                 references: [
                     "Goss TP. Double disruptions of the superior shoulder suspensory complex. J Orthop Trauma.",
-                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Chapter: Fractures of the Scapula.",
-                    "AO Surgery Reference — Scapula & Clavicle Combined Injuries (Floating Shoulder)."
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Fractures of the Scapula.",
+                    "AO Surgery Reference — Scapula & Clavicle Combined Injuries."
                 ]
             },
             {
                 id: "case-03",
                 number: "03",
                 title: "Anterior Shoulder Dislocation & Terrible Triad",
-                subtitle: "Bankart & Hill-Sachs Lesions • Axillary Nerve Exam & Age-Related Complications",
+                subtitle: "Bankart & Hill-Sachs Lesions • Axillary Nerve Exam & Age >40 Pitfalls",
                 category: "Upper Extremity",
-                highYieldBadge: "Must-Know ER Reduction & Pitfalls",
+                skdiBadge: "SKDI 3B • Must-Know ER",
+                highYieldBadge: "Axillary Nerve & Rotator Cuff Tear",
+                kisiKisiPPDS: "Wajib dikuasai saat OSCE & ujian tulis: (1) Pemeriksaan n. aksilaris (regimental badge area & kontraksi deltoid) SEBELUM dan SESUDAH reduksi, (2) Perbedaan Bankart lesion vs Hill-Sachs lesion, (3) Terrible Triad of the Shoulder pada usia >40 tahun (Dislokasi + Robekan Rotator Cuff + Cedera Saraf), dan (4) Lightbulb sign pada dislokasi posterior pasca kejang.",
                 summary: "Pemeriksaan n. aksilaris pra/pasca reduksi, lesi Bankart vs Hill-Sachs, serta Terrible Triad of the Shoulder pada usia >40 tahun.",
                 vignette: "Pria 48 tahun datang ke IGD setelah jatuh dengan posisi lengan abduksi dan eksorotasi. Bahu kanan tampak kehilangan kontur bulatnya (squared-off shoulder / prominence of acromion) dan lengan tertahan dalam posisi sedikit abduksi serta eksorotasi. Sebelum dilakukan reduksi, dokter jaga IGD melakukan pemeriksaan neurovaskular lengkap.",
-                pathoanatomy: [
-                    "<strong>Arah Dislokasi:</strong> >95% dislokasi glenohumeral adalah tipe <strong>Anterior</strong> (subcoracoid paling sering), terjadi akibat trauma abduksi, ekstensi, dan eksorotasi.",
+                classificationAndMechanism: [
+                    "<strong>Arah Dislokasi:</strong> >95% dislokasi glenohumeral adalah tipe <strong>Anterior</strong> (subcoracoid paling sering), akibat trauma abduksi, ekstensi, dan eksorotasi.",
                     "<strong>Lesi Patognomonik:</strong><br>• <em>Bankart Lesion:</em> Avulsi labrum glenoid anteroinferior beserta kapsul sendi (atau <em>Bony Bankart</em> bila disertai fragmen tulang glenoid).<br>• <em>Hill-Sachs Lesion:</em> Fraktur kompresi impaksi pada aspek posterolateral kaput humerus akibat terbentur tepi anterior glenoid.",
-                    "<strong>Terrible Triad of the Shoulder (Usia > 40 tahun):</strong> Kombinasi dari (1) Dislokasi bahu anterior, (2) <strong>Robekan Rotator Cuff</strong> (sangat sering pada usia >40 tahun akibat degenerasi tendon), dan (3) <strong>Cedera Saraf (N. Aksilaris atau Pleksus Brakhialis)</strong>."
+                    "<strong>Terrible Triad of the Shoulder (Usia > 40 tahun):</strong> Kombinasi (1) Dislokasi bahu anterior, (2) <strong>Robekan Rotator Cuff</strong> (sangat sering pada usia >40 tahun akibat degenerasi tendon), dan (3) <strong>Cedera Saraf (N. Aksilaris atau Pleksus Brakhialis)</strong>."
                 ],
-                workup: [
-                    "<strong>Pemeriksaan Neurovaskular Wajib (Pra & Pasca Reduksi):</strong> Uji sensasi pada <em>regimental badge area</em> (aspek lateral deltoid) dan kontraksi isometrik <em>m. deltoideus</em> untuk menilai <strong>n. aksilaris</strong> (saraf paling sering cedera).",
-                    "<strong>Radiografi Trauma Series:</strong> AP, Scapular Y-view (kaput humerus berada di anterior pusat huruf Y), dan Axillary/Velpeau view untuk memastikan arah dislokasi dan menyingkirkan fraktur collum chirurgicum humerus sebelum menarik lengan.",
-                    "<strong>MRI / USG Bahu:</strong> Wajib dipertimbangkan pada pasien usia >40 tahun yang tetap tidak mampu melakukan abduksi aktif 2–3 minggu pasca reduksi untuk mendeteksi robekan rotator cuff masif."
+                examAndRedFlags: [
+                    "<strong>Pemeriksaan N. Aksilaris Wajib (Pra & Pasca Reduksi):</strong> Uji sensasi pada <em>regimental badge area</em> (aspek lateral deltoid) dan kontraksi isometrik <em>m. deltoideus</em>.",
+                    "<strong>Radiografi Trauma Series:</strong> AP, Scapular Y-view (kaput humerus berada di anterior pusat huruf Y), dan Axillary/Velpeau view sebelum menarik lengan.",
+                    "<strong>RED FLAG — Missed Posterior Dislocation:</strong> Bila lengan terkunci dalam <em>internal rotation</em> dan tanda <em>lightbulb sign</em> pada foto AP (sering pasca kejang atau tersengat listrik), jangan dipaksa reduksi sebagai dislokasi anterior."
                 ],
                 management: [
-                    "<strong>Closed Reduction Segera:</strong> Berikan analgetik/sedasi prosedural atau blok intra-artikular (lidokain 1% 15–20 mL), lalu lakukan teknik atraumatik seperti <strong>Milch</strong>, <strong>Stimson</strong>, <strong>FARES</strong>, atau <strong>Traction-Countertraction</strong>. Hindari teknik Kocher yang agresif karena berisiko menyebabkan fraktur spiral humerus.",
-                    "<strong>Konfirmasi Pasca Reduksi:</strong> Ulangi pemeriksaan n. aksilaris dan foto Rontgen konfirmasi reduksi konsentris.",
-                    "<strong>Imobilisasi:</strong> Arm sling selama 1–3 minggu (lebih singkat pada pasien >40 tahun untuk mencegah adhesive capsulitis/frozen shoulder).",
-                    "<strong>Indikasi Operasi:</strong> Dislokasi ireduksibel (interposisi jaringan lunak/tendon biseps), Bony Bankart >20–25% permukaan glenoid, atau robekan rotator cuff akut pada pasien >40 tahun."
-                ],
-                redFlags: [
-                    "<strong>Missed Posterior Dislocation:</strong> Bila lengan terkunci dalam <em>internal rotation</em> dan tanda <em>lightbulb sign</em> pada foto AP (sering pasca kejang atau tersengat listrik), jangan dipaksa reduksi sebagai dislokasi anterior.",
-                    "<strong>Fracture-Dislocation:</strong> Selalu periksa foto polos sebelum reduksi; menarik fraktur collum humerus yang tak terdiagnosis dapat memutus total fragmen kaput dan merusak pembuluh darah."
+                    "<strong>Tatalaksana Awal IGD (SKDI 3B — Closed Reduction Segera):</strong> Setelah foto Rontgen menyingkirkan fraktur collum chirurgicum humerus, berikan analgetik/sedasi prosedural atau blok intra-artikular (lidokain 1% 15–20 mL), lalu lakukan teknik atraumatik seperti <strong>Milch</strong>, <strong>Stimson</strong>, <strong>FARES</strong>, atau <strong>Traction-Countertraction</strong>.",
+                    "<strong>Konfirmasi Pasca Reduksi:</strong> Ulangi pemeriksaan n. aksilaris, foto Rontgen konfirmasi reduksi konsentris, dan pasang <em>arm sling</em> selama 1–3 minggu (lebih singkat pada usia >40 tahun untuk mencegah frozen shoulder).",
+                    "<strong>Terapi Definitif / Rujukan Sp.OT:</strong> Dislokasi ireduksibel, Bony Bankart >20–25% glenoid, instabilitas rekuren pada atlet muda (Bankart repair), atau robekan rotator cuff akut pada pasien usia >40 tahun."
                 ],
                 mcq: {
                     question: "Seorang wanita 54 tahun menjalani reduksi tertutup yang berhasil untuk dislokasi bahu anterior pertamanya. Tiga minggu kemudian, nyeri sudah berkurang namun ia tetap tidak mampu mengangkat (abduksi aktif) lengannya melewati 30 derajat, sementara gerakan pasif penuh. Komplikasi apakah yang paling mungkin terjadi pada kelompok usia ini?",
@@ -393,12 +495,12 @@
                         "Malunion prosesus coracoid"
                     ],
                     correctIndex: 1,
-                    explanation: "Pada pasien berusia >40 tahun yang mengalami dislokasi bahu anterior, elastisitas tendon rotator cuff sudah menurun sehingga gaya dislokasi lebih sering merobek rotator cuff daripada labrum (Bankart). Ketidakmampuan abduksi aktif pasca reduksi (pseudoparalisis) menandakan robekan rotator cuff hingga terbukti sebaliknya."
+                    explanation: "Pada pasien berusia >40 tahun yang mengalami dislokasi bahu anterior, elastisitas tendon rotator cuff sudah menurun sehingga gaya dislokasi lebih sering merobek rotator cuff daripada labrum (Bankart). Ketidakmampuan abduksi aktif pasca reduksi (pseudoparalisis) menandakan robekan rotator cuff."
                 },
                 references: [
-                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Chapter: Glenohumeral Instability.",
-                    "Miller's Review of Orthopaedics, 8th Ed. — Sports Medicine & Trauma: Shoulder Dislocation.",
-                    "Neviaser RJ, Neviaser TJ. Recurrent instability of the shoulder after age 40. J Shoulder Elbow Surg."
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Glenohumeral Instability.",
+                    "Miller's Review of Orthopaedics, 8th Ed. — Shoulder Dislocation.",
+                    "Konsil Kedokteran Indonesia (KKI) — SKDI Kompetensi 3B Dislokasi Sendi Bahu."
                 ]
             },
             {
@@ -407,27 +509,26 @@
                 title: "Humeral Shaft Fracture & Holstein-Lewis Variant",
                 subtitle: "Radial Nerve Palsy • Sarmiento Functional Bracing & Exploration Criteria",
                 category: "Upper Extremity",
-                highYieldBadge: "Radial Nerve & Bracing Criteria",
+                skdiBadge: "SKDI 3B • High-Yield PPDS",
+                highYieldBadge: "Primary vs Secondary Radial Palsy",
+                kisiKisiPPDS: "Soal klasik ujian PPDS: (1) Perbedaan tata laksana Primary radial nerve palsy (observasi 3–4 bulan karena >85% neurapraxia pulih spontan) vs Secondary radial nerve palsy pasca reduksi tertutup (indikasi eksplorasi bedah segera!), (2) Varian fraktur Holstein-Lewis, (3) Otot pertama yang pulih (Brachioradialis & ECRL), dan (4) Kriteria angulasi Sarmiento functional brace.",
                 summary: "Manajemen radial nerve palsy primer vs sekunder, kriteria Sarmiento functional brace, dan fraktur Holstein-Lewis.",
                 vignette: "Laki-laki 31 tahun mengalami kecelakaan lalu lintas dan datang dengan nyeri serta angulasi pada lengan atas kanan. Pemeriksaan fisik: lengan bengkak, nyeri tekan pada diafisis humerus tengah-distal, serta pasien tidak mampu melakukan ekstensi pergelangan tangan (wrist drop) maupun ekstensi ibu jari dan sendi MCP jari-jari tangan kanan. Sensasi di dorsum web space pertama menurun.",
-                pathoanatomy: [
-                    "<strong>Hubungan Anatomi N. Radialis:</strong> N. radialis berjalan melingkari aspek posterior diafisis humerus di dalam <em>spiral groove</em> (sulcus nervi radialis) sekitar 14 cm proksimal dari epikondilus lateralis, kemudian menembus septum intermuskularis lateral untuk masuk ke kompartemen anterior.",
-                    "<strong>Holstein-Lewis Fracture:</strong> Fraktur spiral pada sepertiga distal diafisis humerus di mana fragmen distal bergeser ke proksimal dan radial, berisiko tinggi menjepit atau merobek n. radialis saat menembus septum intermuskularis lateral.",
-                    "<strong>Urutan Reinervasi Motorik:</strong> Otot paling proksimal yang dipersarafi n. radialis di area ini adalah <em>m. brachioradialis</em> dan <em>m. extensor carpi radialis longus (ECRL)</em> — keduanya merupakan tanda pemulihan saraf paling awal."
+                classificationAndMechanism: [
+                    "<strong>Hubungan Anatomi N. Radialis:</strong> N. radialis berjalan melingkari aspek posterior diafisis humerus di dalam <em>spiral groove</em> (sulcus nervi radialis), kemudian menembus septum intermuskularis lateral untuk masuk ke kompartemen anterior.",
+                    "<strong>Holstein-Lewis Fracture:</strong> Fraktur spiral sepertiga distal diafisis humerus di mana fragmen distal bergeser ke proksimal-radial, berisiko tinggi menjepit/merobek n. radialis di septum intermuskularis lateral.",
+                    "<strong>Urutan Reinervasi Motorik:</strong> Otot paling proksimal yang dipersarafi n. radialis di area ini adalah <em>m. brachioradialis</em> dan <em>m. extensor carpi radialis longus (ECRL)</em> — tanda pemulihan saraf paling awal."
                 ],
-                workup: [
-                    "<strong>Dokumentasi Neurologis Lengkap:</strong> Catat fungsi motorik (ekstensi wrist, ekstensi jari di MCP, ekstensi ibu jari/EPL) dan sensorik (dorsal first web space) secara tertulis sebelum dan sesudah manipulasi/pemasangan bidai.",
-                    "<strong>Radiografi Humerus AP & Lateral:</strong> Harus mencakup sendi bahu dan sendi siku dalam satu film (<em>joint above and joint below</em>)."
+                examAndRedFlags: [
+                    "<strong>Dokumentasi Neurologis Wajib:</strong> Catat ekstensi wrist, ekstensi jari di MCP, ekstensi ibu jari (EPL), serta sensorik dorsal first web space sebelum dan sesudah pemasangan bidai.",
+                    "<strong>Radiografi Humerus AP & Lateral:</strong> Harus mencakup sendi bahu dan sendi siku (<em>joint above and joint below</em>).",
+                    "<strong>RED FLAG — Secondary Radial Nerve Palsy:</strong> Munculnya defisit n. radialis tepat setelah manipulasi/reduksi tertutup menandakan saraf terjepit di celah fraktur → indikasi eksplorasi bedah segera."
                 ],
                 management: [
-                    "<strong>Konservatif (Sarmiento Functional Bracing):</strong> Merupakan standar emas untuk sebagian besar fraktur diafisis humerus tertutup (angka union >90%) karena lengan menggantung bebas oleh gravitasi. Awalnya pasang <em>coaptation splint</em> atau <em>hanging arm cast</em> 1–2 minggu hingga bengkak mereda, lalu ganti dengan <em>Sarmiento brace</em>.",
-                    "<strong>Batas Toleransi Angulasi (Sarmiento Criteria):</strong><br>• Angulasi anterior/posterior <strong>< 20°</strong><br>• Angulasi varus/valgus <strong>< 30°</strong><br>• Pemendekan (shortening) <strong>< 3 cm</strong>",
-                    "<strong>Manajemen Primary Radial Nerve Palsy:</strong> Pada fraktur tertutup, >85–90% cedera n. radialis bersifat <em>neurapraxia</em> dan akan pulih spontan dalam 3–4 bulan. Lakukan observasi berkala + dynamic wrist/finger extension splint + EMG/NCS bila belum ada tanda pemulihan pada bulan ke-3 hingga ke-4.",
-                    "<strong>Indikasi Operasi (ORIF) & Eksplorasi Saraf:</strong><br>• Fraktur terbuka (open fracture)<br>• Cedera vaskular (a. brakhialis)<br>• Floating elbow (fraktur humerus + antebrachii ipsilateral)<br>• Fraktur patologis atau bilateral humerus<br>• <strong>Secondary radial nerve palsy</strong> (saraf awalnya normal, lalu muncul wrist drop <em>setelah</em> manipulasi/reduksi tertutup — menandakan saraf terjepit di antara fragmen fraktur)."
-                ],
-                redFlags: [
-                    "<strong>Post-Reduction Nerve Palsy:</strong> Munculnya defisit n. radialis tepat setelah pemasangan gips/reduksi tertutup merupakan indikasi eksplorasi bedah segera karena kemungkinan saraf terjepit (entrapped) di celah fraktur.",
-                    "<strong>Hanging Arm Cast pada Fraktur Transversal:</strong> Hindari pemasangan hanging cast terlalu berat pada fraktur transversal karena dapat menyebabkan distraksi fragmen dan nonunion."
+                    "<strong>Tatalaksana Awal IGD (SKDI 3B):</strong> Dokumentasi neurovaskular lengkap, pemasangan <em>coaptation splint (U-slab)</em> + <em>collar-and-cuff</em>, pasang <em>cock-up wrist splint</em> bila ada wrist drop, dan rujuk Sp.OT.",
+                    "<strong>Terapi Konservatif (Sarmiento Functional Bracing):</strong> Standar emas fraktur tertutup diafisis humerus (union >90%) bila memenuhi kriteria toleransi: angulasi anterior/posterior <strong>< 20°</strong>, varus/valgus <strong>< 30°</strong>, dan pemendekan <strong>< 3 cm</strong>.",
+                    "<strong>Manajemen Primary Radial Nerve Palsy:</strong> Pada fraktur tertutup, >85–90% bersifat <em>neurapraxia</em> → observasi berkala + dynamic extension splint + EMG/NCS bila belum pulih pada bulan ke-3 hingga ke-4.",
+                    "<strong>Indikasi Operasi (ORIF) & Eksplorasi Saraf:</strong> Fraktur terbuka, cedera a. brakhialis, <em>Floating Elbow</em>, fraktur bilateral/patologis, dan <strong>Secondary radial nerve palsy</strong>."
                 ],
                 mcq: {
                     question: "Seorang pasien datang dengan fraktur tertutup 1/3 tengah diafisis humerus dengan status neurovaskular awal sepenuhnya normal. Setelah dilakukan manipulasi reduksi tertutup dan pemasangan coaptation splint di IGD, pasien tiba-tiba mengalami wrist drop dan tidak mampu mengekstensikan jari-jarinya. Langkah selanjutnya yang paling tepat adalah?",
@@ -441,122 +542,79 @@
                     explanation: "Defisit nervus radialis sekunder yang muncul SETELAH reduksi tertutup (secondary radial nerve palsy) mengindikasikan saraf terjepit di antara fragmen tulang (terutama pada varian Holstein-Lewis) dan merupakan indikasi kuat untuk eksplorasi bedah dan ORIF."
                 },
                 references: [
-                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Chapter: Humeral Shaft Fractures.",
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Humeral Shaft Fractures.",
                     "Sarmiento A, et al. Functional bracing for comminuted extra-articular fractures of the distal third of the humerus. J Bone Joint Surg Br.",
-                    "Shao YC, et al. Radial nerve palsy associated with fractures of the shaft of the humerus: a systematic review. J Bone Joint Surg Br."
+                    "Shao YC, et al. Radial nerve palsy associated with fractures of the shaft of the humerus. J Bone Joint Surg Br."
                 ]
             },
             {
                 id: "case-05",
                 number: "05",
-                title: "Pediatric Supracondylar Humerus Fracture",
-                subtitle: "Gartland Classification • AIN Injury & Pink Pulseless Hand Algorithm",
+                title: "Distal Radius & Forearm Fracture-Dislocations",
+                subtitle: "Colles, Smith, Barton • Galeazzi & Monteggia Pearls • EPL Rupture & Acute CTS",
                 category: "Upper Extremity",
-                highYieldBadge: "Most Common Pediatric Elbow Fracture",
-                summary: "Klasifikasi Gartland I–IV, pemeriksaan Anterior Interosseous Nerve ('OK sign'), Baumann's angle, dan algoritma Pink Pulseless Hand.",
-                vignette: "Anak laki-laki usia 6 tahun dibawa orang tuanya ke IGD setelah jatuh dari ayunan dengan bertumpu pada tangan yang terentang (FOOSH). Siku kiri tampak bengkak hebat, nyeri, dan terdapat memar di lipat siku anterior (pucker sign). Anak tidak mampu membuat tanda 'OK' dengan ibu jari dan jari telunjuknya. Tangan kiri teraba hangat, capillary refill time (CRT) < 2 detik, namun pulsasi a. radialis tidak teraba.",
-                pathoanatomy: [
-                    "<strong>Mekanisme Cedera:</strong> 95–98% merupakan <strong>Extension-type</strong> (jatuh dengan siku hiperekstensi); 2–5% <em>Flexion-type</em> (jatuh langsung pada siku fleksi, berisiko mencederai n. ulnaris).",
-                    "<strong>Klasifikasi Gartland (Extension Type):</strong><br>• <em>Type I:</em> Nondisplaced (hanya tampak <em>posterior fat pad sign</em>).<br>• <em>Type II:</em> Displaced dengan korteks posterior masih intak (engsel posterior).<br>• <em>Type III:</em> Displaced total tanpa kontak kortikal sama sekali.<br>• <em>Type IV:</em> Instabilitas multidirectional (periosteum anterior dan posterior robek total — didiagnosis intraoperatif).",
-                    "<strong>Cedera Saraf Paling Sering:</strong> Pada extension-type adalah <strong>Anterior Interosseous Nerve (AIN)</strong> — cabang murni motorik n. medianus yang mempersarafi <em>FPL</em> (fleksi IP ibu jari) dan <em>FDP jari telunjuk</em> (fleksi DIP telunjuk). Pasien tidak dapat membentuk huruf 'O' yang bulat saat membuat tanda 'OK'."
-                ],
-                workup: [
-                    "<strong>Parameter Radiografis Kritis:</strong><br>• <em>Anterior Humeral Line (AHL):</em> Pada foto lateral sejati, garis di sepanjang korteks anterior humerus harus memotong <strong>sepertiga tengah capitellum</strong>. Pada extension type, capitellum berada di posterior garis ini.<br>• <em>Baumann's Angle:</em> Sudut pada foto AP antara aksis panjang diafisis humerus dan garis fisis kondilus lateral (normal <strong>64°–81°</strong>; perubahan >5° menandakan malreduksi varus/cubitus varus).",
-                    "<strong>Pemeriksaan Vaskular (A. Brakhialis):</strong> Evaluasi perfusi tangan (warna, suhu, CRT, pulse oximetry waveform) serta pulsasi a. radialis."
-                ],
-                management: [
-                    "<strong>Gartland Type I:</strong> Imobilisasi dengan long arm cast/posterior splint dengan siku fleksi 80°–90° selama 3 minggu.",
-                    "<strong>Gartland Type II, III, dan IV:</strong> <strong>Closed Reduction and Percutaneous Pinning (CRPP)</strong> menggunakan 2–3 lateral-entry K-wires (divergen) di kamar operasi di bawah fluoroskopi (C-arm).",
-                    "<strong>Algoritma Pink Pulseless Hand (Tangan Hangat Perfusi Baik, Nadi Tidak Teraba):</strong><br>1. Segera lakukan <strong>CRPP emergensi</strong> untuk mereduksi fragmen yang menekan/membuat spasme a. brakhialis.<br>2. Evaluasi ulang nadi setelah reduksi. Jika tangan tetap hangat (perfusi adekuat via sirkulasi kolateral siku), observasi ketat di RS tanpa eksplorasi vaskular rutin.<br>3. Jika tangan menjadi <strong>pucat/dingin (avascular/white pulseless hand)</strong> setelah reduksi → eksplorasi a. brakhialis emergensi oleh bedah vaskular/ortopedi."
-                ],
-                redFlags: [
-                    "<strong>Forearm Compartment Syndrome:</strong> Pembengkakan hebat di fossa cubiti (pucker sign) dan imobilisasi siku hiperfleksi (>90°) meningkatkan risiko sindrom kompartemen dan <em>Volkmann ischemic contracture</em>.",
-                    "<strong>Cubitus Varus (Gunstock Deformity):</strong> Komplikasi lanjut tersering akibat malreduksi rotasi/varus medial column."
-                ],
-                mcq: {
-                    question: "Seorang anak usia 7 tahun dengan fraktur suprakondiler humerus tipe ekstensi Gartland III menjalani pemeriksaan fisik. Tangan teraba hangat dan merah muda dengan CRT 1,5 detik, tetapi nadi radialis tidak teraba. Anak juga tidak mampu memfleksikan sendi interfalang distal (DIP) jari telunjuk dan interfalang (IP) ibu jari. Manakah pernyataan yang paling tepat mengenai kondisi pasien ini?",
-                    options: [
-                        "Cedera terjadi pada nervus ulnaris dan dibutuhkan angiografi CT sebelum ke kamar operasi",
-                        "Cedera terjadi pada Anterior Interosseous Nerve (AIN) dan pasien harus segera menjalani CRPP emergensi",
-                        "Cedera terjadi pada nervus radialis dan cukup dipasang long arm cast di IGD",
-                        "Eksplorasi arteri brakhialis harus dilakukan sebelum reduksi tulang"
-                    ],
-                    correctIndex: 1,
-                    explanation: "Ketidakmampuan fleksi DIP telunjuk (FDP) dan IP ibu jari (FPL) adalah tanda khas cedera Anterior Interosseous Nerve (AIN), saraf yang paling sering cedera pada fraktur suprakondiler tipe ekstensi. Pada 'Pink Pulseless Hand', langkah pertama yang wajib dilakukan adalah reduksi tertutup dan fiksasi pin perkutan (CRPP) emergensi untuk membebaskan jepitan/spasme arteri brakhialis."
-                },
-                references: [
-                    "Rockwood and Wilkins' Fractures in Children, 9th Ed. — Chapter: Supracondylar Fractures of the Distal Humerus.",
-                    "AAOS Clinical Practice Guideline: Management of Pediatric Supracondylar Humerus Fractures.",
-                    "Miller's Review of Orthopaedics, 8th Ed. — Pediatric Trauma."
-                ]
-            },
-            {
-                id: "case-06",
-                number: "06",
-                title: "Distal Radius Fracture (Colles, Smith, Barton)",
-                subtitle: "Radiographic Acceptability Criteria • EPL Tendon Rupture & Acute CTS",
-                category: "Upper Extremity",
-                highYieldBadge: "High-Frequency ER Trauma",
-                summary: "Parameter radiografis normal vs batas reduksi diterima, perbedaan Colles/Smith/Barton, ruptur tendon EPL, dan acute CTS.",
+                skdiBadge: "SKDI 3B • High-Yield PPDS",
+                highYieldBadge: "Radiographic Limits & Forearm Eponyms",
+                kisiKisiPPDS: "Kombinasi favorit ujian tulis PPDS: (1) 4 Parameter radiografis distal radius normal vs batas reduksi diterima (Radial height 11–13 mm, Radial inclination 22°–23°, Volar tilt 11°–12°, Step-off <2 mm), (2) Perbedaan Colles (dorsal), Smith (volar), dan Barton (intra-artikular shearing), (3) Galeazzi (fraktur 1/3 distal radius + dislokasi DRUJ) vs Monteggia (fraktur 1/3 proksimal ulna + dislokasi caput radii + cedera PIN), dan (4) Ruptur tendon EPL pada tuberkulum Lister.",
+                summary: "Parameter radiografis distal radius, perbedaan Colles/Smith/Barton, eponim Galeazzi vs Monteggia, ruptur tendon EPL, dan acute CTS.",
                 vignette: "Wanita 62 tahun dengan riwayat osteoporosis datang ke IGD setelah terpeleset dan jatuh menumpu dengan telapak tangan kanan (FOOSH). Pergelangan tangan kanan tampak mengalami deformitas seperti garpu makan malam terbalik (dinner-fork deformity). Pasien juga mengeluh rasa kesemutan (parestesia) pada ibu jari, jari telunjuk, dan jari tengah kanan yang semakin memberat dalam 2 jam terakhir.",
-                pathoanatomy: [
-                    "<strong>Varian Klasik:</strong><br>• <em>Colles Fracture:</em> Fraktur metafisis distal radius ekstra-artikular dengan angulasi/displacement <strong>dorsal</strong> ('dinner-fork deformity') — paling sering.<br>• <em>Smith Fracture (Reverse Colles):</em> Angulasi/displacement <strong>volar</strong> ('garden-spade deformity') akibat jatuh dengan pergelangan tangan fleksi.<br>• <em>Barton Fracture:</em> Fraktur-dislokasi <strong>intra-artikular</strong> tepi dorsal atau volar radius di mana karpus ikut bergeser bersama fragmen artikular (sangat tidak stabil).",
-                    "<strong>Klasifikasi:</strong> <em>Frykman</em> (keterlibatan sendi radiokarpal, DRUJ, dan prosesus styloideus ulna) dan <em>Fernandez</em> (berdasarkan mekanisme cedera: bending, shearing, compression, avulsion, combined)."
+                classificationAndMechanism: [
+                    "<strong>Varian Distal Radius:</strong><br>• <em>Colles Fracture:</em> Fraktur metafisis distal radius ekstra-artikular dengan angulasi/displacement <strong>dorsal</strong> ('dinner-fork deformity').<br>• <em>Smith Fracture (Reverse Colles):</em> Angulasi/displacement <strong>volar</strong> ('garden-spade deformity').<br>• <em>Barton Fracture:</em> Fraktur-dislokasi <strong>intra-artikular</strong> tepi dorsal atau volar radius di mana karpus ikut bergeser bersama fragmen artikular (sangat tidak stabil).",
+                    "<strong>Eponim Lengan Bawah (Wajib Hafal):</strong><br>• <em>Galeazzi ('Fracture of Necessity'):</em> Fraktur 1/3 distal diafisis radius + dislokasi <strong>DRUJ (Distal Radioulnar Joint)</strong> → butuh ORIF anatomis radius.<br>• <em>Monteggia:</em> Fraktur 1/3 proksimal ulna + dislokasi <strong>caput radii</strong> → berisiko mencederai <strong>Posterior Interosseous Nerve (PIN)</strong> (finger drop tanpa wrist drop)."
                 ],
-                workup: [
-                    "<strong>Radiografi Pergelangan Tangan (PA, Lateral, Oblique):</strong> Ukur 4 parameter krusial pasca reduksi:<br>• <strong>Radial Height:</strong> Normal 11–13 mm (diterima bila pemendekan <strong>< 3–5 mm</strong> dari sisi kontralateral).<br>• <strong>Radial Inclination:</strong> Normal 22°–23° (diterima <strong>> 15°</strong>).<br>• <strong>Volar Tilt:</strong> Normal 11°–12° (diterima dari <strong>dorsal tilt < 10° hingga volar tilt normal</strong>).<br>• <strong>Intra-articular Step-off / Gap:</strong> Harus <strong>< 2 mm</strong> untuk mencegah osteoartritis pasca-trauma."
+                examAndRedFlags: [
+                    "<strong>4 Parameter Radiografis Distal Radius (Normal vs Batas Diterima):</strong><br>• <em>Radial Height:</em> Normal 11–13 mm (diterima pemendekan <strong>< 3–5 mm</strong>).<br>• <em>Radial Inclination:</em> Normal 22°–23° (diterima <strong>> 15°</strong>).<br>• <em>Volar Tilt:</em> Normal 11°–12° (diterima dari <strong>dorsal tilt < 10° hingga volar tilt normal</strong>).<br>• <em>Intra-articular Step-off / Gap:</em> Harus <strong>< 2 mm</strong>.",
+                    "<strong>RED FLAG — Acute Carpal Tunnel Syndrome (CTS):</strong> Parestesia progresif distribusi n. medianus yang tidak membaik pasca reduksi adalah emergensi bedah untuk rilis terowongan karpal.",
+                    "<strong>RED FLAG — Attrition Rupture Tendon EPL:</strong> Terjadi 4–8 minggu pasca fraktur distal radius <em>nondisplaced</em> akibat iskemia/gesekan tendon di sekitar <em>Lister's tubercle</em>."
                 ],
                 management: [
-                    "<strong>Konservatif (Closed Reduction + Hematoma Block + Sugar-Tong/Colles Splint):</strong> Untuk fraktur stabil yang memenuhi kriteria radiografis pasca reduksi. Lakukan foto ulang pada minggu ke-1 dan ke-2 untuk mendeteksi re-displacement.",
-                    "<strong>Operatif (ORIF Volar Locking Plate / External Fixation):</strong> Diindikasikan bila gagal mempertahankan parameter radiografis pasca reduksi tertutup, fraktur Barton (shearing intra-artikular), kominusi dorsal berat (>50%), atau fraktur terbuka.",
-                    "<strong>Acute Carpal Tunnel Syndrome (CTS):</strong> Parestesia progresif di distribusi n. medianus yang tidak membaik setelah reduksi fraktur merupakan <strong>emergensi bedah</strong> untuk dilakukan rilis terowongan karpal (carpal tunnel release) + fiksasi fraktur."
-                ],
-                redFlags: [
-                    "<strong>Attrition Rupture Tendon EPL (Extensor Pollicis Longus):</strong> Paling sering terjadi pada fraktur distal radius <em>nondisplaced/minimally displaced</em> akibat iskemia dan gesekan tendon di sekitar <em>Lister's tubercle</em> pada minggu ke-4 hingga ke-8 pasca trauma.",
-                    "<strong>CRPS (Complex Regional Pain Syndrome):</strong> Nyeri terbakar berlebihan, alodinia, dan perubahan vasomotor; suplementasi Vitamin C 500 mg/hari selama 50 hari terbukti menurunkan insidensinya."
+                    "<strong>Tatalaksana Awal IGD (SKDI 3B):</strong> Evaluasi neurovaskular (terutama n. medianus), foto rontgen wrist & forearm (include wrist & elbow), lakukan hematoma block + reduksi tertutup dan pemasangan <em>sugar-tong / below-elbow splint</em> (hindari posisi fleksi-deviasi ulnar ekstrem / Cotton-Loder position karena memicu acute CTS).",
+                    "<strong>Terapi Definitif / Indikasi ORIF (Volar Locking Plate):</strong> Gagal mempertahankan parameter radiografis pasca reduksi, fraktur Barton, kominusi dorsal berat (>50%), fraktur Galeazzi/Monteggia pada dewasa, atau disertai acute CTS."
                 ],
                 mcq: {
-                    question: "Seorang wanita 58 tahun ditatalaksana secara konservatif dengan gips untuk fraktur distal radius kiri nondisplaced. Enam minggu kemudian setelah gips dilepas, ia tiba-tiba tidak dapat mengekstensikan sendi interfalang (IP) ibu jari kirinya saat telapak tangan diletakkan rata di atas meja. Struktur apakah yang paling mungkin mengalami ruptur?",
+                    question: "Seorang pasien mengalami fraktur pada sepertiga proksimal ulna disertai dislokasi kaput radii ke arah anterior (Monteggia fracture-dislocation). Setelah trauma, pasien tidak mampu mengekstensikan jari-jari tangan di sendi MCP (finger drop), namun ekstensi pergelangan tangan masih dapat dilakukan dengan deviasi radial dan tidak ada defisit sensorik. Saraf manakah yang mengalami cedera?",
                     options: [
-                        "Tendon Flexor Pollicis Longus (FPL)",
-                        "Tendon Extensor Pollicis Longus (EPL)",
-                        "Tendon Abductor Pollicis Longus (APL)",
-                        "Nervus Interosseous Posterior (PIN)"
+                        "Anterior Interosseous Nerve (AIN)",
+                        "Posterior Interosseous Nerve (PIN)",
+                        "Nervus Ulnaris di kanal Guyon",
+                        "Nervus Cutaneus Antebrachii Lateralis"
                     ],
                     correctIndex: 1,
-                    explanation: "Ruptur tendon Extensor Pollicis Longus (EPL) merupakan komplikasi klasik yang justru lebih sering terjadi pada fraktur distal radius nondisplaced karena hematoma di kompartemen ekstensor ke-3 menekan suplai darah tendon EPL di sekitar tuberkulum Lister."
+                    explanation: "Dislokasi caput radii pada cedera Monteggia sering menekan/mencederai Posterior Interosseous Nerve (PIN) saat melewati arcade of Frohse. PIN adalah cabang murni motorik n. radialis sehingga menyebabkan finger drop tanpa defisit sensorik, sementara ekstensi wrist tetap ada berkat otot ECRL yang dipersarafi n. radialis sebelum bercabang menjadi PIN."
                 },
                 references: [
-                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Chapter: Fractures of the Distal Radius and Ulna.",
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Distal Radius & Forearm Fractures.",
                     "AAOS Clinical Practice Guideline: Management of Distal Radius Fractures.",
                     "Miller's Review of Orthopaedics, 8th Ed. — Hand and Upper Extremity Trauma."
                 ]
             },
+
+            // --- PILLAR 3: LOWER EXTREMITY & PELVIC TRAUMA (CASES 06 - 09) ---
             {
-                id: "case-07",
-                number: "07",
+                id: "case-06",
+                number: "06",
                 title: "Femoral Neck Fracture (Young vs Geriatric)",
                 subtitle: "Garden & Pauwels Classification • MFCA Vascular Supply & Surgical Timing",
-                category: "Lower Extremity",
-                highYieldBadge: "AVN Risk & Geriatric Hip Protocol",
+                category: "Lower Extremity & Pelvis",
+                skdiBadge: "SKDI 3B • High-Yield PPDS",
+                highYieldBadge: "MFCA Supply & AVN Prevention",
+                kisiKisiPPDS: "Topik wajib ujian masuk PPDS: (1) Suplai darah utama kaput femoris dewasa yaitu Medial Femoral Circumflex Artery (MFCA) via cabang retinakular posterosuperior, (2) Klasifikasi Garden I–IV & Pauwels I–III (sudut >50° = gaya geser tinggi), dan (3) Perbedaan prinsip bedah pada usia muda (<60 thn: emergensi reduksi anatomis + cannulated screws/DHS dalam <6–12 jam) vs geriatri (>65 thn Garden III–IV: Hemiarthroplasty / THA).",
                 summary: "Perbedaan prinsip tatalaksana fraktur collum femoris pada usia muda (emergensi ORIF) vs geriatri (arthroplasty), suplai darah MFCA, dan klasifikasi Garden.",
                 vignette: "Skenario A: Laki-laki 29 tahun korban kecelakaan motor mengalami nyeri panggul kanan hebat; tungkai kanan tampak memendek dan eksorotasi. Foto Rontgen menunjukkan fraktur collum femoris kanan Garden Type IV dengan sudut Pauwels 65°.\nSkenario B: Wanita 78 tahun terjatuh di kamar mandi dengan gambaran fraktur collum femoris kiri Garden Type IV.",
-                pathoanatomy: [
-                    "<strong>Vaskularisasi Kaput Femoris:</strong> Suplai darah utama kaput femoris dewasa berasal dari <strong>Medial Femoral Circumflex Artery (MFCA)</strong> melalui cabang <em>lateral epiphyseal / posterosuperior retinacular vessels</em> yang berjalan intrakapsular di sepanjang collum femoris. Fraktur bergeser merobek pembuluh ini dan memicu hematoma intrakapsular (tamponade), menyebabkan risiko tinggi <strong>Avascular Necrosis (AVN)</strong> dan <strong>Nonunion</strong>.",
+                classificationAndMechanism: [
+                    "<strong>Vaskularisasi Kaput Femoris:</strong> Suplai darah utama kaput femoris dewasa berasal dari <strong>Medial Femoral Circumflex Artery (MFCA)</strong> melalui cabang <em>lateral epiphyseal / posterosuperior retinacular vessels</em> yang berjalan intrakapsular di sepanjang collum femoris. Fraktur displaced merobek pembuluh ini dan memicu hematoma intrakapsular (tamponade), menyebabkan risiko tinggi <strong>Avascular Necrosis (AVN)</strong> dan <strong>Nonunion</strong>.",
                     "<strong>Klasifikasi Garden (AP View):</strong><br>• <em>Type I:</em> Incomplete / valgus-impacted.<br>• <em>Type II:</em> Complete, nondisplaced.<br>• <em>Type III:</em> Complete, partially displaced (trabekula kaput tidak segaris dengan asetabulum).<br>• <em>Type IV:</em> Complete, fully displaced (trabekula kaput sejajar kembali dengan asetabulum karena terlepas bebas).",
-                    "<strong>Klasifikasi Pauwels (Berdasarkan Sudut Vertikal Garis Fraktur):</strong> Type I (<30°), Type II (30°–50°), Type III (>50° — gaya geser/shear force sangat tinggi, risiko nonunion besar)."
+                    "<strong>Klasifikasi Pauwels (Berdasarkan Sudut Garis Fraktur):</strong> Type I (<30°), Type II (30°–50°), Type III (>50° — gaya geser/shear force sangat tinggi, risiko nonunion besar)."
                 ],
-                workup: [
-                    "<strong>Radiografi Pelvis AP & Cross-Table Lateral Hip:</strong> Evaluasi integritas <em>Shenton's line</em> dan sudut Pauwels.",
-                    "<strong>MRI Hip:</strong> Gold standard bila klinis sangat curiga fraktur panggul geriatri namun foto Rontgen awal tampak normal (occult femoral neck fracture)."
+                examAndRedFlags: [
+                    "<strong>Pemeriksaan Klinis & Radiografis:</strong> Deformitas klasik berupa tungkai <strong>memendek (shortening) dan eksorotasi (external rotation)</strong>. Evaluasi terputusnya <em>Shenton's line</em> pada foto Pelvis AP.",
+                    "<strong>MRI Hip:</strong> Gold standard bila klinis curiga fraktur panggul geriatri namun foto Rontgen awal tampak normal (occult hip fracture).",
+                    "<strong>RED FLAG — Penundaan Operasi:</strong> Pada pasien geriatri, penundaan operasi >48 jam meningkatkan mortalitas 1 tahun dan risiko DVT/PE/pneumonia secara signifikan."
                 ],
                 management: [
-                    "<strong>Pasien Usia Muda (<60 tahun) — EMERGENSI ORTOPEDI:</strong><br>• Target utama: <strong>Preservasi kaput femoris asli</strong>.<br>• Lakukan <strong>reduksi anatomis segera (dalam <6–12 jam)</strong> dan fiksasi interna dengan 3 buah <em>Cannulated Cancellous Screws</em> (konfigurasi segitiga terbalik) atau <em>Sliding Hip Screw (DHS)</em> + anti-rotation screw (terutama untuk Pauwels Type III).",
-                    "<strong>Pasien Geriatri (>65 tahun):</strong><br>• <em>Nondisplaced (Garden I–II):</em> In-situ fixation dengan 3 cannulated screws.<br>• <em>Displaced (Garden III–IV):</em> <strong>Arthroplasty</strong> (penggantian sendi) untuk mobilisasi dini dan menghindari re-operasi akibat AVN/nonunion. Pilih <strong>Hemiarthroplasty (Bipolar/Unipolar)</strong> untuk pasien aktivitas rendah, atau <strong>Total Hip Arthroplasty (THA)</strong> untuk pasien geriatri aktif tanpa gangguan kognitif/osteoartritis asetabulum."
-                ],
-                redFlags: [
-                    "<strong>Kualitas Reduksi adalah Penentu Utama:</strong> Pada pasien muda, reduksi varus harus dihindari mutlak; jika reduksi tertutup tidak anatomis, segera konversi ke <em>Open Reduction</em> (Smith-Petersen atau Watson-Jones approach).",
-                    "<strong>DVT/PE Prophylaxis & Early Mobilization:</strong> Penundaan operasi >48 jam pada fraktur panggul geriatri meningkatkan mortalitas 1 tahun secara signifikan."
+                    "<strong>Tatalaksana Awal IGD (SKDI 3B):</strong> Pasang akses IV, analgesia adekuat (pertimbangkan <em>fascia iliaca compartment block</em>), imobilisasi sementara (hindari traksi kulit berlebihan pada fraktur intrakapsular karena dapat meningkatkan tekanan intrakapsular), evaluasi komorbid geriatri, dan rujuk segera ke Sp.OT.",
+                    "<strong>Pasien Usia Muda (<60 tahun) — EMERGENSI ORTOPEDI:</strong> Target utama preservasi kaput femoris asli → <strong>reduksi anatomis segera (<6–12 jam)</strong> dan fiksasi dengan 3 buah <em>Cannulated Cancellous Screws</em> (konfigurasi segitiga terbalik) atau <em>Sliding Hip Screw (DHS)</em> + anti-rotation screw.",
+                    "<strong>Pasien Geriatri (>65 tahun):</strong><br>• <em>Nondisplaced (Garden I–II):</em> In-situ fixation dengan 3 cannulated screws.<br>• <em>Displaced (Garden III–IV):</em> <strong>Hemiarthroplasty (Bipolar/Unipolar)</strong> untuk aktivitas rendah, atau <strong>Total Hip Arthroplasty (THA)</strong> untuk pasien geriatri aktif/mandiri."
                 ],
                 mcq: {
                     question: "Pembuluh darah utama yang memperdarahi kaput femoris pada orang dewasa dan paling rentan mengalami kerusakan pada fraktur collum femoris displaced (Garden III–IV) sehingga menyebabkan avascular necrosis (AVN) adalah?",
@@ -570,37 +628,34 @@
                     explanation: "Medial Femoral Circumflex Artery (MFCA) melalui cabang retinakular posterosuperior menyuplai >80% aliran darah ke bagian penopang beban (weight-bearing) kaput femoris dewasa. Arteri ligamentum teres hanya menyuplai sebagian kecil area di sekitar fovea capitis."
                 },
                 references: [
-                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Chapter: Femoral Neck Fractures.",
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Femoral Neck Fractures.",
                     "Miller's Review of Orthopaedics, 8th Ed. — Adult Reconstruction & Trauma (Hip Fractures).",
                     "AAOS Clinical Practice Guideline: Management of Hip Fractures in Older Adults."
                 ]
             },
             {
-                id: "case-08",
-                number: "08",
+                id: "case-07",
+                number: "07",
                 title: "Open Tibial Shaft Fracture & Compartment Syndrome",
                 subtitle: "Gustilo-Anderson Classification • Early Antibiotics & Delta-P Threshold",
-                category: "Lower Extremity",
-                highYieldBadge: "Orthopaedic Emergency & Limb Salvage",
-                summary: "Klasifikasi Gustilo-Anderson, protokol antibiotik IV (<1–3 jam), debri­demen, serta diagnosis akut sindrom kompartemen (Delta-P < 30 mmHg).",
+                category: "Lower Extremity & Pelvis",
+                skdiBadge: "SKDI 3B • Orthopaedic Emergency",
+                highYieldBadge: "Antibiotics <1h & Delta-P < 30 mmHg",
+                kisiKisiPPDS: "Kasus emergensi nomor 1 di IGD & ujian PPDS: (1) Klasifikasi Gustilo-Anderson I, II, IIIA, IIIB (butuh flap), IIIC (cedera arteri mayor butuh vascular repair), (2) Pemilihan antibiotik IV profilaksis (<1–3 jam) + Penicillin G pada kontaminasi tanah/pertanian, (3) Tanda paling awal sindrom kompartemen (pain out of proportion & pain on passive stretch), dan (4) Rumus Delta-P = DBP − ICP < 30 mmHg.",
+                summary: "Klasifikasi Gustilo-Anderson, protokol antibiotik IV (<1–3 jam), debridemen, serta diagnosis akut sindrom kompartemen (Delta-P < 30 mmHg).",
                 vignette: "Laki-laki 24 tahun korban kecelakaan motor datang ke IGD dengan luka robek 12 cm di tungkai bawah kanan dengan fragmen tulang tibia mencuat kotor terkontaminasi tanah dan kerusakan jaringan lunak luas, namun masih dapat ditutup tanpa flap. Pulsasi a. dorsalis pedis dan a. tibialis posterior teraba. Enam jam setelah masuk RS, pasien mengeluh nyeri betis kanan yang sangat hebat tidak proporsional (pain out of proportion), terutama saat jari-jari kaki diekstensikan secara pasif.",
-                pathoanatomy: [
-                    "<strong>Mengapa Tibia Rentan:</strong> Permukaan anteromedial tibia hanya dilapisi kulit dan jaringan subkutan tipis tanpa bantalan otot, sehingga mudah mengalami fraktur terbuka dan gangguan vaskularisasi periosteal.",
-                    "<strong>Klasifikasi Gustilo-Anderson (Ditentukan Intraoperatif setelah Debridemen):</strong><br>• <em>Type I:</em> Luka bersih < 1 cm, kerusakan jaringan lunak minimal.<br>• <em>Type II:</em> Luka 1–10 cm, kerusakan jaringan lunak sedang tanpa flap/avulsi luas.<br>• <em>Type IIIA:</em> Luka > 10 cm atau trauma energi tinggi/kontaminasi berat, <strong>cakupan jaringan lunak (soft-tissue coverage) masih adekuat</strong>.<br>• <em>Type IIIB:</em> Stripping periosteal luas & tulang terekspos sehingga <strong>membutuhkan prosedur flap</strong> (rotational atau free flap).<br>• <em>Type IIIC:</em> Fraktur terbuka disertai <strong>cedera arteri mayor yang membutuhkan perbaikan vaskular (vascular repair)</strong> untuk menyelamatkan ekstremitas (tanpa memandang ukuran luka).",
-                    "<strong>Kompartemen Tungkai Bawah:</strong> Terdiri dari 4 kompartemen (Anterior [paling sering], Lateral, Superficial Posterior, Deep Posterior)."
+                classificationAndMechanism: [
+                    "<strong>Klasifikasi Gustilo-Anderson (Ditentukan Intraoperatif setelah Debridemen):</strong><br>• <em>Type I:</em> Luka bersih < 1 cm, kerusakan jaringan lunak minimal.<br>• <em>Type II:</em> Luka 1–10 cm, kerusakan jaringan lunak sedang tanpa flap/avulsi luas.<br>• <em>Type IIIA:</em> Luka > 10 cm atau trauma energi tinggi/kontaminasi berat, <strong>cakupan jaringan lunak (soft-tissue coverage) masih adekuat</strong>.<br>• <em>Type IIIB:</em> Stripping periosteal luas & tulang terekspos sehingga <strong>membutuhkan prosedur flap</strong> (rotational atau free flap).<br>• <em>Type IIIC:</em> Fraktur terbuka disertai <strong>cedera arteri mayor yang membutuhkan perbaikan vaskular (vascular repair)</strong> (tanpa memandang ukuran luka).",
+                    "<strong>4 Kompartemen Tungkai Bawah:</strong> Anterior (paling sering terkena, berisi <em>n. peroneus profundus</em> & <em>a. tibialis anterior</em>), Lateral, Superficial Posterior, dan Deep Posterior."
                 ],
-                workup: [
-                    "<strong>Evaluasi Klinis Sindrom Kompartemen:</strong> <em>Pain out of proportion</em> dan <em>pain with passive stretch</em> adalah tanda paling awal dan sensitif (jangan menunggu <em>pulselessness</em> atau <em>pallor</em> karena itu tanda terlambat!).",
-                    "<strong>Pengukuran Tekanan Kompartemen:</strong> Diindikasikan pada pasien tidak sadar/intubasi atau klinis meragukan. Ambang batas diagnostik: <strong>Delta-P (ΔP) = Diastolic Blood Pressure (DBP) − Intracompartmental Pressure (ICP) < 30 mmHg</strong> (atau ICP absolut > 30 mmHg)."
+                examAndRedFlags: [
+                    "<strong>Diagnosis Sindrom Kompartemen:</strong> <em>Pain out of proportion</em> dan <em>pain with passive stretch</em> adalah tanda paling awal. Pada pasien tidak sadar/intubasi, ukur tekanan kompartemen: <strong>Delta-P (ΔP) = Diastolic Blood Pressure (DBP) − Intracompartmental Pressure (ICP) < 30 mmHg</strong>.",
+                    "<strong>RED FLAG — Menunggu '5 Ps' Lengkap:</strong> Hilangnya pulsasi distal berarti iskemia ireversibel sudah terjadi (nekrosis otot dimulai setelah 4–6 jam iskemia hangat).",
+                    "<strong>RED FLAG — Elevasi Tungkai Berlebihan:</strong> Pada kecurigaan sindrom kompartemen, posisikan tungkai <strong>setinggi jantung</strong> (elevasi tinggi menurunkan tekanan perfusi kapiler)."
                 ],
                 management: [
-                    "<strong>Protokol IGD Fraktur Terbuka (Golden Hours):</strong><br>1. <strong>Antibiotik IV Sesegera Mungkin (<1–3 jam pertama):</strong><br>   • Gustilo I & II: <em>Cefazolin</em> 2 g IV (sefalosporin generasi 1).<br>   • Gustilo III: <em>Cefazolin</em> + <em>Gentamicin</em> (aminoglikosida) atau monoterapi <em>Piperacillin-Tazobactam</em>.<br>   • Kontaminasi tanah/pertanian/barnyard: Tambahkan <em>Penicillin G</em> dosis tinggi atau <em>Metronidazole</em> (profilaksis <em>Clostridium perfringens</em> / gas gangrene).<br>2. <strong>Profilaksis Tetanus:</strong> Tetanus Toxoid +/- Tetanus Immunoglobulin (TIG) sesuai status imunisasi.<br>3. <strong>Foto klinis luka</strong> → irigasi kasar, balut kasa steril lembap NaCl 0,9%, dan pasang bidai (jangan lakukan eksplorasi/irigasi tekanan tinggi di IGD).",
-                    "<strong>Terapi Bedah:</strong> Urgent surgical debridement + stabilisasi tulang (<em>Intramedullary Nailing</em> pada sebagian besar kasus atau <em>External Fixator</em> bila kontaminasi sangat masif/damage control orthopaedics).",
-                    "<strong>Tatalaksana Sindrom Kompartemen:</strong> Lepas semua balutan/gips melingkar segera, posisikan tungkai setinggi jantung (jangan dielevasikan tinggi karena menurunkan perfusi arteri), dan lakukan <strong>4-Compartment Fasciotomy (Two-Incision Technique) emergensi</strong>."
-                ],
-                redFlags: [
-                    "<strong>Menunggu '5 Ps' Lengkap:</strong> Hilangnya pulsasi distal berarti iskemia ireversibel sudah terjadi (nekrosis otot dimulai setelah 4–6 jam iskemia hangat).",
-                    "<strong>Elevasi Ekstremitas Berlebihan:</strong> Pada kecurigaan sindrom kompartemen, elevasi tungkai justru menurunkan tekanan perfusi kapiler."
+                    "<strong>Tatalaksana Awal IGD Fraktur Terbuka (SKDI 3B):</strong><br>1. <strong>Antibiotik IV Sesegera Mungkin (<1–3 jam):</strong> Gustilo I–II = <em>Cefazolin</em> 2 g IV; Gustilo III = <em>Cefazolin</em> + <em>Gentamicin</em> (atau <em>Piperacillin-Tazobactam</em>); Kontaminasi tanah/pertanian = tambahkan <em>Penicillin G</em> atau <em>Metronidazole</em>.<br>2. <strong>Profilaksis Tetanus</strong> (TT +/- TIG).<br>3. Dokumentasi foto klinis luka → tutup kasa steril lembap NaCl 0,9% & pasang bidai (jangan eksplorasi/irigasi tekanan tinggi di IGD) → rujuk segera untuk <em>urgent surgical debridement</em> & fiksasi (IM Nail / Ex-Fix).",
+                    "<strong>Tatalaksana Sindrom Kompartemen:</strong> Lepas semua balutan/gips melingkar segera, posisikan tungkai setinggi jantung, dan lakukan <strong>4-Compartment Fasciotomy (Two-Incision Technique) emergensi</strong>."
                 ],
                 mcq: {
                     question: "Seorang pria 30 tahun dengan fraktur tibia tertusuk benda tajam mengalami nyeri tungkai bawah yang makin hebat saat dilakukan dorsofleksi pasif jari-jari kaki. Tekanan darah pasien 110/70 mmHg. Dokter melakukan pengukuran tekanan intrakompartemen anterior dan mendapatkan hasil 45 mmHg. Berapakah nilai Delta-P (ΔP) pasien ini dan apa tindakan yang harus segera dilakukan?",
@@ -616,123 +671,34 @@
                 references: [
                     "Gustilo RB, Anderson JT. Prevention of infection in the treatment of one thousand and twenty-five open fractures of long bones. J Bone Joint Surg Am.",
                     "McQueen MM, Court-Brown CM. Compartment monitoring in tibial fractures: the pressure threshold for decompression. J Bone Joint Surg Br.",
-                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Chapter: Open Fractures & Acute Compartment Syndrome."
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Open Fractures & Acute Compartment Syndrome."
                 ]
             },
             {
-                id: "case-09",
-                number: "09",
-                title: "Cauda Equina Syndrome (CES)",
-                subtitle: "Surgical Spine Emergency • Red Flags, Saddle Anesthesia & Decompression Timing",
-                category: "Spine & Pelvis",
-                highYieldBadge: "True Spine Surgical Emergency",
-                summary: "Identifikasi red flags CES (retensi urin, saddle anesthesia, penurunan tonus sfingter ani), etiologi HNP sentral L4-L5/L5-S1, dan dekompresi <24–48 jam.",
-                vignette: "Laki-laki 42 tahun datang ke IGD dengan keluhan nyeri punggung bawah menjalar ke kedua tungkai (bilateral sciatica) sejak 2 hari lalu, disertai mati rasa di area selangkangan/bokong bagian dalam dan kesulitan berkemih sejak 8 jam terakhir. Pemeriksaan fisik: penurunan sensasi pinprick di dermatom S2–S4 (perianal), kelemahan dorsofleksi dan plantarfleksi kedua pergelangan kaki, serta penurunan tonus sfingter ani pada pemeriksaan colok dubur (DRE).",
-                pathoanatomy: [
-                    "<strong>Anatomi Cauda Equina:</strong> Kumpulan radiks saraf lumbosakral (L2 hingga Co1) di dalam kanalis spinalis di bawah ujung medula spinalis (<em>conus medullaris</em> yang berakhir di L1–L2 pada dewasa). Karena berisi radiks saraf tepi (lower motor neuron), lesinya bersifat <strong>LMN</strong> (arefleksia, paralisis flaksid).",
-                    "<strong>Etiologi Tersering:</strong> Herniasi nukleus pulposus (HNP) sentral masif pada level <strong>L4–L5</strong> atau <strong>L5–S1</strong> (>45% kasus). Penyebab lain: tumor/metastasis vertebra, abses epidural spinal, trauma fraktur burst lumbal, atau hematoma epidural pasca operasi.",
-                    "<strong>Klasifikasi Klinis:</strong> <em>CES-Incomplete (CES-I)</em> = gangguan sensasi berkemih/aliran urin melemah namun masih ada kontrol volunter; <em>CES-Retention (CES-R)</em> = retensi urin tanpa nyeri dengan overflow incontinence (prognosis pemulihan sfingter lebih buruk)."
-                ],
-                workup: [
-                    "<strong>Pemeriksaan Fisik Wajib (Dokumentasi Lengkap):</strong><br>• Pemeriksaan sensorik perianal/perineal (<em>saddle anesthesia</em> — dermatom S2, S3, S4).<br>• Pemeriksaan motorik ekstremitas bawah (L4–S1) dan refleks patella/Achilles.<br>• <strong>Digital Rectal Examination (DRE):</strong> Menilai tonus sfingter ani istirahat dan kontraksi volunter.<br>• <strong>Post-Void Residual (PVR) Bladder Scan / Kateterisasi:</strong> PVR <strong>> 200 mL</strong> memiliki sensitivitas dan spesifisitas tinggi untuk retensi urin neurogenik pada kecurigaan CES.",
-                    "<strong>Pencitraan Pilihan Utama:</strong> <strong>Emergent MRI Lumbosacral</strong> (tanpa kontras untuk HNP, atau dengan kontras gadolinium bila curiga infeksi/abses epidural atau tumor)."
-                ],
-                management: [
-                    "<strong>Konsultasi Bedah Tulang Belakang (Spine) Segera:</strong> Jangan menunda rujukan atau MRI sampai pagi hari.",
-                    "<strong>Tindakan Definitif:</strong> <strong>Emergent Surgical Decompression (Laminectomy + Discectomy) dalam waktu < 24–48 jam</strong> sejak onset gejala (idealnya < 24 jam, terutama pada fase CES-Incomplete sebelum berkembang menjadi CES-Retention) untuk memaksimalkan pemulihan fungsi kandung kemih, usus, dan seksual."
-                ],
-                redFlags: [
-                    "<strong>Urinary Retention + Saddle Anesthesia:</strong> Kombinasi retensi urin dan baal area sadel adalah tanda bahaya absolut; jangan pernah memulangkan pasien low back pain dengan keluhan miksi tanpa evaluasi PVR dan pemeriksaan DRE.",
-                    "<strong>Bilateral Sciatica:</strong> Nyeri radikuler bilateral pada pasien HNP menandakan protrusi diskus ke arah sentral yang mengancam seluruh sakus tekalis."
-                ],
-                mcq: {
-                    question: "Seorang pria 45 tahun datang dengan nyeri punggung bawah akut menjalar ke kedua tungkai, mati rasa di area perianal, dan post-void residual (PVR) urin 450 mL. Pemeriksaan penunjang dan tatalaksana definitif yang paling tepat adalah?",
-                    options: [
-                        "Foto polos lumbosakral AP/Lateral dan tirah baring selama 2 minggu dengan NSAID",
-                        "CT Scan lumbal dan injeksi steroid epidural",
-                        "Emergent MRI lumbosakral dilanjutkan dekompresi bedah (laminektomi/disektomi) dalam < 24–48 jam",
-                        "EMG/NCS ekstremitas bawah dan fisioterapi penguatan otot core"
-                    ],
-                    correctIndex: 2,
-                    explanation: "Pasien menunjukkan gejala klasik Cauda Equina Syndrome (bilateral sciatica, saddle anesthesia, dan retensi urin dengan PVR > 200 mL). Ini adalah kegawatdaruratan bedah tulang belakang yang membutuhkan MRI lumbosakral emergensi dan dekompresi bedah segera (<24–48 jam) untuk mencegah defisit sfingter permanen."
-                },
-                references: [
-                    "Miller's Review of Orthopaedics, 8th Ed. — Spine: Cauda Equina Syndrome.",
-                    "Todd NV. Cauda equina syndrome: the timing of surgery probably does influence outcome. Br J Neurosurg.",
-                    "AO Spine Knowledge Forum — Degenerative & Emergency Spine Guidelines."
-                ]
-            },
-            {
-                id: "case-10",
-                number: "10",
-                title: "Pediatric Septic Arthritis vs Osteomyelitis",
-                subtitle: "Kocher Criteria • S. aureus & Kingella kingae • Urgent Arthrotomy",
-                category: "Pediatric & Infection",
-                highYieldBadge: "Joint Destruction Prevention",
-                summary: "Kriteria Kocher + CRP untuk membedakan septic arthritis panggul vs transient synovitis, mikrobiologi pediatri, dan urgensi arthrotomy/washout.",
-                vignette: "Anak laki-laki usia 4 tahun dibawa ke IGD karena menolak berjalan dan menangis kesakitan setiap kali panggul kanannya digerakkan sejak 24 jam lalu. Suhu tubuh 39,1°C, nadi 132x/menit. Panggul kanan tertahan dalam posisi fleksi, abduksi, dan eksorotasi (posisi FABER untuk memaksimalkan volume kapsul sendi). Laboratorium: Leukosit 16.400/µL, LED (ESR) 54 mm/jam, dan CRP 68 mg/L.",
-                pathoanatomy: [
-                    "<strong>Patofisiologi Kerusakan Sendi:</strong> Pada <em>Septic Arthritis</em>, bakteri memicu pelepasan enzim proteolitik (matrix metalloproteinases) dari neutrofil dan sinoviosit yang dapat <strong>menghancurkan kartilago hialin secara ireversibel dalam 8–24 jam</strong>, serta meningkatkan tekanan intrakapsular yang menyumbat pembuluh darah epifisis (risiko AVN kaput femoris).",
-                    "<strong>Hubungan dengan Osteomielitis:</strong> Pada anak kecil (<18 bulan), pembuluh darah metafisis menembus lempeng pertumbuhan (<em>transphyseal vessels</em>) menuju epifisis. Selain itu, metafisis proksimal femur, humerus, radius, dan distal tibia bersifat <strong>intrakapsular</strong>, sehingga osteomielitis metafisis dapat pecah langsung ke dalam sendi dan memicu septic arthritis sekunder.",
-                    "<strong>Mikrobiologi Tersering:</strong><br>• Semua kelompok usia: <strong>Staphylococcus aureus</strong> (termasuk MRSA) adalah penyebab utama.<br>• Usia 6 bulan – 4 tahun (toddlers): Pertimbangkan juga <strong>Kingella kingae</strong> (kokobasilus Gram negatif yang sulit tumbuh pada kultur agar biasa; membutuhkan inokulasi botol kultur darah atau PCR)."
-                ],
-                workup: [
-                    "<strong>Kriteria Kocher (Membedakan Septic Arthritis Panggul vs Transient Synovitis):</strong><br>1. Demam > 38,5°C<br>2. Non-weight bearing (menolak menumpu beban)<br>3. ESR (LED) > 40 mm/jam<br>4. WBC > 12.000/µL<br>• <em>Interpretasi Probabilitas Septic Arthritis:</em> 1 kriteria = 3%; 2 kriteria = 40%; 3 kriteria = 93%; <strong>4 kriteria = 99,6%</strong>. Penambahan <strong>CRP > 20 mg/L</strong> meningkatkan akurasi diagnostik secara signifikan.",
-                    "<strong>USG Panggul & Aspirasi Sendi (Arthrocentesis):</strong> USG mendeteksi efusi sendi. Lakukan aspirasi cairan sinovial (analisis hitung sel, pengecatan Gram, kultur) <strong>SEBELUM</strong> memberikan antibiotik IV (kecuali pasien sepsis berat/syok). Cairan sinovial septic arthritis: <strong>WBC > 50.000/µL</strong> dengan dominasi PMN > 75–90%."
-                ],
-                management: [
-                    "<strong>Septic Arthritis:</strong> Merupakan <strong>emergensi bedah ortopedi</strong> → segera lakukan <strong>Surgical Arthrotomy / Arthroscopic Irrigation & Debridement (Washout)</strong> diikuti antibiotik IV empiris (misal <em>Cefazolin</em> atau <em>Vancomycin</em> bila prevalensi MRSA tinggi; tambahkan sefalosporin generasi ke-3 pada anak usia <4 tahun untuk cakupan <em>Kingella kingae</em>).",
-                    "<strong>Acute Hematogenous Osteomyelitis (Tanpa Abses Subperiosteal/Intrameduler):</strong> Terapi utama adalah <strong>antibiotik IV empiris</strong> sesuai kultur darah/aspirasi tulang. Operasi (debridemen/drilling) diindikasikan bila terdapat abses subperiosteal, sekuestrum, atau tidak ada perbaikan klinis/CRP setelah 48–72 jam terapi antibiotik."
-                ],
-                redFlags: [
-                    "<strong>Memberikan Antibiotik Sebelum Aspirasi pada Pasien Stabil:</strong> Dapat mensterilkan kultur cairan sendi sehingga menyulitkan pemilihan antibiotik definitif.",
-                    "<strong>Menganggap Pincang + Demam Tinggi sebagai Transient Synovitis:</strong> Transient synovitis bersifat afebris atau demam ringan (<38°C) dengan parameter inflamasi normal/minimal."
-                ],
-                mcq: {
-                    question: "Seorang anak usia 3 tahun datang dengan demam 39,2°C, menolak berjalan pada tungkai kiri, leukosit 15.800/µL, LED 48 mm/jam, dan CRP 55 mg/L. USG panggul kiri menunjukkan efusi sendi moderat, dan hasil aspirasi cairan sinovial menunjukkan leukosit 78.000/µL (92% PMN). Tatalaksana definitif yang paling tepat adalah?",
-                    options: [
-                        "Observasi dan pemberian ibuprofen oral selama 48 jam untuk transient synovitis",
-                        "Pemberian antibiotik oral dan traksi kulit (skin traction) di rumah",
-                        "Emergent surgical arthrotomy/washout sendi panggul kiri diikuti antibiotik intravena",
-                        "Pemasangan hip spica cast selama 4 minggu"
-                    ],
-                    correctIndex: 2,
-                    explanation: "Pasien memenuhi keempat kriteria Kocher (probabilitas 99,6%) dan hasil analisis cairan sinovial menunjukkan WBC > 50.000/µL dengan dominasi PMN (>90%), yang mengonfirmasi diagnosis Septic Arthritis. Diperlukan dekompresi dan pencucian sendi bedah (surgical arthrotomy/washout) segera untuk mencegah destruksi kartilago dan AVN kaput femoris."
-                },
-                references: [
-                    "Kocher MS, Zurakowski D, Kasser JR. Differentiating between septic arthritis and transient synovitis of the hip in children. J Bone Joint Surg Am.",
-                    "Rockwood and Wilkins' Fractures in Children, 9th Ed. — Musculoskeletal Infections.",
-                    "Pediatric Orthopaedic Society of North America (POSNA) — Septic Arthritis & Osteomyelitis Guidelines."
-                ]
-            },
-            {
-                id: "case-11",
-                number: "11",
+                id: "case-08",
+                number: "08",
                 title: "Ankle Fracture & Syndesmotic Injury",
                 subtitle: "Danis-Weber & Lauge-Hansen • Maisonneuve Fracture & Mortise View",
-                category: "Lower Extremity",
-                highYieldBadge: "Ankle Stability & Maisonneuve Trap",
+                category: "Lower Extremity & Pelvis",
+                skdiBadge: "SKDI 3B • High-Yield PPDS",
+                highYieldBadge: "Maisonneuve Trap & Mortise View",
+                kisiKisiPPDS: "Jebakan klasik ujian tulis & OSCE: (1) Maisonneuve fracture (cedera struktur medial ankle + robekan sindesmosis + fraktur 1/3 proksimal fibula — wajib palpasi leher fibula!), (2) Klasifikasi Danis-Weber A/B/C & Lauge-Hansen (tersering Supination-External Rotation / SER), (3) Parameter Mortise view (Medial Clear Space ≤ 4 mm, Tibiofibular Clear Space < 6 mm), dan (4) Ottawa Ankle Rules.",
                 summary: "Klasifikasi Weber & Lauge-Hansen, Ottawa Ankle Rules, evaluasi sindesmosis pada Mortise view, dan jebakan Maisonneuve fracture.",
                 vignette: "Laki-laki 30 tahun mengalami cedera pergelangan kaki kanan saat bermain futsal dengan mekanisme kaki terputar keluar (external rotation). Pada pemeriksaan fisik didapatkan nyeri tekan pada malleolus medialis dan sepanjang membran interoseus anterior, serta nyeri tekan tajam di area proksimal fibula kanan (dekat caput fibulae). Foto polos pergelangan kaki hanya menunjukkan fraktur avulsi malleolus medialis dan pelebaran medial clear space tanpa fraktur fibula distal.",
-                pathoanatomy: [
-                    "<strong>Cincin Stabilitas Pergelangan Kaki (Ankle Ring):</strong> Terdiri dari malleolus lateralis, sindesmosis tibiofibular distal (AITFL, PITFL, IOL), malleolus medialis, dan ligamentum deltoideum. Gangguan pada 1 sisi cincin (isolated lateral malleolus tanpa cedera medial) masih stabil; gangguan pada <strong>≥ 2 sisi cincin</strong> bersifat tidak stabil.",
+                classificationAndMechanism: [
                     "<strong>Klasifikasi Danis-Weber (Berdasarkan Level Fraktur Fibula terhadap Sindesmosis):</strong><br>• <em>Weber A:</em> Di bawah plafond/sindesmosis (infrasyndesmotic) — biasanya stabil.<br>• <em>Weber B:</em> Setinggi plafond/sindesmosis (transsyndesmotic) — stabilitas bergantung pada integritas struktur medial (deltoid/malleolus medialis).<br>• <em>Weber C:</em> Di atas sindesmosis (suprasyndesmotic) — hampir selalu disertai robekan sindesmosis dan tidak stabil.",
                     "<strong>Maisonneuve Fracture:</strong> Varian Weber C (mekanisme Pronation-External Rotation / PER) berupa cedera struktur medial (fraktur malleolus medialis atau ruptur ligamen deltoid), robekan membran interoseus & sindesmosis, disertai <strong>fraktur spiral 1/3 proksimal fibula</strong>.",
-                    "<strong>Klasifikasi Lauge-Hansen:</strong> Kata pertama = posisi kaki saat cedera (Supination/Pronation); kata kedua = arah gaya deformitas pada talus (Adduction, Abduction, External Rotation). Tersering: <em>Supination-External Rotation (SER)</em>."
+                    "<strong>Klasifikasi Lauge-Hansen:</strong> Kata pertama = posisi kaki saat cedera (Supination/Pronation); kata kedua = arah gaya pada talus. Tersering: <em>Supination-External Rotation (SER)</em>."
                 ],
-                workup: [
-                    "<strong>Ottawa Ankle Rules:</strong> Foto rontgen ankle diperlukan jika nyeri di zona malleolus disertai salah satu: nyeri tekan tulang di tepi posterior/ujung malleolus lateralis/medialis (6 cm distal), atau tidak mampu menumpu berat badan (4 langkah) baik saat kejadian maupun di IGD.",
-                    "<strong>3 Proyeksi Wajib Ankle:</strong> AP, Lateral, dan <strong>Mortise View (15°–20° internal rotation)</strong>.",
-                    "<strong>Parameter Mortise View Normal:</strong><br>• <em>Medial Clear Space (MCS):</em> <strong>≤ 4 mm</strong> (dan setara dengan superior tibiotalar clear space; MCS > 4–5 mm menandakan talar shift akibat robekan ligamen deltoid).<br>• <em>Tibiofibular Clear Space:</em> <strong>< 6 mm</strong> (diukur 1 cm di atas plafond).<br>• <em>Tibiofibular Overlap:</em> <strong>> 1 mm</strong> pada Mortise view (> 6 mm pada AP view)."
+                examAndRedFlags: [
+                    "<strong>Ottawa Ankle Rules:</strong> Foto rontgen ankle diindikasikan bila nyeri di zona malleolus disertai nyeri tekan tulang pada 6 cm distal tepi posterior/ujung malleolus lateralis/medialis, atau tidak mampu menumpu 4 langkah.",
+                    "<strong>Parameter Mortise View (15°–20° Internal Rotation):</strong><br>• <em>Medial Clear Space (MCS):</em> <strong>≤ 4 mm</strong> (MCS > 4–5 mm menandakan talar shift akibat robekan ligamen deltoid).<br>• <em>Tibiofibular Clear Space:</em> <strong>< 6 mm</strong> (diukur 1 cm di atas plafond).<br>• <em>Tibiofibular Overlap:</em> <strong>> 1 mm</strong> pada Mortise view (> 6 mm pada AP view).",
+                    "<strong>RED FLAG — Missed Maisonneuve Fracture:</strong> Setiap menemukan fraktur malleolus medialis terisolasi atau pelebaran MCS tanpa fraktur fibula distal, <strong>wajib palpasi fibula proksimal dan minta foto Rontgen cruris (full-length tibia/fibula)</strong>."
                 ],
                 management: [
-                    "<strong>Reduksi Tertutup & Bidai Segera di IGD:</strong> Jika terdapat fraktur-dislokasi ankle (talar shift berat), segera lakukan reduksi tertutup dan pemasangan <em>posterior + U-slab splint</em> sebelum mengirim pasien ke radiologi/bangsal untuk mencegah nekrosis kulit medial akibat tekanan fragmen tulang.",
-                    "<strong>Konservatif (Walking Boot / Short Leg Cast):</strong> Hanya untuk fraktur <strong>stabil</strong> (Weber A atau Weber B terisolasi tanpa talar shift pada gravity/weight-bearing radiograph).",
-                    "<strong>Operatif (ORIF Malleolus + Syndesmotic Screw / Suture-Button):</strong> Diindikasikan pada semua fraktur bi-/trimalleolar, Weber B dengan talar shift (MCS > 4 mm), dan semua fraktur Weber C (termasuk Maisonneuve). Pada Maisonneuve, fibula proksimal tidak perlu di-plate (risiko cedera n. peroneus communis), cukup dilakukan reduksi dan fiksasi <strong>sindesmosis distal</strong>."
-                ],
-                redFlags: [
-                    "<strong>Missed Maisonneuve Fracture:</strong> Setiap kali menemukan fraktur malleolus medialis terisolasi atau pelebaran medial clear space tanpa fraktur fibula distal, <strong>wajib palpasi fibula proksimal dan minta foto Rontgen cruris (full-length tibia/fibula)</strong>.",
-                    "<strong>Skin Blistering & Soft Tissue Compromise:</strong> Fraktur-dislokasi ankle yang terlambat direduksi menyebabkan blister hemoragik yang menunda operasi definitif hingga 1–2 minggu."
+                    "<strong>Tatalaksana Awal IGD (SKDI 3B):</strong> Jika terdapat fraktur-dislokasi ankle (talar shift berat), segera lakukan reduksi tertutup dan pemasangan <em>posterior + U-slab splint</em> sebelum mengirim pasien ke radiologi/bangsal untuk mencegah nekrosis kulit medial dan skin blistering.",
+                    "<strong>Terapi Konservatif:</strong> Walking boot / short leg cast hanya untuk fraktur <strong>stabil</strong> (Weber A atau Weber B terisolasi tanpa talar shift pada stress/weight-bearing radiograph).",
+                    "<strong>Terapi Definitif (ORIF):</strong> Semua fraktur bi-/trimalleolar, Weber B dengan talar shift (MCS > 4 mm), dan semua Weber C. Pada <strong>Maisonneuve fracture</strong>, fibula proksimal tidak di-plate (risiko cedera <em>n. peroneus communis</em>), cukup reduksi dan fiksasi <strong>sindesmosis distal</strong> + malleolus medialis."
                 ],
                 mcq: {
                     question: "Seorang pemain bola mengalami cedera pergelangan kaki. Foto Rontgen ankle menunjukkan pelebaran medial clear space (6 mm) dan fraktur malleolus medialis, tetapi tidak tampak fraktur pada fibula distal. Pemeriksaan fisik menemukan nyeri tekan pada leher fibula proksimal. Apakah diagnosis dan prinsip tatalaksana bedah yang tepat?",
@@ -743,39 +709,38 @@
                         "Jones fracture; fiksasi screw intrameduler metatarsal V"
                     ],
                     correctIndex: 1,
-                    explanation: "Kombinasi cedera struktur medial ankle, robekan sindesmosis/membran interoseus, dan fraktur fibula proksimal disebut Maisonneuve fracture (varian Weber C). Tatalaksana bedahnya berfokus pada pemulihan panjang/rotasi fibula dan fiksasi sindesmosis distal (serta malleolus medialis), sedangkan fibula proksimal dibiarkan menyatu sendiri untuk menghindari cedera nervus peroneus communis."
+                    explanation: "Kombinasi cedera struktur medial ankle, robekan sindesmosis/membran interoseus, dan fraktur fibula proksimal disebut Maisonneuve fracture (varian Weber C). Tatalaksana bedahnya berfokus pada fiksasi sindesmosis distal dan malleolus medialis, sedangkan fibula proksimal dibiarkan menyatu sendiri untuk menghindari cedera nervus peroneus communis."
                 },
                 references: [
-                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Chapter: Ankle Fractures.",
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Ankle Fractures.",
                     "Miller's Review of Orthopaedics, 8th Ed. — Foot and Ankle Trauma.",
-                    "AO Surgery Reference — Malleolar Fractures (Weber & Lauge-Hansen)."
+                    "AO Surgery Reference — Malleolar Fractures."
                 ]
             },
             {
-                id: "case-12",
-                number: "12",
+                id: "case-09",
+                number: "09",
                 title: "Pelvic Ring Injury & Hemorrhagic Shock (ATLS)",
                 subtitle: "Young-Burgess Classification • Trochanteric Pelvic Binder & Corona Mortis",
-                category: "Spine & Pelvis",
-                highYieldBadge: "Life-Threatening ATLS Trauma",
+                category: "Lower Extremity & Pelvis",
+                skdiBadge: "SKDI 3B • Life-Threatening ATLS",
+                highYieldBadge: "Trochanteric Binder & Venous Bleeding",
+                kisiKisiPPDS: "Soal wajib ATLS & Ujian Masuk PPDS: (1) Sumber utama perdarahan fraktur pelvis (80–90% pleksus vena presakral/perivesikal & tulang kanselus; 10–20% arteri iliaka interna seperti a. glutea superior/pudenda interna), (2) Lokasi pemasangan pelvic binder yang benar (setinggi TROKANTER MAYOR, bukan krista iliaka!), (3) Corona mortis (anastomosis a./v. obturatoria dengan a./v. epigastrica inferior/iliaka eksterna), dan (4) Kontraindikasi pemasangan kateter Foley sebelum RUG pada trauma uretra.",
                 summary: "Klasifikasi Young-Burgess, pemasangan pelvic binder yang benar di level trokanter mayor, corona mortis, dan algoritma kontrol perdarahan (PPP vs Angioembolisasi).",
                 vignette: "Laki-laki 38 tahun korban kecelakaan mobil adu banteng dibawa ke IGD dalam kondisi syok hemoragik (TD 78/45 mmHg, Nadi 138x/menit, akral dingin). Pada primary survey, ditemukan instabilitas mekanis saat palpasi lembut krista iliaka (tidak dilakukan spring test berulang), hematom di skrotum, dan darah pada meatus uretra eksternus. Foto Rontgen pelvis AP di ruang resusitasi menunjukkan pelebaran simfisis pubis sebesar 4,5 cm disertai pelebaran sendi sakroiliaka anterior bilateral (Open-Book Pelvis).",
-                pathoanatomy: [
-                    "<strong>Sumber Perdarahan Utama:</strong> Pada fraktur cincin pelvis, <strong>80–90% perdarahan berasal dari pleksus vena presakral/perivesikal dan permukaan tulang kanselus yang fraktur</strong>, sedangkan 10–20% berasal dari cabang arteri iliaka interna (terutama <em>a. glutea superior</em> dan <em>a. pudenda interna</em>).",
-                    "<strong>Corona Mortis ('Crown of Death'):</strong> Anastomosis vaskular retropubik antara <em>a./v. obturatoria</em> dan <em>a./v. epigastrica inferior</em> (atau iliaka eksterna) yang melintas di atas ramus pubis superior. Robekan pada struktur ini dapat memicu perdarahan masif yang sulit dikontrol.",
-                    "<strong>Klasifikasi Young-Burgess (Berdasarkan Arah Gaya):</strong><br>• <em>Anterior-Posterior Compression (APC I, II, III):</em> 'Open-book' injury. APC II = diastasis simfisis > 2,5 cm + robekan ligamen sacrospinous & anterior SI; APC III = disrupsi total sendi SI anterior & posterior (instabilitas rotasional & vertikal).<br>• <em>Lateral Compression (LC I, II, III):</em> Paling sering (tabrakan samping); LC III = 'Windswept pelvis'.<br>• <em>Vertical Shear (VS):</em> Jatuh dari ketinggian; hemipelvis bergeser ke kranial (instabilitas total).<br>• <em>Combined Mechanism (CM).</em>"
+                classificationAndMechanism: [
+                    "<strong>Sumber Perdarahan Utama:</strong> Pada fraktur cincin pelvis, <strong>80–90% perdarahan berasal dari pleksus vena presakral/perivesikal dan tulang kanselus</strong>, sedangkan 10–20% berasal dari cabang arteri iliaka interna (terutama <em>a. glutea superior</em> dan <em>a. pudenda interna</em>).",
+                    "<strong>Corona Mortis ('Crown of Death'):</strong> Anastomosis vaskular retropubik antara <em>a./v. obturatoria</em> dan <em>a./v. epigastrica inferior</em> (atau iliaka eksterna) di atas ramus pubis superior.",
+                    "<strong>Klasifikasi Young-Burgess (Berdasarkan Arah Gaya):</strong><br>• <em>Anterior-Posterior Compression (APC I, II, III):</em> 'Open-book' injury. APC II = diastasis simfisis > 2,5 cm + robekan ligamen sacrospinous & anterior SI; APC III = disrupsi total sendi SI anterior & posterior.<br>• <em>Lateral Compression (LC I, II, III):</em> Paling sering (tabrakan samping); LC III = 'Windswept pelvis'.<br>• <em>Vertical Shear (VS):</em> Jatuh dari ketinggian; hemipelvis bergeser ke kranial (instabilitas total)."
                 ],
-                workup: [
-                    "<strong>Primary Survey ATLS:</strong> Jangan melakukan <em>pelvic rock/spring test</em> berulang karena dapat memecah bekuan darah (clot) dan memperparah perdarahan.",
-                    "<strong>Pencitraan:</strong> AP Pelvis di ruang resusitasi, <strong>eFAST</strong> (menyingkirkan perdarahan intraperitoneal bersamaan), dan <strong>CT Angiography (CTA) Pelvis</strong> (bila hemodinamik stabil) untuk mendeteksi <em>arterial contrast blush</em>. Lakukan <em>Retrograde Urethrogram (RUG)</em> sebelum memasang kateter Foley bila ada darah di meatus uretra atau high-riding prostate."
+                examAndRedFlags: [
+                    "<strong>Primary Survey ATLS:</strong> Jangan melakukan <em>pelvic rock/spring test</em> berulang karena dapat memecah bekuan darah (clot) yang sudah terbentuk.",
+                    "<strong>Pencitraan:</strong> AP Pelvis di ruang resusitasi, <strong>eFAST</strong>, dan <strong>CTA Pelvis</strong> (bila stabil). Lakukan <em>Retrograde Urethrogram (RUG)</em> sebelum kateter Foley bila ada darah di meatus uretra atau hematom perineum.",
+                    "<strong>RED FLAG — Pelvic Binder Terlalu Tinggi:</strong> Pemasangan di krista iliaka tidak akan menutup simfisis pubis dan justru memperburuk deformitas."
                 ],
                 management: [
-                    "<strong>Resusitasi & Penutupan Volume Pelvis Segera (IGD):</strong><br>1. Aktivasi <em>Massive Transfusion Protocol (MTP)</em> (rasio 1:1:1 PRC:FFP:Platelet) + <em>Tranexamic Acid (TXA)</em> 1 g IV dalam 3 jam pertama.<br>2. <strong>Pemasangan Pelvic Binder / Sheet Wrap:</strong> HARUS dipasang tepat di level <strong>Trokanter Mayor (Greater Trochanters)</strong> — BUKAN di krista iliaka (agar efektif menutup volume pelvis dan mereduksi simfisis pubis) — disertai rotasi interna kedua tungkai bawah.",
-                    "<strong>Manajemen Hemodinamik Tidak Stabil (Transient/Non-Responder):</strong><br>• Bawa segera ke kamar operasi untuk <strong>Preperitoneal Pelvic Packing (PPP)</strong> + <strong>External Fixation</strong> (atau C-Clamp untuk instabilitas posterior) guna menamponade perdarahan vena.<br>• Bila hemodinamik tetap tidak stabil pasca-PPP atau terdapat arterial blush pada CTA → lanjutkan dengan <strong>Interventional Radiology Angioembolization</strong>."
-                ],
-                redFlags: [
-                    "<strong>Pelvic Binder Terpasang Terlalu Tinggi (di Krista Iliaka):</strong> Tidak akan menutup simfisis pubis yang terbuka dan justru dapat memperburuk deformitas.",
-                    "<strong>Blind Foley Catheterization pada Trauma Uretra:</strong> Darah di meatus uretra, hematom perineum/skrotum (butterfly hematoma) adalah kontraindikasi pemasangan kateter transuretra sebelum dilakukan RUG."
+                    "<strong>Tatalaksana Awal IGD (ATLS & SKDI 3B):</strong><br>1. Resusitasi cairan seimbang + aktivasi <em>Massive Transfusion Protocol (MTP)</em> (rasio 1:1:1 PRC:FFP:Platelet) + <em>Tranexamic Acid (TXA)</em> 1 g IV dalam 3 jam pertama.<br>2. <strong>Pemasangan Pelvic Binder / Sheet Wrap:</strong> HARUS dipasang tepat melingkari kedua <strong>Trokanter Mayor (Greater Trochanters)</strong> disertai rotasi interna kedua tungkai bawah untuk mengurangi volume rongga pelvis.",
+                    "<strong>Terapi Definitif Hemodinamik Tidak Stabil:</strong> Bawa segera ke kamar operasi untuk <strong>Preperitoneal Pelvic Packing (PPP)</strong> + <strong>External Fixation / C-Clamp</strong> guna menamponade perdarahan vena; bila tetap tidak stabil atau terdapat <em>arterial blush</em> pada CTA → lanjutkan <strong>Angioembolization</strong>."
                 ],
                 mcq: {
                     question: "Seorang korban kecelakaan lalu lintas datang dengan syok hemoragik dan foto Rontgen pelvis AP menunjukkan open-book pelvic fracture (APC Type II) dengan diastasis simfisis pubis 4 cm. Di lokasi anatomis manakah pelvic binder harus dipasang agar memberikan efek reduksi dan tamponade yang optimal?",
@@ -789,9 +754,306 @@
                     explanation: "Pelvic binder wajib dipasang tepat melingkari kedua Trokanter Mayor (greater trochanters) dan dikencangkan hingga kedua trokanter terkompresi ke medial. Pemasangan terlalu tinggi di krista iliaka tidak efektif mereduksi simfisis pubis dan tidak mengurangi volume rongga pelvis."
                 },
                 references: [
-                    "ATLS Student Course Manual, 10th Ed. — Chapter: Musculoskeletal Trauma (Pelvic Fractures).",
+                    "ATLS Student Course Manual, 10th Ed. — Musculoskeletal Trauma (Pelvic Fractures).",
                     "Burgess AR, et al. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma.",
-                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Chapter: Fractures of the Pelvic Ring."
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Fractures of the Pelvic Ring."
+                ]
+            },
+
+            // --- PILLAR 4: PEDIATRIC ORTHOPAEDICS (CASES 10 - 12) ---
+            {
+                id: "case-10",
+                number: "10",
+                title: "Pediatric Supracondylar Humerus Fracture",
+                subtitle: "Gartland Classification • AIN Injury & Pink Pulseless Hand Algorithm",
+                category: "Pediatric Orthopaedics",
+                skdiBadge: "SKDI 3B • High-Yield PPDS",
+                highYieldBadge: "AIN 'OK Sign' & Pink Pulseless Hand",
+                kisiKisiPPDS: "Kasus anak paling sering keluar di ujian masuk PPDS: (1) Klasifikasi Gartland I–IV (Type IV = instabilitas multidirectional intraoperatif), (2) Saraf paling sering cedera pada extension type adalah Anterior Interosseous Nerve / AIN ('OK sign'), sedangkan pada flexion type adalah n. ulnaris, (3) Anterior Humeral Line (memotong 1/3 tengah capitellum) & Baumann's Angle (64°–81°), serta (4) Algoritma Pink Pulseless Hand (CRPP emergensi dulu, bukan eksplorasi vaskular sebelum reduksi!).",
+                summary: "Klasifikasi Gartland I–IV, pemeriksaan Anterior Interosseous Nerve ('OK sign'), Baumann's angle, dan algoritma Pink Pulseless Hand.",
+                vignette: "Anak laki-laki usia 6 tahun dibawa orang tuanya ke IGD setelah jatuh dari ayunan dengan bertumpu pada tangan yang terentang (FOOSH). Siku kiri tampak bengkak hebat, nyeri, dan terdapat memar di lipat siku anterior (pucker sign). Anak tidak mampu membuat tanda 'OK' dengan ibu jari dan jari telunjuknya. Tangan kiri teraba hangat, capillary refill time (CRT) < 2 detik, namun pulsasi a. radialis tidak teraba.",
+                classificationAndMechanism: [
+                    "<strong>Mekanisme Cedera:</strong> 95–98% adalah <strong>Extension-type</strong> (jatuh siku hiperekstensi); 2–5% <em>Flexion-type</em> (jatuh siku fleksi, berisiko mencederai <strong>n. ulnaris</strong>).",
+                    "<strong>Klasifikasi Gartland (Extension Type):</strong><br>• <em>Type I:</em> Nondisplaced (tampak <em>posterior fat pad sign</em>).<br>• <em>Type II:</em> Displaced dengan korteks posterior masih intak.<br>• <em>Type III:</em> Displaced total tanpa kontak kortikal.<br>• <em>Type IV:</em> Instabilitas multidirectional (periosteum anterior & posterior robek total — didiagnosis intraoperatif).",
+                    "<strong>Cedera Saraf Paling Sering:</strong> Pada extension-type adalah <strong>Anterior Interosseous Nerve (AIN)</strong> — cabang murni motorik n. medianus yang mempersarafi <em>FPL</em> (fleksi IP ibu jari) dan <em>FDP telunjuk</em> (fleksi DIP telunjuk)."
+                ],
+                examAndRedFlags: [
+                    "<strong>Parameter Radiografis Kritis:</strong><br>• <em>Anterior Humeral Line (AHL):</em> Pada foto lateral sejati, garis korteks anterior humerus harus memotong <strong>sepertiga tengah capitellum</strong>.<br>• <em>Baumann's Angle:</em> Sudut pada foto AP antara aksis panjang diafisis humerus dan garis fisis kondilus lateral (normal <strong>64°–81°</strong>; perubahan >5° menandakan malreduksi cubitus varus).",
+                    "<strong>RED FLAG — Forearm Compartment Syndrome:</strong> Pembengkakan hebat fossa cubiti (pucker sign) dan imobilisasi siku hiperfleksi (>90°) memicu <em>Volkmann ischemic contracture</em>."
+                ],
+                management: [
+                    "<strong>Tatalaksana Awal IGD (SKDI 3B):</strong> Dokumentasi status saraf (AIN, radial, ulnar) & perfusi tangan (warna, suhu, CRT, pulse oximetry), pasang posterior splint dengan siku <strong>fleksi ringan 30°–45°</strong> (JANGAN hiperfleksi 90° saat bengkak hebat), dan rujuk segera ke Sp.OT.",
+                    "<strong>Terapi Definitif:</strong> Gartland Type I → long arm cast 3 minggu. Gartland Type II, III, IV → <strong>Closed Reduction and Percutaneous Pinning (CRPP)</strong> dengan 2–3 lateral-entry K-wires.",
+                    "<strong>Algoritma Pink Pulseless Hand (Tangan Hangat, Nadi Tidak Teraba):</strong> Segera lakukan <strong>CRPP emergensi</strong> → evaluasi ulang perfusi. Bila tangan tetap hangat/merah muda (sirkulasi kolateral adekuat), observasi ketat di RS; bila tangan menjadi <strong>pucat/dingin (white pulseless hand)</strong> pasca reduksi → eksplorasi a. brakhialis emergensi."
+                ],
+                mcq: {
+                    question: "Seorang anak usia 7 tahun dengan fraktur suprakondiler humerus tipe ekstensi Gartland III menjalani pemeriksaan fisik. Tangan teraba hangat dan merah muda dengan CRT 1,5 detik, tetapi nadi radialis tidak teraba. Anak juga tidak mampu memfleksikan sendi interfalang distal (DIP) jari telunjuk dan interfalang (IP) ibu jari. Manakah pernyataan yang paling tepat mengenai kondisi pasien ini?",
+                    options: [
+                        "Cedera terjadi pada nervus ulnaris dan dibutuhkan angiografi CT sebelum ke kamar operasi",
+                        "Cedera terjadi pada Anterior Interosseous Nerve (AIN) dan pasien harus segera menjalani CRPP emergensi",
+                        "Cedera terjadi pada nervus radialis dan cukup dipasang long arm cast di IGD",
+                        "Eksplorasi arteri brakhialis harus dilakukan sebelum reduksi tulang"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Ketidakmampuan fleksi DIP telunjuk (FDP) dan IP ibu jari (FPL) adalah tanda khas cedera Anterior Interosseous Nerve (AIN), saraf yang paling sering cedera pada fraktur suprakondiler tipe ekstensi. Pada 'Pink Pulseless Hand', langkah pertama yang wajib dilakukan adalah CRPP emergensi untuk membebaskan jepitan/spasme arteri brakhialis."
+                },
+                references: [
+                    "Rockwood and Wilkins' Fractures in Children, 9th Ed. — Supracondylar Fractures of the Distal Humerus.",
+                    "AAOS Clinical Practice Guideline: Management of Pediatric Supracondylar Humerus Fractures.",
+                    "Miller's Review of Orthopaedics, 8th Ed. — Pediatric Trauma."
+                ]
+            },
+            {
+                id: "case-11",
+                number: "11",
+                title: "Physeal Injuries (Salter-Harris) & Pediatric Septic Arthritis",
+                subtitle: "SALTER Mnemonic • Kocher Criteria & Urgent Joint Washout",
+                category: "Pediatric Orthopaedics",
+                skdiBadge: "SKDI 3B / 3A • High-Yield PPDS",
+                highYieldBadge: "Salter-Harris & Kocher Criteria",
+                kisiKisiPPDS: "Dua topik pediatri paling sering keluar bersamaan: (1) Klasifikasi Salter-Harris I–V (mnemonic SALTER: Straight across, Above, Lower, Through, ERasure/Crush; Type II paling sering, Type V prognosis growth arrest terburuk; lapisan fisis terlemah adalah Zona Hipertrofi), dan (2) Kriteria Kocher (Demam >38,5°C, Non-weight bearing, ESR >40, WBC >12.000) + CRP >20 mg/L untuk membedakan Septic Arthritis panggul vs Transient Synovitis.",
+                summary: "Klasifikasi lempeng pertumbuhan Salter-Harris I–V, kriteria Kocher untuk septic arthritis panggul anak, mikrobiologi Kingella kingae, dan urgensi arthrotomy.",
+                vignette: "Anak laki-laki usia 4 tahun dibawa ke IGD karena menolak berjalan dan menangis kesakitan setiap kali panggul kanannya digerakkan sejak 24 jam lalu. Suhu tubuh 39,1°C, nadi 132x/menit. Panggul kanan tertahan dalam posisi fleksi, abduksi, dan eksorotasi (posisi FABER untuk memaksimalkan volume kapsul sendi). Laboratorium: Leukosit 16.400/µL, LED (ESR) 54 mm/jam, dan CRP 68 mg/L.",
+                classificationAndMechanism: [
+                    "<strong>Klasifikasi Salter-Harris (Cedera Lempeng Pertumbuhan / Physis — Zona Terlemah: Zona Hipertrofi):</strong><br>• <em>Type I (S - Straight across):</em> Garis fraktur lurus melewati fisis saja (prognosis baik).<br>• <em>Type II (A - Above):</em> Melewati fisis & metafisis dengan fragmen segitiga <strong>Thurston-Holland</strong> (<strong>paling sering</strong>, ~75%).<br>• <em>Type III (L - Lower):</em> Melewati fisis & epifisis (intra-artikular, contoh: <em>Tillaux fracture</em>).<br>• <em>Type IV (TE - Through Everything):</em> Melewati metafisis, fisis, dan epifisis (intra-artikular, contoh: <em>Triplane fracture</em> & fraktur kondilus lateralis humerus — butuh reduksi anatomis).<br>• <em>Type V (R - ERasure/Crush):</em> Cedera kompresi fisis (risiko tertinggi <strong>premature physeal arrest / bar formation</strong>).",
+                    "<strong>Patofisiologi Septic Arthritis:</strong> Enzim proteolitik neutrofil dan bakteri (tersering <em>Staphylococcus aureus</em>; pada usia 6 bln–4 thn juga pertimbangkan <em>Kingella kingae</em>) menghancurkan kartilago hialin secara ireversibel dalam <strong>8–24 jam</strong> dan memicu AVN kaput femoris akibat tamponade intrakapsular."
+                ],
+                examAndRedFlags: [
+                    "<strong>Kriteria Kocher (Septic Arthritis Panggul vs Transient Synovitis):</strong> (1) Demam > 38,5°C, (2) Non-weight bearing, (3) ESR > 40 mm/jam, (4) WBC > 12.000/µL. Memenuhi 3 kriteria = probabilitas 93%; <strong>4 kriteria = 99,6%</strong>. Tambahkan <strong>CRP > 20 mg/L</strong>.",
+                    "<strong>Aspirasi Cairan Sinovial (Arthrocentesis):</strong> Lakukan <strong>SEBELUM</strong> antibiotik IV (kecuali syok sepsis). Septic arthritis: <strong>WBC > 50.000/µL</strong> dengan PMN > 75–90%.",
+                    "<strong>RED FLAG — Memberikan Antibiotik Sebelum Aspirasi Sendi pada Pasien Stabil:</strong> Mensterilkan kultur cairan sendi dan menyulitkan eradikasi infeksi."
+                ],
+                management: [
+                    "<strong>Tatalaksana Awal IGD (SKDI 3B/3A):</strong> Stabilisasi hemodinamik, ambil kultur darah + panel inflamasi (CBC, ESR, CRP), rujuk segera ke Sp.OT untuk USG-guided hip aspiration.",
+                    "<strong>Terapi Definitif Septic Arthritis:</strong> <strong>Emergent Surgical Arthrotomy / Arthroscopic Washout</strong> diikuti antibiotik IV empiris (<em>Cefazolin</em> atau <em>Vancomycin</em>; tambahkan sefalosporin gen-3 pada usia <4 tahun untuk cakupan <em>Kingella kingae</em>).",
+                    "<strong>Terapi Definitif Salter-Harris:</strong> Type I & II → closed reduction & cast (hati-hati manipulasi kasar berulang karena merusak sel germinal fisis). Type III & IV → ORIF anatomis (smooth K-wire / screw paralel terhadap fisis tanpa menyilang lempeng pertumbuhan)."
+                ],
+                mcq: {
+                    question: "Seorang anak usia 3 tahun datang dengan demam 39,2°C, menolak berjalan pada tungkai kiri, leukosit 15.800/µL, LED 48 mm/jam, dan CRP 55 mg/L. USG panggul kiri menunjukkan efusi sendi moderat, dan hasil aspirasi cairan sinovial menunjukkan leukosit 78.000/µL (92% PMN). Tatalaksana definitif yang paling tepat adalah?",
+                    options: [
+                        "Observasi dan pemberian ibuprofen oral selama 48 jam untuk transient synovitis",
+                        "Pemberian antibiotik oral dan traksi kulit (skin traction) di rumah",
+                        "Emergent surgical arthrotomy/washout sendi panggul kiri diikuti antibiotik intravena",
+                        "Pemasangan hip spica cast selama 4 minggu"
+                    ],
+                    correctIndex: 2,
+                    explanation: "Pasien memenuhi keempat kriteria Kocher (probabilitas 99,6%) dan hasil analisis cairan sinovial menunjukkan WBC > 50.000/µL dengan dominasi PMN (>90%), yang mengonfirmasi diagnosis Septic Arthritis. Diperlukan dekompresi dan pencucian sendi bedah (surgical arthrotomy/washout) segera."
+                },
+                references: [
+                    "Kocher MS, Zurakowski D, Kasser JR. Differentiating between septic arthritis and transient synovitis of the hip in children. J Bone Joint Surg Am.",
+                    "Rockwood and Wilkins' Fractures in Children, 9th Ed. — Physeal Injuries & Musculoskeletal Infections.",
+                    "Tachdjian's Pediatric Orthopaedics, 6th Ed."
+                ]
+            },
+            {
+                id: "case-12",
+                number: "12",
+                title: "DDH & Congenital Talipes Equinovarus (CTEV)",
+                subtitle: "Ortolani/Barlow & Pavlik Harness • Ponseti CAVE Sequence & Achilles Tenotomy",
+                category: "Pediatric Orthopaedics",
+                skdiBadge: "SKDI 2 / 3A • High-Yield PPDS",
+                highYieldBadge: "Ponseti CAVE & Ortolani/Barlow",
+                kisiKisiPPDS: "Pertanyaan klasik pediatri elektif di ujian tulis & wawancara PPDS: (1) Faktor risiko DDH '4F' (Female, First-born, Frank breech, Family history), (2) Tes Ortolani ('clunk' reduksi kaput ke asetabulum) vs Barlow (provokasi dislokasi), (3) Pencitraan DDH usia <4–6 bulan (USG Graf method) vs >6 bulan (AP Pelvis: Hilgenreiner, Perkin, Shenton line), (4) Deformitas CTEV & urutan koreksi Ponseti 'CAVE' (Cavus → Adductus → Varus → Equinus) dengan perc. Achilles tenotomy di akhir.",
+                summary: "Skrining DDH (Ortolani/Barlow, USG vs Rontgen) & Pavlik harness, serta prinsip koreksi Clubfoot/CTEV metode Ponseti (urutan CAVE).",
+                vignette: "Skenario A: Bayi perempuan baru lahir usia 2 minggu (anak pertama, lahir sungsang/frank breech) dibawa ke poli untuk skrining. Pada pemeriksaan panggul kiri teraba bunyi/sensasi 'clunk' saat panggul diabduksikan sambil mengangkat trokanter mayor ke anterior.\nSkenario B: Bayi laki-laki usia 1 bulan dibawa dengan kedua telapak kaki terputar ke dalam seperti stik golf sejak lahir dan kaku saat dikoreksi pasif.",
+                classificationAndMechanism: [
+                    "<strong>Developmental Dysplasia of the Hip (DDH):</strong> Spektrum instabilitas sendi panggul akibat kapsul longgar dan asetabulum dangkal. Faktor risiko klasik <strong>'4F'</strong>: <em>Female</em>, <em>First-born</em>, <em>Frank breech presentation</em>, dan <em>Family history</em> (serta oligohidramnion & bedong kaki lurus/tight swaddling).",
+                    "<strong>Congenital Talipes Equinovarus (CTEV / Clubfoot):</strong> Idiopatik pada >80% kasus (dapat pula sindromik: arthrogryposis, spina bifida). Memiliki 4 komponen deformitas <strong>'CAVE'</strong>:<br>• <em>Cavus:</em> Lengkungan arkus medial tinggi (plantarfleksi jari pertama).<br>• <em>Adductus:</em> Forefoot adduksi terhadap midfoot.<br>• <em>Varus:</em> Hindfoot (kalkaneus) inversi/varus.<br>• <em>Equinus:</em> Plantarfleksi pergelangan kaki akibat kontraktur tendon Achilles."
+                ],
+                examAndRedFlags: [
+                    "<strong>Pemeriksaan DDH:</strong><br>• <em>Ortolani Test (Out → In):</em> Mengabduksikan panggul yang terdislokasi untuk mereduksinya masuk kembali ke asetabulum (terasa palpable 'clunk').<br>• <em>Barlow Test (In → Out):</em> Mengadduksikan panggul dengan tekanan posterior lembut untuk memprovokasi dislokasi pada panggul yang tidak stabil.<br>• <em>Galeazzi Sign (Usia >3 bulan):</em> Perbedaan tinggi lutut saat panggul dan lutut difleksikan 90° (sisi dislokasi tampak lebih pendek).",
+                    "<strong>Pencitraan DDH:</strong> Usia <strong>< 4–6 bulan</strong> gunakan <strong>USG Panggul (Metode Graf: sudut alpha normal > 60°)</strong> karena kaput femoris masih berupa kartilago. Usia <strong>> 6 bulan</strong> gunakan <strong>Foto Polos Pelvis AP</strong> (garis Hilgenreiner, garis Perkin, Shenton's line, dan Acetabular Index < 25°–30°).",
+                    "<strong>RED FLAG — Koreksi Equinus Terlalu Dini pada CTEV:</strong> Memaksa dorsofleksi ankle sebelum koreksi Cavus, Adductus, dan Varus selesai akan menyebabkan <strong>rocker-bottom foot deformity</strong>."
+                ],
+                management: [
+                    "<strong>Tatalaksana DDH:</strong><br>• Usia <strong>0–6 bulan:</strong> <strong>Pavlik Harness</strong> (mempertahankan panggul dalam posisi fleksi 90°–100° dan abduksi aman 40°–50°; hindari abduksi berlebihan >60° karena risiko AVN kaput femoris).<br>• Usia <strong>6–18 bulan:</strong> Closed reduction di bawah anestesi + arthrogram + Hip Spica Cast.<br>• Usia <strong>> 18–24 bulan:</strong> Open reduction +/- femoral shortening & pelvic osteotomy (Salter/Pemberton).",
+                    "<strong>Tatalaksana CTEV (Metode Ponseti — Gold Standard):</strong><br>• Manipulasi lembut mingguan + pemasangan <em>long-leg cast</em> bertahap sesuai urutan mutlak <strong>C-A-V-E</strong> (<strong>C</strong>avus dulu dengan supinasi jari pertama → <strong>A</strong>dductus & <strong>V</strong>arus dengan abduksi kaki bertumpu pada kaput talus → terakhir <strong>E</strong>quinus).<br>• Sekitar 85–90% kasus memerlukan <strong>Percutaneous Achilles Tenotomy</strong> sebelum gips terakhir, dilanjutkan pemakaian <strong>Foot Abduction Brace (Denis Browne / Mitchell brace)</strong> selama 23 jam/hari (3 bulan pertama) lalu saat tidur hingga usia 4–5 tahun untuk mencegah relaps."
+                ],
+                mcq: {
+                    question: "Pada tatalaksana Congenital Talipes Equinovarus (CTEV / Clubfoot) menggunakan metode Ponseti, manakah urutan koreksi deformitas yang benar secara bertahap untuk mencegah komplikasi rocker-bottom foot?",
+                    options: [
+                        "Equinus → Varus → Adductus → Cavus",
+                        "Cavus → Adductus & Varus → Equinus",
+                        "Varus → Equinus → Cavus → Adductus",
+                        "Adductus → Equinus → Varus → Cavus"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Metode Ponseti mengikuti urutan CAVE: pertama mengoreksi Cavus (dengan mengangkat/supinasi metatarsal pertama agar sejajar dengan hindfoot), diikuti koreksi bersamaan Adductus dan Varus (mengabduksikan kaki dengan titik tumpu pada kaput talus), dan terakhir mengoreksi Equinus (sering membutuhkan tenotomi tendon Achilles perkutan)."
+                },
+                references: [
+                    "Tachdjian's Pediatric Orthopaedics, 6th Ed. — DDH & Idiopathic Clubfoot.",
+                    "Ponseti IV. Congenital Clubfoot: Fundamentals of Treatment, 2nd Ed.",
+                    "AAOS Clinical Practice Guideline: Detection and Nonoperative Management of Pediatric DDH."
+                ]
+            },
+
+            // --- PILLAR 5: SPINE & EMERGENCY NEUROLOGY (CASE 13) ---
+            {
+                id: "case-13",
+                number: "13",
+                title: "Cauda Equina Syndrome & Spinal Cord Injury",
+                subtitle: "CES Red Flags • ASIA Scale & Neurogenic vs Spinal Shock",
+                category: "Spine & Neuro",
+                skdiBadge: "SKDI 3B • True Spine Emergency",
+                highYieldBadge: "CES <24–48h & Neurogenic vs Spinal Shock",
+                kisiKisiPPDS: "Dua konsep krusial spine emergency di ujian PPDS & ATLS: (1) Cauda Equina Syndrome (retensi urin PVR > 200 mL, saddle anesthesia S2–S4, penurunan tonus sfingter ani → MRI emergensi & dekompresi < 24–48 jam), dan (2) Perbedaan Neurogenic Shock (gangguan otonom simpatis pada cedera ≥ T6: hipotensi + BRADIKARDIA + kulit hangat) vs Spinal Shock (hilangnya refleks medula spinalis sementara pasca trauma; berakhir ditandai kembalinya Bulbocavernosus Reflex dalam 24–48 jam).",
+                summary: "Red flags Cauda Equina Syndrome (retensi urin, saddle anesthesia), dekompresi <24–48 jam, serta perbedaan Neurogenic Shock vs Spinal Shock.",
+                vignette: "Laki-laki 42 tahun datang ke IGD dengan keluhan nyeri punggung bawah menjalar ke kedua tungkai (bilateral sciatica) sejak 2 hari lalu, disertai mati rasa di area selangkangan/bokong bagian dalam dan kesulitan berkemih sejak 8 jam terakhir. Pemeriksaan fisik: penurunan sensasi pinprick di dermatom S2–S4 (perianal), kelemahan dorsofleksi dan plantarfleksi kedua pergelangan kaki, serta penurunan tonus sfingter ani pada pemeriksaan colok dubur (DRE).",
+                classificationAndMechanism: [
+                    "<strong>Cauda Equina Syndrome (CES):</strong> Kompresi radiks saraf lumbosakral (L2–Co1) di bawah <em>conus medullaris</em> (L1–L2). Bersifat <strong>Lower Motor Neuron (LMN)</strong>. Etiologi tersering: HNP sentral masif pada <strong>L4–L5</strong> atau <strong>L5–S1</strong> (>45% kasus).",
+                    "<strong>Neurogenic Shock vs Spinal Shock (Sering Ditukar di Soal Ujian!):</strong><br>• <em>Neurogenic Shock (Hemodinamik):</em> Terjadi pada cedera medula spinalis servikal atau torakal tinggi (<strong>≥ T6</strong>) akibat hilangnya tonus simpatis dan dominasi parasimpatis (n. vagus) → trias: <strong>Hipotensi + Bradikardia + Akral hangat/kering</strong>.<br>• <em>Spinal Shock (Neurologis/Refleks):</em> Hilangnya seluruh fungsi motorik, sensorik, dan refleks di bawah level lesi secara sementara pasca trauma. Berakhirnya fase spinal shock ditandai dengan kembalinya <strong>Bulbocavernosus Reflex</strong> (biasanya dalam 24–48 jam)."
+                ],
+                examAndRedFlags: [
+                    "<strong>Pemeriksaan Fisik Wajib CES:</strong> Sensorik perianal (<em>saddle anesthesia</em> S2–S4), motorik L4–S1, <strong>Digital Rectal Examination (DRE)</strong> (tonus sfingter ani), dan <strong>Post-Void Residual (PVR)</strong> urin (<strong>PVR > 200 mL</strong> sangat spesifik untuk retensi urin neurogenik).",
+                    "<strong>ASIA Impairment Scale (SCI):</strong> A = Complete (tidak ada fungsi motorik/sensorik di S4–S5); B = Sensory incomplete; C = Motor incomplete (>50% otot kunci di bawah lesi kekuatan <3); D = Motor incomplete (≥50% otot kunci kekuatan ≥3); E = Normal.",
+                    "<strong>RED FLAG — Menunda MRI Lumbosacral:</strong> Pasien low back pain dengan retensi urin + saddle anesthesia tidak boleh dipulangkan; wajib MRI emergensi."
+                ],
+                management: [
+                    "<strong>Tatalaksana Awal IGD (SKDI 3B):</strong><br>• Pada <em>CES:</em> Pasang kateter urin (catat volume residu awal), analgetik, dan rujuk/konsul bedah spine segera untuk <strong>Emergent MRI Lumbosacral</strong>.<br>• Pada <em>Spinal Cord Injury + Neurogenic Shock:</em> Imobilisasi tulang belakang (C-collar + log-roll), pertahankan <strong>Mean Arterial Pressure (MAP) ≥ 85 mmHg</strong> selama 7 hari pertama (vasopresor seperti <em>Norepinephrine</em>) untuk menjaga perfusi medula spinalis, serta atropin bila bradikardia berat.",
+                    "<strong>Terapi Definitif CES:</strong> <strong>Emergent Surgical Decompression (Laminectomy + Discectomy) dalam waktu < 24–48 jam</strong> sejak onset gejala (idealnya < 24 jam sebelum fase CES-Incomplete berkembang menjadi CES-Retention)."
+                ],
+                mcq: {
+                    question: "Seorang pasien laki-laki 32 tahun mengalami fraktur-dislokasi vertebra C6–C7 akibat kecelakaan menyelam. Di IGD didapatkan tekanan darah 80/48 mmHg, nadi 48x/menit, akral teraba hangat, dan refleks bulbocavernosus belum muncul. Apakah penyebab gangguan hemodinamik pada pasien ini dan target tekanan darah yang harus dipertahankan?",
+                    options: [
+                        "Spinal shock; pertahankan tekanan darah sistolik > 80 mmHg dengan bolus kristaloid 4 liter",
+                        "Neurogenic shock akibat hilangnya tonus simpatis; pertahankan Mean Arterial Pressure (MAP) ≥ 85 mmHg",
+                        "Syok hipovolemik tersembunyi; berikan beta-blocker untuk menstabilkan nadi",
+                        "Autonomic dysreflexia; posisikan pasien duduk tegak dan berikan nifedipine"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Hipotensi disertai bradikardia dan akral hangat pada cedera medula spinalis di atas T6 merupakan gambaran klasik Neurogenic Shock akibat hilangnya output simpatis sementara tonus parasimpatis (vagus) tetap utuh. Pedoman neurotrauma/spine merekomendasikan mempertahankan MAP ≥ 85 mmHg selama 7 hari pertama untuk mencegah iskemia sekunder medula spinalis."
+                },
+                references: [
+                    "ATLS Student Course Manual, 10th Ed. — Spine and Spinal Cord Trauma.",
+                    "Miller's Review of Orthopaedics, 8th Ed. — Spine: Cauda Equina Syndrome & Spinal Cord Injury.",
+                    "AANS/CNS Joint Section on Disorders of the Spine — Acute Spinal Cord Injury Guidelines."
+                ]
+            },
+
+            // --- PILLAR 6: TUMOR, SPORTS & BASIC SCIENCE (CASES 14 - 16) ---
+            {
+                id: "case-14",
+                number: "14",
+                title: "Primary Bone Tumors & Enneking Staging",
+                subtitle: "Osteosarcoma vs Giant Cell Tumor vs Osteochondroma • Biopsy Principles",
+                category: "Tumor & Sports",
+                skdiBadge: "SKDI 2 • High-Yield PPDS",
+                highYieldBadge: "Codman Triangle, Soap-Bubble & Biopsy Rules",
+                kisiKisiPPDS: "Materi wajib muskuloskeletal onkologi di ujian PPDS: (1) Predileksi lokasi tumor tulang berdasarkan usia & anatomi: Epiphyseal = Giant Cell Tumor (dewasa muda fisis menutup, 'soap-bubble') & Chondroblastoma (anak); Metaphyseal = Osteosarcoma (bimodal usia 10–20 thn, sekitar lutut, 'Codman triangle' & 'Sunburst') & Osteochondroma (tumor jinak tersering, cartilage cap >2 cm curiga kondrosarkoma); Diaphyseal = Ewing Sarcoma ('onion-skin' & translokasi t(11;22)), (2) Enneking Staging, dan (3) Prinsip biopsi (insisi longitudinal searah jalur pendekatan bedah definitif, dilakukan oleh tim ahli bedah tumor!).",
+                summary: "Identifikasi radiografis & usia predileksi Osteosarcoma, Ewing Sarcoma, Giant Cell Tumor, dan Osteochondroma, serta prinsip biopsi tumor tulang.",
+                vignette: "Remaja laki-laki usia 16 tahun datang dengan keluhan nyeri tumpul di lutut kanan yang semakin memberat terutama pada malam hari (night pain) sejak 2 bulan lalu disertai benjolan keras di distal femur yang membesar progresif. Foto Rontgen lutut AP/Lateral menunjukkan lesi destruktif permeatif di metafisis distal femur dengan reaksi periosteal berbentuk pancaran sinar matahari (sunburst appearance) dan terangkatnya tepi periosteum (Codman triangle). Laboratorium menunjukkan peningkatan Alkaline Phosphatase (ALP) dan LDH.",
+                classificationAndMechanism: [
+                    "<strong>Pola Usia & Lokasi Anatomis Tumor Tulang Primer (Kunci Jawaban Soal Ujian):</strong><br>• <em>Epifisis (Ujung Tulang):</em> <strong>Giant Cell Tumor (GCT)</strong> pada usia 20–40 tahun (setelah fisis menutup; lesi litik eksentrik 'soap-bubble' hingga tulang subkondral; jinak namun agresif lokal & dapat bermetastasis ke paru) vs <em>Chondroblastoma</em> pada anak/remaja (fisis masih terbuka).<br>• <em>Metafisis (Paling Sering):</em> <strong>Osteosarcoma</strong> (usia 10–20 tahun, 60% sekitar lutut: distal femur/proksimal tibia; memproduksi osteoid ganas; <em>Codman triangle</em> & <em>Sunburst appearance</em>) dan <strong>Osteochondroma</strong> (tumor tulang jinak tersering; eksostosis bertangkai menjauhi sendi dengan kontinuitas korteks & medula).<br>• <em>Diafisis (Tengah Tulang):</em> <strong>Ewing Sarcoma</strong> (usia <20 tahun; reaksi periosteal berlapis 'onion-skin', translokasi kromosom <strong>t(11;22)</strong> EWSR1-FLI1, sering disertai demam/leukositosis menyerupai osteomielitis).",
+                    "<strong>Enneking Staging System (Tumor Ganas Muskuloskeletal):</strong><br>• <em>Stage I:</em> Low-grade (IA = intrakompartemen; IB = ekstrakompartemen).<br>• <em>Stage II:</em> High-grade (IIA = intrakompartemen; IIB = ekstrakompartemen — paling sering saat diagnosis osteosarcoma).<br>• <em>Stage III:</em> Metastasis jauh (paru atau skip metastasis)."
+                ],
+                examAndRedFlags: [
+                    "<strong>Workup Staging Wajib:</strong> Foto polos 2 proyeksi seluruh tulang (mendeteksi <em>skip lesions</em>), <strong>MRI dengan kontras seluruh kompartemen tulang</strong> (menilai ekstensi intrameduler & keterlibatan neurovaskular), <strong>CT Scan Toraks</strong> (metastasis paru), dan <strong>Bone Scan / PET Scan</strong>.",
+                    "<strong>RED FLAG — Kesalahan Biopsi Tumor Tulang:</strong> Biopsi yang salah (insisi transversal, kontaminasi kompartemen sehat, atau dilakukan sebelum MRI lengkap) dapat menggagalkan operasi penyelamatan ekstremitas (<em>limb-salvage surgery</em>) dan memaksa dilakukannya amputasi!"
+                ],
+                management: [
+                    "<strong>Peran Dokter Umum (SKDI 2):</strong> Jangan melakukan eksisi/biopsi insisional sembarangan pada massa tulang atau jaringan lunak dalam (>5 cm, di bawah fasia). Lakukan foto polos awal dan rujuk segera ke pusat rujukan onkologi ortopedi.",
+                    "<strong>Tatalaksana Definitif Osteosarcoma:</strong> Pendekatan multidisiplin → <strong>Kemoterapi Neoadjuvan (pra-operasi)</strong> → <strong>Wide Surgical Resection + Limb-Salvage Reconstruction</strong> (endoprosthesis / allograft) → <strong>Kemoterapi Adjuvan (pasca-operasi)</strong> (radioterapi tidak efektif karena osteosarcoma bersifat radioresisten, berbeda dengan Ewing sarcoma yang radiosensitif)."
+                ],
+                mcq: {
+                    question: "Seorang laki-laki usia 29 tahun datang dengan nyeri lutut kronis. Foto Rontgen menunjukkan lesi radiolusen litik eksentrik berbentuk 'soap-bubble' pada epifisis distal femur yang meluas hingga tepat di bawah kartilago subkondral tanpa tepi sklerotik. Apakah diagnosis yang paling mungkin pada pasien ini?",
+                    options: [
+                        "Osteosarcoma konvensional",
+                        "Ewing Sarcoma",
+                        "Giant Cell Tumor (GCT) of bone",
+                        "Osteoid Osteoma"
+                    ],
+                    correctIndex: 2,
+                    explanation: "Giant Cell Tumor (GCT) secara klasik terjadi pada dewasa muda (usia 20–40 tahun setelah lempeng pertumbuhan menutup) dan berlokasi di epifisis tulang panjang (tersering sekitar lutut) dengan gambaran litik eksentrik 'soap-bubble' yang mencapai tulang subkondral."
+                },
+                references: [
+                    "Miller's Review of Orthopaedics, 8th Ed. — Chapter: Musculoskeletal Oncology.",
+                    "Enneking WF, Spanier SS, Goodman MA. A system for the surgical staging of musculoskeletal sarcoma. Clin Orthop Relat Res.",
+                    "NCCN Clinical Practice Guidelines in Oncology: Bone Cancer."
+                ]
+            },
+            {
+                id: "case-15",
+                number: "15",
+                title: "Knee Ligament & Meniscus Injuries",
+                subtitle: "ACL / PCL / MCL • Lachman Test, Unhappy Triad & Bucket-Handle Tear",
+                category: "Tumor & Sports",
+                skdiBadge: "SKDI 3A • High-Yield PPDS",
+                highYieldBadge: "Lachman Test & Unhappy Triad",
+                kisiKisiPPDS: "Soal klasik sports medicine di ujian masuk PPDS: (1) Uji klinis paling sensitif untuk ruptur ACL akut adalah Lachman Test (fleksi lutut 20°–30°), (2) Penyebab hemarthrosis akut lutut pasca cedera olahraga non-kontak disertai bunyi 'pop' (>70% adalah ruptur ACL), (3) Unhappy Triad of O'Donoghue (ACL + MCL + Lateral/Medial Meniscus), (4) Locked knee akut (block to full extension) akibat Bucket-Handle Meniscus Tear, dan (5) Zona vaskularisasi meniskus (Red-Red zone bisa di-repair vs White-White zone avaskular).",
+                summary: "Pemeriksaan spesifik ACL/PCL/MCL/Meniskus (Lachman, Posterior Drawer, McMurray), Unhappy Triad, locked knee, dan zona vaskularisasi meniskus.",
+                vignette: "Atlet basket laki-laki 22 tahun datang ke poli dengan keluhan lutut kanan bengkak besar dalam 2 jam setelah mendarat dari lompatan dan lutut terputar (pivoting non-contact injury), disertai bunyi 'pop' yang jelas. Pasien tidak mampu melanjutkan pertandingan. Pada pemeriksaan fisik didapatkan efusi sendi akut (hemarthrosis), Lachman test positif (translasi anterior tibia meningkat tanpa end-point yang tegas), serta nyeri tekan pada garis sendi medial dan valgus stress test positif pada fleksi 30°.",
+                classificationAndMechanism: [
+                    "<strong>Anterior Cruciate Ligament (ACL):</strong> Mencegah translasi anterior tibia terhadap femur dan instabilitas rotasional. Robek pada mekanisme <em>non-contact pivoting / deceleration</em> dengan lutut sedikit fleksi dan valgus. Menimbulkan <strong>hemarthrosis akut dalam <2–4 jam</strong> (karena suplai darah dari <em>middle geniculate artery</em>).",
+                    "<strong>Posterior Cruciate Ligament (PCL):</strong> Mencegah translasi posterior tibia. Robek pada mekanisme <em>dashboard injury</em> (benturan langsung pada tibia proksimal saat lutut fleksi 90°).",
+                    "<strong>Unhappy Triad of O'Donoghue:</strong> Kombinasi cedera akibat gaya valgus-rotasi: <strong>ACL + MCL + Meniscus</strong> (pada trauma akut sering mengenai meniscus lateralis, sedangkan kronis mengenai meniscus medialis).",
+                    "<strong>Zona Vaskularisasi Meniskus (Dari Perifer ke Sentral):</strong> <em>Red-Red zone</em> (perifer, vaskularisasi baik → potensi penyembuhan tinggi bila dilakukan <em>meniscal repair</em>), <em>Red-White zone</em>, dan <em>White-White zone</em> (sentral, avaskular → umumnya memerlukan <em>partial meniscectomy</em>)."
+                ],
+                examAndRedFlags: [
+                    "<strong>Pemeriksaan Fisik Spesifik Lutut:</strong><br>• <em>ACL:</em> <strong>Lachman Test</strong> (fleksi 20°–30°, paling sensitif pada fase akut), Anterior Drawer Test (fleksi 90°), Pivot Shift Test (paling spesifik).<br>• <em>PCL:</em> Posterior Sag Sign (Godfrey sign) & <strong>Posterior Drawer Test</strong> (fleksi 90°).<br>• <em>MCL / LCL:</em> Valgus Stress Test (MCL) & Varus Stress Test (LCL) pada fleksi 30°.<br>• <em>Meniskus:</em> Joint line tenderness, McMurray Test, Thessaly Test.",
+                    "<strong>Pencitraan:</strong> Foto polos lutut AP/Lateral/Merchant (menyingkirkan fraktur avulsi seperti <em>Segond fracture</em> — avulsi kapsul anterolateral yang patognomonik untuk ruptur ACL!), dilanjutkan <strong>MRI Lutut</strong> (gold standard).",
+                    "<strong>RED FLAG — Knee Dislocation (Multiligament Knee Injury):</strong> Bila ≥2 ligamen utama robek disertai instabilitas berat, wajib evaluasi cedera <strong>Arteri Poplitea</strong> (ukur Ankle-Brachial Index; bila ABI < 0,9 → CTA emergensi) dan <strong>Nervus Peroneus Communis</strong>."
+                ],
+                management: [
+                    "<strong>Tatalaksana Awal IGD / Klinik (SKDI 3A):</strong> Prinsip RICE/PRICE (kompres es, elevasi, analgetik NSAID, pemasangan <em>hinged knee brace</em>), edukasi latihan isometrik quadriceps & pemulihan ekstensi penuh sebelum operasi, dan rujuk ke Sp.OT.",
+                    "<strong>Terapi Definitif:</strong><br>• <em>Isolated MCL Tear:</em> Hampir selalu berhasil konservatif dengan hinged knee brace dan rehabilitasi.<br>• <em>ACL Rupture pada pasien muda/aktif:</em> <strong>Arthroscopic ACL Reconstruction</strong> menggunakan autograft (Hamstring tendon, Bone-Patellar Tendon-Bone / BPTB, atau Quadriceps tendon).<br>• <em>Bucket-Handle Meniscus Tear dengan Locked Knee:</em> <strong>Arthroscopic Meniscal Repair / Partial Meniscectomy</strong> segera untuk membuka kunci mekanis sendi."
+                ],
+                mcq: {
+                    question: "Seorang pemain futsal mengalami cedera lutut kanan tanpa kontak saat melakukan gerakan berputar mendadak, disertai bunyi 'pop' dan pembengkakan sendi lutut yang cepat dalam 3 jam. Manakah pemeriksaan fisik yang memiliki sensitivitas paling tinggi untuk menegakkan diagnosis ruptur Anterior Cruciate Ligament (ACL) pada fase akut?",
+                    options: [
+                        "Posterior Drawer Test pada fleksi lutut 90 derajat",
+                        "Lachman Test pada fleksi lutut 20–30 derajat",
+                        "McMurray Test dengan rotasi interna tibia",
+                        "Varus Stress Test pada ekstensi penuh 0 derajat"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Lachman Test (dilakukan pada fleksi lutut 20°–30°) merupakan pemeriksaan klinis paling sensitif untuk mendeteksi ruptur ACL akut karena pada posisi ini otot hamstring tidak terlalu tegang menahan translasi anterior tibia dan efusi sendi tidak menghambat gerakan."
+                },
+                references: [
+                    "Miller's Review of Orthopaedics, 8th Ed. — Chapter: Sports Medicine (Knee Ligament & Meniscus Injuries).",
+                    "AAOS Clinical Practice Guideline: Management of Anterior Cruciate Ligament Injuries.",
+                    "Rockwood and Green's Fractures in Adults, 9th Ed. — Knee Dislocations & Ligamentous Injuries."
+                ]
+            },
+            {
+                id: "case-16",
+                number: "16",
+                title: "Bone Healing Biology, Nonunion & Osteomyelitis",
+                subtitle: "Primary vs Secondary Healing • Wolff's Law, RANKL-OPG & Nonunion Types",
+                category: "Basic Science & Infection",
+                skdiBadge: "Basic Science • Wajib Ujian PPDS",
+                highYieldBadge: "Strain Theory, Nonunion & Cierny-Mader",
+                kisiKisiPPDS: "Pilar Basic Science yang SELALU keluar di ujian tulis & wawancara masuk PPDS: (1) Primary/Direct bone healing (absolute stability via compression plate → Haversian remodeling tanpa kalus) vs Secondary/Indirect bone healing (relative stability via cast/IM nail/bridge plate → hematoma → soft callus [kartilago tipe II] → hard callus [tulang tipe I] → remodeling), (2) Perren's Strain Theory (<2% lamellar bone, 2–10% woven bone/cartilage, >10% fibrous tissue/nonunion), (3) Wolff's Law, (4) Sel tulang (Osteoblast dari MSC; Osteoclast dari monosit-makrofag diatur jalur RANK-RANKL-OPG), dan (5) Hypertrophic nonunion ('elephant foot' — vaskular baik, kurang stabilitas mekanis) vs Atrophic nonunion (avaskular/biologi buruk).",
+                summary: "Biologi penyembuhan tulang (primary vs secondary healing), Perren's strain theory, jalur RANKL-OPG, tipe nonunion (hypertrophic vs atrophic), serta osteomielitis kronis (Cierny-Mader).",
+                vignette: "Skenario A: Laki-laki 35 tahun datang dengan keluhan nyeri pada paha kanan 9 bulan setelah pemasangan fiksasi fraktur femur. Foto Rontgen menunjukkan celah fraktur masih terbuka dengan pembentukan kalus yang sangat lebar menyerupai kaki gajah ('elephant foot appearance') tanpa penyatuan kortikal.\nSkenario B: Pasien lain dengan riwayat fraktur terbuka tibia 1 tahun lalu menunjukkan ujung tulang yang meruncing sklerotik tanpa pembentukan kalus sama sekali disertai sinus keluar pus kronis.",
+                classificationAndMechanism: [
+                    "<strong>Primary (Direct) vs Secondary (Indirect) Bone Healing:</strong><br>• <em>Primary Healing:</em> Terjadi pada <strong>absolute stability</strong> (interfragmentary compression plate, lag screw) dengan celah <0,01 mm dan strain <2%. Penyembuhan langsung melalui <em>Haversian remodeling (cutting cones)</em> <strong>tanpa pembentukan kalus</strong>.<br>• <em>Secondary Healing:</em> Terjadi pada <strong>relative stability</strong> (gips, IM nail, external fixator, bridge plate; strain 2–10%). Melalui 4 fase: (1) Hematoma & inflamasi (PDGF, TGF-β, BMP), (2) Soft callus (fibrokartilago, kolagen tipe II), (3) Hard callus (osifikasi endokondral & intramembranosa, kolagen tipe I), (4) Remodeling sesuai <strong>Wolff's Law</strong> (tulang beradaptasi terhadap beban mekanis).",
+                    "<strong>Regulasi Sel Tulang (RANK–RANKL–OPG):</strong> Osteoblast (berasal dari <em>mesenchymal stem cell</em>, diatur RUNX2/BMP-2) mengekspresikan <strong>RANKL</strong> yang berikatan dengan reseptor RANK pada prekursor makrofag untuk mengaktifkan <strong>Osteoclast</strong> (resorpsi tulang via enzim <em>cathepsin K</em> & <em>TRAP</em>). <strong>Osteoprotegerin (OPG)</strong> adalah <em>decoy receptor</em> yang menghambat RANKL sehingga menekan resorpsi tulang.",
+                    "<strong>Klasifikasi Nonunion (Gagal Menyatu > 9 Bulan atau Tidak Ada Progres dalam 3 Bulan):</strong><br>• <em>Hypertrophic Nonunion ('Elephant foot' / 'Horse hoof'):</em> Vaskularisasi dan biologi baik, tetapi <strong>kurang stabilitas mekanis</strong> (terlalu banyak gerakan mikro).<br>• <em>Atrophic Nonunion:</em> Ujung tulang menyempit/avaskular tanpa kalus akibat <strong>gangguan biologi/vaskularisasi</strong> (atau infeksi/nikotin/NSAID kronis)."
+                ],
+                examAndRedFlags: [
+                    "<strong>Osteomielitis Kronis (Klasifikasi Cierny-Mader):</strong> Berdasarkan anatomi (Type I Medullary, Type II Superficial, Type III Localized, Type IV Diffuse) dan status fisiologis host (A = normal, B = compromised sistemik/lokal, C = terapi lebih berbahaya dari penyakit). Ditandai adanya <strong>Sequestrum</strong> (fragmen tulang nekrotik terisolasi) yang dikelilingi <strong>Involucrum</strong> (pembentukan tulang reaktif baru) dan <em>cloaca</em>.",
+                    "<strong>RED FLAG — Faktor Penghambat Bone Healing:</strong> Merokok (nikotin menyebabkan vasokonstriksi dan menghambat osteoblast), malnutrisi (albumin < 3,5 g/dL), diabetes tidak terkontrol, serta infeksi tersembunyi (selalu singkirkan <em>infected nonunion</em> dengan cek WBC, ESR, CRP)."
+                ],
+                management: [
+                    "<strong>Tatalaksana Hypertrophic Nonunion:</strong> Karena biologinya sudah baik, cukup berikan <strong>stabilisasi mekanis yang lebih rigid</strong> (misal: <em>exchange reamed nailing</em> atau <em>compression plating</em>) tanpa wajib melakukan bone graft.",
+                    "<strong>Tatalaksana Atrophic Nonunion:</strong> Membutuhkan perbaikan <strong>biologi + stabilitas mekanis</strong> → debridemen jaringan fibrosa/nekrotik di celah fraktur, <strong>Autologous Bone Graft</strong> (gold standard: <em>iliac crest bone graft</em> karena memiliki sifat osteogenik, osteoinduktif, dan osteokonduktif), serta fiksasi stabil.",
+                    "<strong>Tatalaksana Osteomielitis Kronis:</strong> Antibiotik saja tidak akan menembus sequestrum avaskular → wajib <strong>Radical Surgical Debridement (Sequestrectomy)</strong> + dead-space management (antibiotic-loaded PMMA beads/spacer) + antibiotik spesifik kultur selama 6 minggu."
+                ],
+                mcq: {
+                    question: "Seorang pasien mengalami nonunion diafisis femur 10 bulan pasca trauma. Pada foto Rontgen didapatkan pembentukan kalus yang sangat melimpah di sekitar celah fraktur ('elephant foot appearance'), tetapi garis fraktur masih tetap terlihat jelas. Apakah penyebab utama dan tatalaksana yang paling tepat untuk kondisi ini?",
+                    options: [
+                        "Kegagalan vaskularisasi (atrophic nonunion); membutuhkan eksisi kalus dan vascularized fibular graft",
+                        "Kurangnya stabilitas mekanis pada jaringan dengan vaskularisasi baik (hypertrophic nonunion); membutuhkan fiksasi yang lebih stabil",
+                        "Defisiensi vitamin D berat; cukup diberikan suplementasi kalsium dan imobilisasi gips",
+                        "Kelebihan ekspresi Osteoprotegerin (OPG); membutuhkan terapi denosumab"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Gambaran 'elephant foot' menandakan Hypertrophic Nonunion, di mana suplai darah dan respons biologis pasien sebenarnya sangat baik (terbukti dari banyaknya kalus), namun instabilitas mekanis menghalangi proses osifikasi akhir. Tatalaksana utamanya adalah meningkatkan stabilitas mekanis (misal compression plating atau exchange nailing)."
+                },
+                references: [
+                    "Miller's Review of Orthopaedics, 8th Ed. — Chapter: Basic Science (Bone Biology, Fracture Healing & Infection).",
+                    "Perren SM. Evolution of the internal fixation of long bone fractures. J Bone Joint Surg Br.",
+                    "Cierny G 3rd, Mader JT, Penninck JJ. A clinical staging system for adult osteomyelitis. Clin Orthop Relat Res."
                 ]
             }
         ];
@@ -799,7 +1061,7 @@
         // =========================================================================
         // 2. STATE MANAGEMENT (PROGRESS, FILTERING, ROUTING)
         // =========================================================================
-        const STORAGE_KEY = 'ortho_learn_progress_v2';
+        const STORAGE_KEY = 'ortho_learn_progress_v3';
         let userProgress = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
             reviewed: [],   // array of case IDs
             quizPassed: []  // array of case IDs
@@ -808,6 +1070,11 @@
         let activeCategory = 'All';
         let searchQuery = '';
         let currentCaseId = null;
+
+        function toggleBlueprintDrawer() {
+            const drawer = document.getElementById('blueprint-drawer');
+            drawer.classList.toggle('hidden');
+        }
 
         function saveProgress() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(userProgress));
@@ -842,12 +1109,16 @@
             switch (category) {
                 case 'Upper Extremity':
                     return 'bg-sky-50 text-sky-700 border-sky-200';
-                case 'Lower Extremity':
+                case 'Lower Extremity & Pelvis':
                     return 'bg-indigo-50 text-indigo-700 border-indigo-200';
-                case 'Spine & Pelvis':
-                    return 'bg-amber-50 text-amber-800 border-amber-200';
-                case 'Pediatric & Infection':
+                case 'Pediatric Orthopaedics':
                     return 'bg-rose-50 text-rose-700 border-rose-200';
+                case 'Spine & Neuro':
+                    return 'bg-amber-50 text-amber-800 border-amber-200';
+                case 'Tumor & Sports':
+                    return 'bg-purple-50 text-purple-700 border-purple-200';
+                case 'Basic Science & Infection':
+                    return 'bg-emerald-50 text-emerald-700 border-emerald-200';
                 default:
                     return 'bg-slate-100 text-slate-700 border-slate-200';
             }
@@ -863,15 +1134,18 @@
                 if (!matchesCategory) return false;
                 if (!query) return true;
 
-                // Search across title, subtitle, summary, vignette, pathoanatomy
+                // Search across title, subtitle, SKDI badge, kisi-kisi, summary, vignette, pathoanatomy
                 const searchableText = [
                     c.number,
                     c.title,
                     c.subtitle,
                     c.category,
+                    c.skdiBadge,
+                    c.kisiKisiPPDS,
                     c.summary,
                     c.vignette,
-                    ...c.pathoanatomy,
+                    ...c.classificationAndMechanism,
+                    ...c.examAndRedFlags,
                     ...c.management
                 ].join(' ').toLowerCase();
 
@@ -895,12 +1169,12 @@
                          role="button" 
                          tabindex="0"
                          onkeydown="if(event.key==='Enter') openCase('${c.id}')"
-                         class="bg-white rounded-2xl p-5 border ${isReviewed ? 'border-teal-300/90' : 'border-slate-200'} hover:border-teal-500 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group relative overflow-hidden">
+                         class="bg-white rounded-2xl p-5 border ${isReviewed ? 'border-emerald-300' : 'border-slate-200'} hover:border-clinical-500 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group relative overflow-hidden">
                         
                         <div>
-                            <!-- Top Row: Case Number & Category -->
-                            <div class="flex items-center justify-between gap-2 mb-3">
-                                <div class="flex items-center gap-2">
+                            <!-- Top Row: Case Number, Category & SKDI Badge -->
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <div class="flex flex-wrap items-center gap-1.5">
                                     <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-navy-900 text-white">
                                         CASE ${c.number}
                                     </span>
@@ -917,11 +1191,11 @@
                                         </span>
                                     ` : ''}
                                     ${isReviewed ? `
-                                        <span title="Sudah Dibaca" class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-bold">
+                                        <span title="Sudah Dibaca" class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">
                                             ✓
                                         </span>
                                     ` : `
-                                        <span class="w-6 h-6 rounded-full bg-slate-100 group-hover:bg-teal-50 text-slate-400 group-hover:text-teal-600 flex items-center justify-center transition-colors">
+                                        <span class="w-6 h-6 rounded-full bg-slate-100 group-hover:bg-clinical-50 text-slate-400 group-hover:text-clinical-600 flex items-center justify-center transition-colors">
                                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                                             </svg>
@@ -930,11 +1204,18 @@
                                 </div>
                             </div>
 
+                            <!-- SKDI Pill -->
+                            <div class="mb-2">
+                                <span class="inline-flex items-center gap-1 text-[11px] font-mono font-semibold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+                                    ${c.skdiBadge}
+                                </span>
+                            </div>
+
                             <!-- Title & Subtitle -->
-                            <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-teal-700 transition-colors leading-snug">
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-clinical-700 transition-colors leading-snug">
                                 ${c.title}
                             </h3>
-                            <p class="text-xs font-medium text-teal-700 mt-1">
+                            <p class="text-xs font-medium text-clinical-700 mt-1">
                                 ${c.subtitle}
                             </p>
 
@@ -946,11 +1227,11 @@
 
                         <!-- Card Footer -->
                         <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                            <span class="font-medium text-slate-500 flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+                            <span class="font-medium text-slate-500 flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-clinical-500"></span>
                                 ${c.highYieldBadge}
                             </span>
-                            <span class="font-semibold text-teal-700 group-hover:translate-x-0.5 transition-transform">
+                            <span class="font-semibold text-clinical-700 group-hover:translate-x-0.5 transition-transform">
                                 Pelajari →
                             </span>
                         </div>
@@ -997,19 +1278,11 @@
         function renderCaseDetail(caseId) {
             const idx = ORTHO_CASES.findIndex(c => c.id === caseId);
             const c = ORTHO_CASES[idx];
-            const catStyle = getCategoryBadgeStyle(c.category);
             const isReviewed = userProgress.reviewed.includes(c.id);
             const isQuizPassed = userProgress.quizPassed.includes(c.id);
 
             // Update "Mark as Reviewed" button
-            const reviewBtn = document.getElementById('btn-mark-reviewed');
-            if (isReviewed) {
-                reviewBtn.className = 'inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl border bg-teal-50 text-teal-800 border-teal-300 hover:bg-teal-100 transition-all';
-                reviewBtn.innerHTML = `<span>✓</span> Sudah Dipelajari`;
-            } else {
-                reviewBtn.className = 'inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl border bg-white text-slate-700 border-slate-300 hover:bg-slate-50 transition-all';
-                reviewBtn.innerHTML = `<span>○</span> Tandai Selesai Belajar`;
-            }
+            updateReviewButtonState(c.id);
 
             // Render Main Article Content
             const article = document.getElementById('case-article');
@@ -1017,75 +1290,86 @@
                 <!-- Case Header Banner -->
                 <div class="bg-gradient-to-r from-navy-900 to-navy-800 text-white p-6 sm:p-8 border-b border-slate-800">
                     <div class="flex flex-wrap items-center gap-2 mb-3">
-                        <span class="font-mono text-xs font-bold px-3 py-1 rounded-lg bg-teal-500 text-navy-950">
-                            CASE ${c.number} / 12
+                        <span class="font-mono text-xs font-bold px-3 py-1 rounded-lg bg-clinical-500 text-navy-950">
+                            CASE ${c.number} / ${ORTHO_CASES.length}
                         </span>
                         <span class="text-xs font-semibold px-3 py-1 rounded-lg bg-white/10 text-slate-200 border border-white/15">
                             ${c.category}
                         </span>
-                        <span class="text-xs font-medium px-3 py-1 rounded-lg bg-teal-500/20 text-teal-300 border border-teal-500/30">
-                            ${c.highYieldBadge}
+                        <span class="font-mono text-xs font-semibold px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                            ${c.skdiBadge}
                         </span>
                     </div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
                         ${c.title}
                     </h2>
-                    <p class="text-sm sm:text-base text-teal-300 font-medium mt-1.5">
+                    <p class="text-sm sm:text-base text-sky-300 font-medium mt-1.5">
                         ${c.subtitle}
                     </p>
                 </div>
 
                 <!-- Clinical Sections -->
-                <div class="p-6 sm:p-8 space-y-8">
+                <div class="p-6 sm:p-8 space-y-7">
                     
+                    <!-- Callout: Kisi-Kisi Ujian PPDS -->
+                    <section class="bg-clinical-50 rounded-2xl p-5 border border-clinical-200/90 shadow-xs">
+                        <div class="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-clinical-800 mb-2">
+                            <span class="px-2 py-0.5 rounded bg-clinical-600 text-white">KISI-KISI UJIAN PPDS</span>
+                            <span>Fokus Penguji (Tulis & OSCE/Wawancara)</span>
+                        </div>
+                        <p class="text-sm sm:text-[15px] text-slate-800 leading-relaxed">
+                            ${c.kisiKisiPPDS}
+                        </p>
+                    </section>
+
                     <!-- 1. Clinical Vignette -->
                     <section class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-200/90">
                         <div class="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-navy-900 mb-2.5">
                             <span class="w-6 h-6 rounded-lg bg-navy-900 text-white flex items-center justify-center text-xs">1</span>
-                            <span>Clinical Vignette (Skenario Ujian PPDS / IGD)</span>
+                            <span>Clinical Vignette (Skenario Kasus Ujian & IGD)</span>
                         </div>
                         <p class="text-sm sm:text-base text-slate-700 leading-relaxed whitespace-pre-line font-normal">
                             ${c.vignette}
                         </p>
                     </section>
 
-                    <!-- 2. Core Pathoanatomy & Classification -->
+                    <!-- 2. Klasifikasi & Patomekanisme -->
                     <section class="space-y-3">
                         <div class="flex items-center gap-2.5">
-                            <span class="w-7 h-7 rounded-lg bg-teal-100 text-teal-800 font-mono font-bold text-xs flex items-center justify-center">2</span>
-                            <h3 class="text-lg font-bold text-slate-900">Patofisiologi, Anatomi & Klasifikasi</h3>
+                            <span class="w-7 h-7 rounded-lg bg-sky-100 text-sky-800 font-mono font-bold text-xs flex items-center justify-center">2</span>
+                            <h3 class="text-lg font-bold text-slate-900">Klasifikasi & Patomekanisme</h3>
                         </div>
                         <ul class="space-y-2.5 pl-1">
-                            ${c.pathoanatomy.map(item => `
+                            ${c.classificationAndMechanism.map(item => `
                                 <li class="flex items-start gap-3 text-sm sm:text-[15px] text-slate-700 leading-relaxed">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2.5 shrink-0"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-clinical-600 mt-2.5 shrink-0"></span>
                                     <span>${item}</span>
                                 </li>
                             `).join('')}
                         </ul>
                     </section>
 
-                    <!-- 3. Diagnostic Workup & Radiographic Pearls -->
+                    <!-- 3. Pemeriksaan Fisik, Radiografi & Red Flags -->
                     <section class="space-y-3 pt-2 border-t border-slate-100">
                         <div class="flex items-center gap-2.5">
-                            <span class="w-7 h-7 rounded-lg bg-sky-100 text-sky-800 font-mono font-bold text-xs flex items-center justify-center">3</span>
-                            <h3 class="text-lg font-bold text-slate-900">Evaluasi Diagnostik & Parameter Radiografis</h3>
+                            <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 font-mono font-bold text-xs flex items-center justify-center">3</span>
+                            <h3 class="text-lg font-bold text-slate-900">Pemeriksaan Fisik, Parameter Radiografis & Red Flags</h3>
                         </div>
-                        <ul class="space-y-2.5 pl-1">
-                            ${c.workup.map(item => `
-                                <li class="flex items-start gap-3 text-sm sm:text-[15px] text-slate-700 leading-relaxed">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-sky-600 mt-2.5 shrink-0"></span>
+                        <div class="bg-amber-50/50 rounded-2xl p-4 sm:p-5 border border-amber-200/70 space-y-2.5">
+                            ${c.examAndRedFlags.map(item => `
+                                <div class="flex items-start gap-3 text-sm sm:text-[15px] text-slate-800 leading-relaxed">
+                                    <span class="text-amber-600 font-bold mt-0.5 shrink-0">⚠</span>
                                     <span>${item}</span>
-                                </li>
+                                </div>
                             `).join('')}
-                        </ul>
+                        </div>
                     </section>
 
-                    <!-- 4. Definitive Management & Indications -->
+                    <!-- 4. Tatalaksana Awal IGD (SKDI) vs Terapi Definitif -->
                     <section class="space-y-3 pt-2 border-t border-slate-100">
                         <div class="flex items-center gap-2.5">
                             <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 font-mono font-bold text-xs flex items-center justify-center">4</span>
-                            <h3 class="text-lg font-bold text-slate-900">Tatalaksana Definitif & Indikasi Operasi</h3>
+                            <h3 class="text-lg font-bold text-slate-900">Tatalaksana Awal IGD (SKDI) vs Terapi Definitif</h3>
                         </div>
                         <div class="bg-emerald-50/40 rounded-2xl p-4 sm:p-5 border border-emerald-200/60 space-y-2.5">
                             ${c.management.map(item => `
@@ -1097,29 +1381,13 @@
                         </div>
                     </section>
 
-                    <!-- 5. Red Flags & Clinical Pitfalls -->
-                    <section class="space-y-3 pt-2 border-t border-slate-100">
-                        <div class="flex items-center gap-2.5">
-                            <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-800 font-mono font-bold text-xs flex items-center justify-center">!</span>
-                            <h3 class="text-lg font-bold text-rose-900">Red Flags & Pitfalls Klinis</h3>
-                        </div>
-                        <div class="bg-rose-50/70 rounded-2xl p-4 sm:p-5 border border-rose-200 space-y-2.5">
-                            ${c.redFlags.map(item => `
-                                <div class="flex items-start gap-3 text-sm sm:text-[15px] text-rose-950 leading-relaxed">
-                                    <span class="text-rose-600 font-bold mt-0.5 shrink-0">⚠</span>
-                                    <span>${item}</span>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </section>
-
-                    <!-- 6. Active Recall Self-Test (Interactive MCQ) -->
+                    <!-- 5. Active Recall Self-Test (Interactive MCQ) -->
                     <section class="pt-4 border-t border-slate-200">
                         <div class="bg-navy-900 text-white rounded-2xl p-5 sm:p-6 shadow-sm">
                             <div class="flex items-center justify-between gap-2 mb-3">
                                 <div class="flex items-center gap-2">
-                                    <span class="px-2.5 py-1 rounded-md bg-teal-500 text-navy-950 font-mono text-xs font-bold">ACTIVE RECALL</span>
-                                    <h3 class="text-base sm:text-lg font-bold">Uji Pemahaman (Board-Style MCQ)</h3>
+                                    <span class="px-2.5 py-1 rounded-md bg-clinical-500 text-navy-950 font-mono text-xs font-bold">ACTIVE RECALL</span>
+                                    <h3 class="text-base sm:text-lg font-bold">Latihan Soal Seleksi PPDS</h3>
                                 </div>
                                 ${isQuizPassed ? `<span class="text-xs font-semibold text-emerald-400">✓ Pernah Lulus</span>` : ''}
                             </div>
@@ -1135,7 +1403,7 @@
                                         <button onclick="checkMCQAnswer('${c.id}', ${optIdx})" 
                                                 id="mcq-opt-${optIdx}"
                                                 class="w-full text-left p-3.5 sm:p-4 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-sm text-slate-100 transition-all flex items-start gap-3">
-                                            <span class="w-6 h-6 rounded-lg bg-slate-700 text-teal-300 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                            <span class="w-6 h-6 rounded-lg bg-slate-700 text-sky-300 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                                                 ${letter}
                                             </span>
                                             <span class="leading-snug">${opt}</span>
@@ -1150,7 +1418,7 @@
                         </div>
                     </section>
 
-                    <!-- 7. Verified Textbook References -->
+                    <!-- 6. Verified Textbook References -->
                     <section class="pt-2 border-t border-slate-100">
                         <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 mb-2">
                             Referensi Buku Teks & Literatur Terverifikasi
@@ -1251,7 +1519,7 @@
             if (!reviewBtn) return;
             const isReviewed = userProgress.reviewed.includes(caseId);
             if (isReviewed) {
-                reviewBtn.className = 'inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl border bg-teal-50 text-teal-800 border-teal-300 hover:bg-teal-100 transition-all';
+                reviewBtn.className = 'inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl border bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100 transition-all';
                 reviewBtn.innerHTML = `<span>✓</span> Sudah Dipelajari`;
             } else {
                 reviewBtn.className = 'inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl border bg-white text-slate-700 border-slate-300 hover:bg-slate-50 transition-all';
@@ -1279,9 +1547,9 @@
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.className = 'filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100';
+                    b.className = 'filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100';
                 });
-                btn.className = 'filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-navy-900 text-white shadow-sm';
+                btn.className = 'filter-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-navy-900 text-white shadow-sm';
                 activeCategory = btn.getAttribute('data-category');
                 renderCaseCards();
             });
@@ -1312,9 +1580,9 @@
             activeCategory = 'All';
             document.querySelectorAll('.filter-btn').forEach(b => {
                 if (b.getAttribute('data-category') === 'All') {
-                    b.className = 'filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-navy-900 text-white shadow-sm';
+                    b.className = 'filter-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-navy-900 text-white shadow-sm';
                 } else {
-                    b.className = 'filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100';
+                    b.className = 'filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100';
                 }
             });
             renderCaseCards();
