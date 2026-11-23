@@ -1327,17 +1327,48 @@
         // =========================================================================
         // MODULAR CASE LOADER (Allows batch2.js - batch5.js to register seamlessly)
         // =========================================================================
-        window.registerOrthoCases = function(newCases) {
-            if (!Array.isArray(newCases)) return;
-            const existingIds = new Set(window.ORTHO_CASES.map(c => c.id));
-            let added = 0;
-            newCases.forEach(c => {
-                if (c && c.id && !existingIds.has(c.id)) {
-                    window.ORTHO_CASES.push(c);
-                    existingIds.add(c.id);
-                    added++;
-                }
-            });
+             window.registerOrthoCases = function(newCases) {
+         if (!Array.isArray(newCases)) return;
+         const categoryMap = {
+             'Pediatric Orthopaedics': 'Pediatric',
+             'Spine & Trauma Emergencies': 'Spine',
+             'Tumor, Sports & Basic Science': 'Tumor/Sports/Basic Science'
+         };
+         const existingIds = new Set(window.ORTHO_CASES.map(c => c.id));
+         let added = 0;
+         newCases.forEach(raw => {
+             if (raw && raw.id && !existingIds.has(raw.id)) {
+                 const normalized = {
+                     ...raw,
+                     number: String(raw.number).padStart(2, '0'),
+                     category: categoryMap[raw.category] || raw.category,
+                     subtitle: raw.subtitle || `${raw.badge || 'High-Yield'} • ${raw.skdi || 'PPDS'}`,
+                     badgeHighlight: raw.badgeHighlight || raw.badge || raw.skdi || 'High-Yield PPDS',
+                     presentationAndRedFlags: raw.presentationAndRedFlags || raw.redFlags || [],
+                     classificationAndPathoanatomy: raw.classificationAndPathoanatomy || raw.classification || [],
+                     management: raw.management || [],
+                     kisiKisiPPDS: raw.kisiKisiPPDS || raw.ppdsPearl || '',
+                     reference: raw.reference || (Array.isArray(raw.references) ? raw.references.join(' • ') : ''),
+                     mcq: raw.mcq || (raw.quiz ? {
+                         question: raw.quiz.question,
+                         options: raw.quiz.options,
+                         correctIndex: raw.quiz.answerIndex,
+                         explanation: raw.quiz.explanation
+                     } : { question: '', options: [], correctIndex: 0, explanation: '' })
+                 };
+                 window.ORTHO_CASES.push(normalized);
+                 existingIds.add(normalized.id);
+                 added++;
+             }
+         });
+         if (added > 0 && document.readyState !== 'loading') {
+             updateProgressUI();
+             renderCategoryTabs();
+             renderCaseCards();
+             if (currentCaseId) renderCaseDetail(currentCaseId);
+         }
+     };
+
             if (added > 0 && document.readyState !== 'loading') {
                 updateProgressUI();
                 renderCategoryTabs();
@@ -1811,6 +1842,8 @@
   <script src="batch7.js" defer onerror="void(0)"></script>
   <script src="batch8.js" defer onerror="void(0)"></script>
   <script src="batch9.js" defer onerror="void(0)"></script>
+  <script src="batch10.js" defer onerror="void(0)"></script>
+  <script src="batch11.js" defer onerror="void(0)"></script>
 </body>
 </html>
 
