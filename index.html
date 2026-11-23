@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -19,7 +18,7 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ortho-Learn v2.1 | High-Yield SKDI & PPDS Orthopaedi</title>
+    <title>Ortho-Learn v3.0 | High-Yield SKDI & PPDS Orthopaedi</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & JetBrains Mono -->
@@ -75,7 +74,7 @@
                     <div>
                         <div class="flex items-center gap-2">
                             <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white">Ortho-Learn</h1>
-                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-clinical-500/20 text-sky-300 border border-sky-400/30"></span>
+                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-clinical-500/20 text-sky-300 border border-sky-400/30">v3.0</span>
                         </div>
                         <p class="text-[11px] sm:text-xs text-slate-300 font-medium hidden sm:block">High-Yield SKDI & Seleksi Masuk PPDS Orthopaedi</p>
                     </div>
@@ -108,7 +107,7 @@
                         Kurikulum Klinis & Ujian Masuk PPDS Orthopaedi (<span id="total-cases-hero">26</span> Kasus)
                     </h2>
                     <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                        Mencakup 100 kasus high-yield lintas 6 pilar Orthopaedi & Traumatologi + 100 kuis Active Recall.</strong>. Referensi terverifikasi dari <em>Rockwood & Green, Miller's, AO Surgery Reference, ATLS,</em> dan <em>SKDI KKI</em>.
+                        Mencakup 125 kasus high-yield lintas 6 pilar Orthopaedi & Traumatologi + 125 kuis Active Recall. Referensi terverifikasi dari <em>Rockwood & Green, Miller's, AO Surgery Reference, ATLS,</em> dan <em>SKDI KKI</em>.
                     </p>
                 </div>
 
@@ -326,7 +325,7 @@
     <footer class="bg-white border-t border-slate-200 mt-12">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <div class="text-center sm:text-left">
-                <p class="font-semibold text-slate-700">Ortho-Learn v2.1 • SKDI & PPDS Orthopaedi Review</p>
+                <p class="font-semibold text-slate-700">Ortho-Learn v3.0 • SKDI & PPDS Orthopaedi Review</p>
                 <p class="mt-0.5">Gratis untuk Dokter Umum (GP) & Calon Residen Orthopaedi Indonesia.</p>
             </div>
             <div class="text-center sm:text-right">
@@ -1325,50 +1324,42 @@
         ];
 
         // =========================================================================
-        // MODULAR CASE LOADER (Allows batch2.js - batch5.js to register seamlessly)
+        // MODULAR CASE LOADER (Allows batch2.js - batch11.js to register seamlessly)
         // =========================================================================
-             window.registerOrthoCases = function(newCases) {
-         if (!Array.isArray(newCases)) return;
-         const categoryMap = {
-             'Pediatric Orthopaedics': 'Pediatric',
-             'Spine & Trauma Emergencies': 'Spine',
-             'Tumor, Sports & Basic Science': 'Tumor/Sports/Basic Science'
-         };
-         const existingIds = new Set(window.ORTHO_CASES.map(c => c.id));
-         let added = 0;
-         newCases.forEach(raw => {
-             if (raw && raw.id && !existingIds.has(raw.id)) {
-                 const normalized = {
-                     ...raw,
-                     number: String(raw.number).padStart(2, '0'),
-                     category: categoryMap[raw.category] || raw.category,
-                     subtitle: raw.subtitle || `${raw.badge || 'High-Yield'} • ${raw.skdi || 'PPDS'}`,
-                     badgeHighlight: raw.badgeHighlight || raw.badge || raw.skdi || 'High-Yield PPDS',
-                     presentationAndRedFlags: raw.presentationAndRedFlags || raw.redFlags || [],
-                     classificationAndPathoanatomy: raw.classificationAndPathoanatomy || raw.classification || [],
-                     management: raw.management || [],
-                     kisiKisiPPDS: raw.kisiKisiPPDS || raw.ppdsPearl || '',
-                     reference: raw.reference || (Array.isArray(raw.references) ? raw.references.join(' • ') : ''),
-                     mcq: raw.mcq || (raw.quiz ? {
-                         question: raw.quiz.question,
-                         options: raw.quiz.options,
-                         correctIndex: raw.quiz.answerIndex,
-                         explanation: raw.quiz.explanation
-                     } : { question: '', options: [], correctIndex: 0, explanation: '' })
-                 };
-                 window.ORTHO_CASES.push(normalized);
-                 existingIds.add(normalized.id);
-                 added++;
-             }
-         });
-         if (added > 0 && document.readyState !== 'loading') {
-             updateProgressUI();
-             renderCategoryTabs();
-             renderCaseCards();
-             if (currentCaseId) renderCaseDetail(currentCaseId);
-         }
-     };
-
+        window.registerOrthoCases = function(newCases) {
+            if (!Array.isArray(newCases)) return;
+            const categoryMap = {
+                'Pediatric Orthopaedics': 'Pediatric',
+                'Spine & Trauma Emergencies': 'Spine',
+                'Tumor, Sports & Basic Science': 'Tumor/Sports/Basic Science'
+            };
+            const existingIds = new Set(window.ORTHO_CASES.map(c => c.id));
+            let added = 0;
+            newCases.forEach(raw => {
+                if (raw && raw.id && !existingIds.has(raw.id)) {
+                    const normalized = {
+                        ...raw,
+                        number: String(raw.number).padStart(2, '0'),
+                        category: categoryMap[raw.category] || raw.category,
+                        subtitle: raw.subtitle || `${raw.badge || 'High-Yield'} • ${raw.skdi || 'PPDS'}`,
+                        badgeHighlight: raw.badgeHighlight || raw.badge || raw.skdi || 'High-Yield PPDS',
+                        presentationAndRedFlags: raw.presentationAndRedFlags || raw.redFlags || [],
+                        classificationAndPathoanatomy: raw.classificationAndPathoanatomy || raw.classification || [],
+                        management: raw.management || [],
+                        kisiKisiPPDS: raw.kisiKisiPPDS || raw.ppdsPearl || '',
+                        reference: raw.reference || (Array.isArray(raw.references) ? raw.references.join(' • ') : ''),
+                        mcq: raw.mcq || (raw.quiz ? {
+                            question: raw.quiz.question,
+                            options: raw.quiz.options,
+                            correctIndex: raw.quiz.answerIndex,
+                            explanation: raw.quiz.explanation
+                        } : { question: '', options: [], correctIndex: 0, explanation: '' })
+                    };
+                    window.ORTHO_CASES.push(normalized);
+                    existingIds.add(normalized.id);
+                    added++;
+                }
+            });
             if (added > 0 && document.readyState !== 'loading') {
                 updateProgressUI();
                 renderCategoryTabs();
@@ -1833,17 +1824,16 @@
         });
     </script>
 
-    <!-- Optional Modular Batch Loaders (Drop batch2.js - batch5.js into repo without editing index.html) -->
+    <!-- Optional Modular Batch Loaders -->
     <script src="batch2.js" defer onerror="void(0)"></script>
     <script src="batch3.js" defer onerror="void(0)"></script>
     <script src="batch4.js" defer onerror="void(0)"></script>
     <script src="batch5.js" defer onerror="void(0)"></script>
     <script src="batch6.js" defer onerror="void(0)"></script>
-  <script src="batch7.js" defer onerror="void(0)"></script>
-  <script src="batch8.js" defer onerror="void(0)"></script>
-  <script src="batch9.js" defer onerror="void(0)"></script>
-  <script src="batch10.js" defer onerror="void(0)"></script>
-  <script src="batch11.js" defer onerror="void(0)"></script>
+    <script src="batch7.js" defer onerror="void(0)"></script>
+    <script src="batch8.js" defer onerror="void(0)"></script>
+    <script src="batch9.js" defer onerror="void(0)"></script>
+    <script src="batch10.js" defer onerror="void(0)"></script>
+    <script src="batch11.js" defer onerror="void(0)"></script>
 </body>
 </html>
-
